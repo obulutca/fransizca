@@ -1,5 +1,5 @@
-# Fransızca Kartlar
+# Fransızca Akademi
 
 Uygulama: https://obulutca.github.io/fransizca/
 
-iPhone: Safari ile aç → Paylaş → Ana Ekrana Ekle.
+Bu depo yalnızca yayınlanan uygulamayı içerir. Kaynak ve çalışma alanı gizli depodadır.
