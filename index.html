@@ -703,7 +703,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='14f5436580';
+const AKV='f0f679e8dc';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -1149,7 +1149,9 @@ const anaEkranda=()=>window.navigator.standalone===true||matchMedia('(display-mo
 const b64u8=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');s+='='.repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
 async function bildirimAc(){if(!bildirimDestek())throw new Error(/iPhone|iPad/.test(navigator.userAgent)&&!anaEkranda()?'iPhone\'da önce Safari → Paylaş → Ana Ekrana Ekle; sonra uygulamayı ana ekrandaki simgeden aç.':'Bu tarayıcı bildirim desteklemiyor.');
   if(!GH.ok())throw new Error('Önce İlerleme → Bağlantı ekranından GitHub anahtarını gir.');
-  const izin=await Notification.requestPermission();if(izin!=='granted')throw new Error('Bildirim izni verilmedi. Ayarlar → Bildirimler → Fransızca\'dan açabilirsin.');
+  const ios=/iPhone|iPad/.test(navigator.userAgent),izin=Notification.permission==='granted'?'granted':await Notification.requestPermission();
+  if(izin!=='granted')throw new Error(ios?'Bildirim izni verilmedi. iPhone Ayarlar → Bildirimler → Fransızca → Bildirimlere İzin Ver; sonra yeniden dene.'
+    :(izin==='denied'?'Bu tarayıcıda bildirim engellenmiş. ':'İzin penceresi görünmedi ya da kapandı (Edge uygulama penceresinde sessiz kalabiliyor). ')+'Edge: sağ üstteki ⋯ → Site izinleri → Bildirimler → İzin ver. Ya da edge://settings/content/notifications → İzin ver → Ekle: https://obulutca.github.io. Sonra burada yeniden «Bildirimleri aç».');
   const reg=await navigator.serviceWorker.ready;let ab=await reg.pushManager.getSubscription();
   if(!ab)ab=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u8(VAPID_PUB)});
   const c=cihaz(),yol='bildirim/'+c.id+'.json',f=await senkDosya(yol).catch(()=>({sha:null}));
@@ -1598,5 +1600,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=14f5436580').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=f0f679e8dc').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
 </body></html>
