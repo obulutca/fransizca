@@ -730,7 +730,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='fc0aef22eb';
+const AKV='6609512207';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -817,7 +817,11 @@ async function A_dersAc(){const un=DIDX.uniteler.find(u=>u.ders===AD.dosya);if(!
   if(toc){const sc=$('screen'),spy=()=>{const lim=sc.getBoundingClientRect().top+110;let i=0;hs.forEach((h,k)=>{if(h.getBoundingClientRect().top<=lim)i=k});
       if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-4)i=hs.length-1;document.querySelectorAll('#aktoc a').forEach((a,k)=>a.setAttribute('aria-current',k===i));$('aktocsu').textContent=hs[i].textContent};
     sc.onscroll=spy;spy()}
-  if(AD.git){const h=document.getElementById(AD.git);AD.git=null;if(h)h.scrollIntoView()}
+  if(AD.git){const h=document.getElementById(AD.git);AD.git=null;AD.sc=0;if(h)h.scrollIntoView()}else if(AD.sc)$('screen').scrollTop=AD.sc;
+  {const sc=$('screen'),eski=sc.onscroll;sc.onscroll=()=>{if(eski)eski();if(tab==='ders'&&AD.view==='ders'){AD.sc=sc.scrollTop;konumGecikmeli()}}}
+  // Kendini dene cevapları bu cihazda saklanır: uygulama kapanıp açılınca ya da derse geri dönünce yerinde durur
+  {const dk='ak-dene:'+un.ders,dv=AKLS.get(dk,{}),ins=[...body.querySelectorAll('.dene-in')];ins.forEach((inp,i)=>{if(dv[i]){inp.value=dv[i];deneKontrol(inp)}});
+    body.addEventListener('input',e=>{const i=ins.indexOf(e.target);if(i<0)return;const v=AKLS.get(dk,{});if(e.target.value)v[i]=e.target.value;else delete v[i];AKLS.set(dk,v)})}
   if(un.ses){const ix=await akIndex(un.ses);pack('icerik/ses/'+un.ses+'.mp3');bindSay(body,'icerik/ses/'+un.ses+'.mp3',ix)}}
 
 /* --- Ders biçimi: "> **Fikir**" gibi başlayan alıntılar renkli kutu olur; Kendini dene'deki {{cevap}} anında kontrol edilen kutucuk olur.
@@ -1085,13 +1089,14 @@ const bgGun=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+
 function bgKayit(){const k=AKLS.get('ak-bugun',null),pid=PLANJ?PLANJ.unite+'|'+PLANJ.durum:'';return k&&k.plan===pid?k:{plan:pid,bitti:{},gun:{},acik:null}}
 const bgOto=it=>it.ac==='kart'||/^sinav:/.test(it.ac||'');
 function bgDurum(d,n){const k=bgKayit(),bk=bgGun(),hs=[0,6].includes(new Date().getDay()),G=(PLANJ&&PLANJ.gunler)||[],aktif=PLANJ&&PLANJ.durum==='aktif'&&G.length>0;
-  const bitti=it=>{if(it.ac==='kart'&&d+n===0)return true;const m=/^sinav:(.+)$/.exec(it.ac||'');if(m){const s=xState(m[1]);if(s&&s.gonderildi)return true}
+  const bitti=it=>{if(it.ac==='kart'&&d+n===0)return true;const m=/^sinav:(.+)$/.exec(it.ac||'');if(m){const s=xState(m[1]);if((s&&s.gonderildi)||(AKCACHE().sonuclar||[]).some(r=>r.id===m[1]))return true}
     return aktif?!!k.bitti[it.id]:!!(k.gun[bk]&&k.gun[bk][it.id])};
   let gi=0,isler=[],uzun=[];
   if(aktif){gi=G.findIndex(g=>!g.isler.every(bitti));if(gi<0)gi=G.length;else{isler=G[gi].isler;uzun=G[gi].uzun||[]}}
   else if(PLANJ)isler=PLANJ.bekle||[];
   // kart işi bugün bittiyse kalıcı işaretle (ertesi gün yeni kartlar gelse de o günün işi bitmiş sayılır)
-  if(aktif&&d+n===0){let deg=false;isler.forEach(it=>{if(it.ac==='kart'&&!k.bitti[it.id]){k.bitti[it.id]=Date.now();deg=true}});if(deg){k.t=Date.now();AKLS.set('ak-bugun',k)}}
+  if(aktif){let deg=false;G.flatMap(g=>[...g.isler,...(g.uzun||[])]).forEach(it=>{if(k.bitti[it.id])return;const m=/^sinav:(.+)$/.exec(it.ac||''),s=m&&xState(m[1]);
+    if((it.ac==='kart'&&d+n===0&&isler.includes(it))||(s&&s.gonderildi)){k.bitti[it.id]=Date.now();deg=true}});if(deg){k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla(2000)}}
   return {k,bk,hs,G,aktif,gi,isler,uzun,bitti}}
 function bgPlanHtml(d,n){bgYukle();if(!PLANJ)return '';const B=bgDurum(d,n),{isler,uzun,aktif,gi,G,k,hs,bitti}=B;
   const sayilan=[...isler,...(hs?uzun:[])],kalan=sayilan.filter(i=>!bitti(i)),sira=kalan[0]||(!hs&&uzun.find(i=>!bitti(i)));
@@ -1131,6 +1136,22 @@ function bgBagla(d,n){if(!PLANJ)return;const B=bgDurum(d,n),hepsi=[...B.isler,..
     if(!bgOto(it)){const k=bgKayit();k.acik={id:it.id,gun:B.bk};k.acikT=k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla()}bgAc(it,d,n)})}
 function bgTarih(){const d=new Date(),hs=[0,6].includes(d.getDay());return `<span class="bg-tarih">${GUNAD[d.getDay()]}, ${d.getDate()} ${d.toLocaleDateString('tr-TR',{month:'long'})}</span><span class="ak-chip ${hs?'wait':''}">${hs?'Hafta sonu · uzun gün ≈ 2 saat':'Hafta içi · kısa gün ≈ 1 saat'}</span>`}
 
+/* =============== KONUM: kaldığın yer ===============
+   iPhone uygulamayı arka planda kapatabiliyor; yeni sürüm gelince sayfa yenileniyor. Her çizimde nerede olduğun (sekme, ders ve
+   kaydırma yeri, sınav/alıştırma, ilerleme ekranı, okuma, kart tekrarı) kaydedilir; açılışta oraya dönülür. */
+function konumKaydet(){try{AKLS.set('ak-konum',{tab,S:(S.view==='session'?{view:'session',phase:'q'}:{view:'home'}),R,
+  AD:{view:AD.view,dosya:AD.dosya,sc:AD.view==='ders'?Math.round(AD.sc||0):0},AS:{view:AS.view,id:AS.id},AI,t:Date.now()})}catch(e){}}
+let KONUMZ=null;function konumGecikmeli(){clearTimeout(KONUMZ);KONUMZ=setTimeout(konumKaydet,400)}
+function konumYukle(){const k=AKLS.get('ak-konum',null);if(!k)return;
+  try{if(!/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&/^(tekrar|oku|ders|sinav|ilerleme)$/.test(k.tab||''))tab=k.tab;
+    if(k.AD&&k.AD.view==='ders'&&k.AD.dosya)AD={view:'ders',dosya:k.AD.dosya,sc:k.AD.sc||0};
+    if(k.AS&&k.AS.id&&['giris','kos','son'].includes(k.AS.view))AS={view:k.AS.view,id:k.AS.id};
+    if(k.AI&&k.AI.view&&k.AI.view!=='bag')AI=k.AI;
+    if(k.R&&(k.R.view==='lib'||(k.R.view==='story'&&typeof k.R.i==='number'&&BOOK[k.R.i])||(k.R.view==='task'&&k.R.id)))R=k.R;
+    if(k.S&&k.S.view==='session'&&P.sess&&P.sess.q&&P.sess.i<P.sess.q.length)S={view:'session',phase:'q'}}catch(e){}}
+// Yeni sürüm sayfayı yeniler: sınavın ya da kart tekrarının ortasındaysan yenileme (yeni sürüm bir sonraki açılışta gelir)
+function yenilemeUygun(){konumKaydet();return !(tab==='sinav'&&AS.view==='kos')&&!(tab==='tekrar'&&S.view==='session')}
+
 /* =============== EŞİTLEME (telefon ↔ PC) ve BİLDİRİM ===============
    Gizli depodaki "senkron" dalında durum.json: kartlar (P), Bugün işleri ve günün özeti. Her cihaz açılışta, öne gelince ve birkaç
    dakikada bir çeker ve birleştirir; değişiklik olunca (en fazla 2 dakikada bir, arka plana geçerken ve iş bitince hemen) yazar.
@@ -1164,9 +1185,9 @@ async function senkYaz(){const S_=senkDurum();if(!GH.ok())return;if(S_.yaziyor){
   S_.yaziyor=false;if(S_.tekrar){S_.tekrar=false;senkPlanla(5000)}}
 // Değişiklik sonrası yazmayı zamanla (en fazla 2 dakikada bir; ms verilirse daha erken)
 function senkPlanla(ms){const S_=senkDurum();if(!GH.ok())return;const bekle=ms!=null?ms:Math.max(5000,120000-(Date.now()-S_.sonYaz));clearTimeout(S_.zaman);S_.zaman=setTimeout(senkYaz,bekle)}
-async function senkBaslat(){if(!GH.ok())return;await senkCek();if(typeof render==='function'&&!(tab==='tekrar'&&S.view==='session')&&!(tab==='sinav'&&AS.view==='kos'))render();senkPlanla(3000)}
+async function senkBaslat(){if(!GH.ok())return;await senkCek();if(typeof render==='function'&&((tab==='tekrar'&&S.view==='home')||(tab==='ilerleme'&&AI.view==='ana')))render();senkPlanla(3000)}
 document.addEventListener('visibilitychange',()=>{if(!GH.ok())return;const S_=senkDurum();
-  if(document.visibilityState==='hidden'){clearTimeout(S_.zaman);senkYaz()}
+  if(document.visibilityState==='hidden'){konumKaydet();clearTimeout(S_.zaman);senkYaz()}
   else if(Date.now()-S_.sonCek>30000)senkBaslat()});
 setInterval(()=>{if(GH.ok()&&document.visibilityState==='visible'&&Date.now()-senkDurum().sonCek>180000)senkCek().then(()=>{if(tab==='tekrar'&&S.view==='home')render()})},60000);
 setTimeout(senkBaslat,1500);
@@ -1362,10 +1383,11 @@ function iBag(){const c=GH.cfg()||{owner:'obulutca',repo:'fransizca-calisma'};
 
 let tab=/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)?location.hash.slice(1):(()=>{try{return localStorage.getItem('fr-pratik-tab')||'tekrar'}catch(e){return 'tekrar'}})();
 let S={view:'home'},R={view:'lib'};
+try{konumYukle()}catch(e){}
 function setTab(t){stopAudio();tab=t;try{localStorage.setItem('fr-pratik-tab',t)}catch(e){}try{history.replaceState(null,'','#'+t)}catch(e){}hideSheet();render()}
 function render(){document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.tab===tab?'page':'false'));
   $('playerSlot').innerHTML='';$('nav').hidden=(tab==='tekrar'&&(S.view==='session'||S.view==='numq'))||(tab==='sinav'&&AS.view==='kos');akStop();if(!['ders','sinav','ilerleme'].includes(tab))document.body.classList.remove('genis');$('screen').onclick=null;$('screen').onscroll=null;$('screen').classList.remove('sv-ekran');$('screen').scrollTop=0;navHedef();temaIsaretle();
-  if(tab==='ders')A_ders();else if(tab==='sinav')A_sinav();else if(tab==='ilerleme')A_ilerleme();else if(tab==='tekrar')({home:rHome,session:rSession,done:rDone,settings:rSettings,stats:rStats,test:rTestPick,free:rFree,num:rNumPick,numq:rNumQ})[S.view]();else ({lib:rLib,story:rStory,task:rTask})[R.view]()}
+  if(tab==='ders')A_ders();else if(tab==='sinav')A_sinav();else if(tab==='ilerleme')A_ilerleme();else if(tab==='tekrar')({home:rHome,session:rSession,done:rDone,settings:rSettings,stats:rStats,test:rTestPick,free:rFree,num:rNumPick,numq:rNumQ})[S.view]();else ({lib:rLib,story:rStory,task:rTask})[R.view]();try{konumKaydet()}catch(e){}}
 
 /* ================= TEKRAR: home ================= */
 function pool(){return CARDS.filter(c=>P.set.units.includes(c.u))}
@@ -1697,5 +1719,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=fc0aef22eb').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=6609512207').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>
