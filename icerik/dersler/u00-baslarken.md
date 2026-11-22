@@ -6,7 +6,7 @@ Bu uygulama artık her şeyin tek yeri: kartlar, dersler, ödevler, sınavlar ve
 
 | Sekme | Ne var? |
 | --- | --- |
-| **Tekrar** | Kartlar (FSRS), Kendini sına, Serbest çalış, Sayı dinle |
+| **Bugün** | Günün işleri (ünitenin 6 günlük planı, tek "Başla" düğmesi), kartlar (FSRS), Serbest çalış, Sayı dinle |
 | **Dersler** | Ünite kılavuzları. Fransızca kelimelere dokununca sesli okunur. |
 | **Sınavlar** | Ödevler ve sınavlar, TCF Canada biçiminde. Bitince **Teslim et**. |
 | **Oku-Dinle** | Hikâyeler ve eski dinleme görevleri (Ünite 5–7, DTS 2) |
@@ -15,7 +15,7 @@ Bu uygulama artık her şeyin tek yeri: kartlar, dersler, ödevler, sınavlar ve
 ## Bir ünitenin akışı
 
 1. **Dersler** sekmesinde üniteyi oku. Altı noktalı Fransızca kelimeye dokun: *je me lève*, *nous sommes allés au parc*.
-2. **Tekrar** sekmesinde yeni kartlar kendiliğinden başlar.
+2. **Bugün** sekmesinde günün işleri sırayla gelir; yeni kartlar kart tekrarında kendiliğinden başlar.
 3. **Sınavlar → Ödev**: süre yok, dinlemeleri 3 kez dinleyebilirsin.
 4. **Sınavlar → Test**: TCF kuralları geçerli. Bitince **Teslim et**.
 5. Bilgisayarda Claude Code'u aç ve **"bitti, bak"** yaz. Puanlarım; değerlendirme **İlerleme** sekmesinde görünür.

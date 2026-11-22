@@ -1,0 +1,15 @@
+{
+ "aciklama": "Bugün ekranının planı. durum: \"bekle\" (yeni ünite için 'geçelim' bekleniyor; her gün 'bekle' işleri) ya da \"aktif\" (gunler: 6 gün, her gün isler + hafta sonu için uzun). ac: kart | sayi | telaffuz | serbest:<ünite> | ders:<dosya.md>[#bN] | sinav:<id> | oku",
+ "unite": 8,
+ "baslik": "Ünite 8",
+ "durum": "bekle",
+ "bekle_baslik": "Ünite 8 hazırlanıyor",
+ "ozet": "Ünite 7 bitti · Test 84,5 · Ödev 79",
+ "not": "Ünite 8'in 6 günlük planı Osman \"geçelim\" deyince burada açılır. O zamana kadar her gün kartlarını tekrar et ve zayıf noktalara bak.",
+ "bekle": [
+  {"id": "b-kart", "tur": "kart", "ad": "Kartlar: günlük tekrar", "dk": 10, "ac": "kart"},
+  {"id": "b-donuslu", "tur": "alistirma", "ad": "Tekrar: dönüşlü fiiller (*je me lève, il s'est levé*)", "not": "Serbest çalış · Ünite 7 kartları", "dk": 10, "ac": "serbest:7"},
+  {"id": "b-sayi", "tur": "dinleme", "ad": "Sayı dinle: tarihler ve saatler", "not": "zayıf nokta: bileşik sayılar", "dk": 5, "ac": "sayi"}
+ ],
+ "gunler": []
+}
