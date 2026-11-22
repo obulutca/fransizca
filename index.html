@@ -482,6 +482,33 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-block}
 .hd-cift{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--metin);font-size:1.0625rem;font-variant-numeric:lining-nums}
 .hd-eklendi{color:var(--good);font-weight:600}
 
+/* ===== Konu haritası (Adım 7) ===== */
+.kh-nokta{width:12px;height:12px;border-radius:99px;flex:none;background:var(--line);display:inline-block}
+.yesil>.kh-nokta,.kh-oz.yesil .kh-nokta,.kh-detay.yesil .kh-nokta{background:var(--good)}
+.sari>.kh-nokta,.kh-oz.sari .kh-nokta,.kh-detay.sari .kh-nokta{background:var(--warn)}
+.kirmizi>.kh-nokta,.kh-oz.kirmizi .kh-nokta,.kh-detay.kirmizi .kh-nokta{background:var(--bad)}
+.kh-ozet{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 4px}
+.kh-oz{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kh-oz b{font-size:1.5rem;line-height:1.1;font-variant-numeric:tabular-nums} .kh-oz span:last-child{font-size:.8125rem;color:var(--muted)}
+.kh-ozet.kucuk{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 0}
+.kh-ozet.kucuk .kh-oz{flex-direction:row;align-items:center;gap:6px;background:none;border:0;padding:0;font-size:.875rem;color:var(--ink)}
+.kh-izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.kh-konu{display:grid;grid-template-columns:12px minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:10px;row-gap:2px;align-items:center;text-align:left;
+  background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;color:var(--ink);font:inherit}
+.kh-konu:hover{border-color:var(--accent)}
+.kh-konu.yesil{border-left-color:var(--good)} .kh-konu.sari{border-left-color:var(--warn);background:color-mix(in srgb,var(--warn-bg) 40%,var(--surface))}
+.kh-konu.kirmizi{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad-bg) 45%,var(--surface))}
+.kh-konu.yok{opacity:.72} .kh-konu.az{border-left-style:dashed}
+.kh-ad{font-weight:600;min-width:0} .kh-oran{font-weight:700;font-variant-numeric:tabular-nums}
+.kh-alt{grid-column:2 / 4;font-size:.8125rem;color:var(--muted)}
+button.panel.kh-giris{display:flex;flex-direction:row;padding:16px 20px;justify-content:flex-start;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+button.panel.kh-giris:hover{border-color:var(--accent)}
+.kh-detay{border-left:4px solid var(--line)} .kh-detay.yesil{border-left-color:var(--good)} .kh-detay.sari{border-left-color:var(--warn)} .kh-detay.kirmizi{border-left-color:var(--bad)}
+.kh-detay .row{align-items:center;gap:10px}
+.kh-eylem{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.kh-eylem .btn{text-align:left}
+@media (max-width:600px){.kh-ozet{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 <div class="app">
   <div class="screen" id="screen"></div>
@@ -703,7 +730,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='f0f679e8dc';
+const AKV='fc0aef22eb';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -887,7 +914,8 @@ function svCiz(EX,st,b,o){const sinav=EX.tur==='sinav',L=EX.bolumler.length;$('s
 function bindNext(EX,st){const n=$('aknext');if(n)n.onclick=()=>{if(EX.tur==='sinav'&&!confirm('Bu bölümü bitirirsen geri dönemezsin. Devam?'))return;akStop();xNextSection(EX,st)}}
 function optsHtml(it,cur,dis){return `<div class="ak-opts" role="radiogroup">${it.secenekler.map((o,i)=>`<button class="ak-opt" role="radio" aria-checked="${cur===i}" data-opt="${i}" ${dis?'disabled':''}><span class="ak-let">${LET[i]}</span><span>${mdi(frb(o))}</span></button>`).join('')}</div>`}
 function playItem(EX,it,slow,done){ctx();Promise.resolve().then(()=>{const e=(slow&&EX.sesIndex[it.id+'~y'])||EX.sesIndex[it.id];if(!e){toast('Bu kaydın sesi yok',true);return done&&done(false)}playClip('icerik/ses/e-'+EX.id+'.mp3',e[0],e[1],done)})}
-function fb(it,v){if(it.dogru==null)return '';let ok;if(Array.isArray(it.dogru))ok=it.dogru.some(a=>norm(String(v||''))===norm(a)||loose(String(v||''))===loose(a));else ok=v===it.dogru;
+function fbOk(it,v){return Array.isArray(it.dogru)?it.dogru.some(a=>norm(String(v||''))===norm(a)||loose(String(v||''))===loose(a)):v===it.dogru}
+function fb(it,v){if(it.dogru==null)return '';const ok=fbOk(it,v);
   return `<div class="fb ${ok?'ok':'no'}"><b>${ok?'Doğru':'Yanlış'}</b>${ok?'':`<div>Doğrusu: ${Array.isArray(it.dogru)?esc(it.dogru[0]):LET[it.dogru]+') '+mdi(it.secenekler[it.dogru])}</div>`}${it.aciklama?`<div class="small">${mdi(it.aciklama)}</div>`:''}</div>`}
 /* Dinleme sesinin yaklaşık ilerlemesi (klipler 48 kbit/sn mp3: süre ≈ bayt × 8 / 48000) */
 let AKP=null;
@@ -948,7 +976,7 @@ function xKisa(EX,st,b){const sinav=EX.tur==='sinav';
   $('screen').querySelectorAll('[data-for]').forEach(x=>x.onclick=()=>{st.ans[x.dataset.for]=+x.dataset.opt;xSave(st);$('screen').querySelectorAll(`[data-for="${x.dataset.for}"]`).forEach(y=>y.setAttribute('aria-checked',y===x))});
   $('screen').querySelectorAll('[data-play]').forEach(x=>x.onclick=()=>{const it=b.sorular.find(q=>q.id===x.dataset.play),max=sinav?1:(it.dinleme||3);if((st.dinle[it.id]||0)>=max)return;
     st.dinle[it.id]=(st.dinle[it.id]||0)+1;xSave(st);const n=st.dinle[it.id];$('pc-'+it.id).textContent=n+' / '+max+' dinleme';if(n>=max)x.disabled=true;playItem(EX,it,false,()=>{})});
-  if($('akchk'))$('akchk').onclick=()=>{st.chk={};b.sorular.forEach(q=>st.chk[q.id]=1);xSave(st);render()};bindNext(EX,st)}
+  if($('akchk'))$('akchk').onclick=()=>{st.chk=st.chk||{};b.sorular.forEach(q=>st.chk[q.id]=1);st.chkT=Date.now();xSave(st);render()};bindNext(EX,st)}
 /* --- Yazma (EE): TCF kelime sayacı (iki boşluk arası = 1 kelime), sınır ölçeği, Fransızca harf düğmeleri --- */
 const HARFLER='é è ê à â ç ù û î ô ë ï œ É À Ç « »'.split(' ');
 const sinirTxt=x=>x.min||x.max?' / '+(x.min||0)+'–'+(x.max||'…'):'';
@@ -1225,9 +1253,77 @@ async function iHata(){$('screen').innerHTML=akTop('Hata defteri',true)+'<p clas
   hkBagla($('screen'),ev=>(H[ev]&&H[ev].D.hatalar)||[],()=>render())}
 hkYukle();
 
+/* =============== KONU HARİTASI (Adım 7) ===============
+   Konular icerik/konular.json'da (araclar/konular.py). Her değerlendirme sorusunun `konu` alanı bir konu id'si.
+   Renk = konunun geçtiği SON ölçümlerdeki (değerlendirme ya da bu cihazdaki alıştırma) soruların ortalaması; en az iki ölçüm,
+   soru sayısı 4'ten azsa daha eskilere de bakılır:
+   %85 ve üstü yeşil, %60–85 sarı, altı kırmızı; hiç soru yoksa gri (ölçülmedi). */
+let KONUJ=null;
+const KRENK={yesil:'Oturmuş',sari:'Tekrar et',kirmizi:'Zayıf',yok:'Ölçülmedi'};
+function konuSkor(q){if(q.max!=null&&q.max>0&&q.puan!=null)return Math.max(0,Math.min(1,q.puan/q.max));return q.durum==='ok'?1:q.durum==='yari'?.5:0}
+async function konuVeri(){
+  if(!KONUJ)KONUJ=(await jget('icerik/konular.json')).konular;
+  const c=AKCACHE(),olay=[];
+  for(const r of (c.sonuclar||[]).filter(r=>/\.json$/i.test(r.degerlendirme||''))){let D=AKLS.get('ak-deg:'+r.id,null);
+    try{const t=await GH.raw(r.degerlendirme);if(t){D=JSON.parse(t);AKLS.set('ak-deg:'+r.id,D)}}catch(e){}
+    if(!D)continue;const items=[];
+    (D.bolumler||[]).forEach(b=>(b.sorular||[]).forEach(q=>{if(q.konu)items.push({konu:q.konu,s:konuSkor(q),q,bolum:b.ad})}));
+    olay.push({id:r.id,baslik:r.baslik||D.baslik,tarih:Date.parse(D.tarih||r.tarih||'')||0,items,tur:'deg'})}
+  // bu cihazdaki alıştırma cevapları (yalnız "Cevapları kontrol et" denmiş olanlar)
+  const harita={};KONUJ.forEach(k=>(k.calisma||[]).forEach(x=>{(harita[x.id]=harita[x.id]||{})[x.bolum]=k.id}));
+  for(const eid of Object.keys(harita)){const st=xState(eid);if(!st||!st.ans||!Object.keys(st.ans).length)continue;st.chk=st.chk||{};
+    const EX=await exLoad(eid).catch(()=>null);if(!EX)continue;const items=[];
+    EX.bolumler.forEach(b=>{const kid=harita[eid][b.id];if(!kid)return;(b.sorular||[]).forEach(it=>{const v=st.ans[it.id];if(it.dogru==null||v==null||v===''||!(st.chk[it.id]||typeof it.dogru==='number'))return;
+      const ok=fbOk(it,v);items.push({konu:kid,s:ok?1:0,q:{no:'',soru:it.soru,cevap:String(v??''),dogru:Array.isArray(it.dogru)?it.dogru[0]:it.secenekler&&it.secenekler[it.dogru],durum:ok?'ok':'yanlis'},bolum:b.ad})})});
+    if(items.length)olay.push({id:eid,baslik:EX.baslik,tarih:st.chkT||st.basla||Date.now(),items,tur:'cal'})}
+  olay.sort((a,b)=>b.tarih-a.tarih);
+  const M={};KONUJ.forEach(k=>M[k.id]={k,ev:[]});
+  for(const o of olay){const by={};o.items.forEach(it=>(by[it.konu]=by[it.konu]||[]).push(it));for(const [kid,its] of Object.entries(by))if(M[kid])M[kid].ev.push({o,its})}
+  Object.values(M).forEach(m=>{let j=0,its=[];while(j<m.ev.length&&(j<2||its.length<4)){its=its.concat(m.ev[j].its);j++}m.kul=j;m.n=its.length;m.oran=its.length?its.reduce((a,x)=>a+x.s,0)/its.length:null;
+    m.renk=m.oran==null?'yok':m.oran>=.85?'yesil':m.oran>=.6?'sari':'kirmizi'});
+  const oz={yesil:0,sari:0,kirmizi:0,yok:0};Object.values(M).forEach(m=>oz[m.renk]++);AKLS.set('ak-konu-ozet',Object.assign(oz,{t:Date.now()}));
+  return M}
+const yuzde=x=>x==null?'—':'%'+Math.round(x*100);
+function konuKart(m){return `<button class="kh-konu ${m.renk}${m.n&&m.n<4?' az':''}" data-konu="${esc(m.k.id)}"><span class="kh-nokta"></span><span class="kh-ad">${esc(m.k.ad)}</span>
+  <span class="kh-oran">${m.renk==='yok'?'—':yuzde(m.oran)}</span><span class="kh-alt">${m.renk==='yok'?'ölçülmedi':m.n+' soru'+(m.n<4?' · az veri':'')}</span></button>`}
+async function iKonu(){$('screen').innerHTML=akTop('Konu haritası',true)+'<p class="muted">Yükleniyor…</p>';$('akbk').onclick=()=>{AI={view:'ana'};render()};
+  let M;try{M=await konuVeri()}catch(e){$('screen').insertAdjacentHTML('beforeend',`<p class="muted">Yüklenemedi: ${esc(e.message)}</p>`);return}
+  if(tab!=='ilerleme'||AI.view!=='konu')return;
+  if(AI.kid&&M[AI.kid])return iKonuDetay(M[AI.kid]);
+  const hepsi=Object.values(M),oz=AKLS.get('ak-konu-ozet',{}),once=hepsi.filter(m=>(m.renk==='kirmizi'||m.renk==='sari')&&m.n>=4).sort((a,b)=>a.oran-b.oran).slice(0,6);
+  const gruplar=[...new Set(KONUJ.map(k=>k.grup))];
+  $('screen').innerHTML=akTop('Konu haritası',true)+`<p class="muted">Her konunun rengi, o konunun geçtiği <b>son ölçümlerden</b> (en az iki ölçüm ve dört soru; değerlendirmeler ve bu cihazda kontrol ettiğin alıştırmalar) hesaplanır. Bir konuya dokun: hangi sorulardan geldiğini gör, dersini ya da alıştırmasını aç.</p>
+   <div class="kh-ozet">${['kirmizi','sari','yesil','yok'].map(r=>`<div class="kh-oz ${r}"><span class="kh-nokta"></span><b>${oz[r]||0}</b><span>${KRENK[r]}</span></div>`).join('')}</div>
+   ${once.length?`<section><h2>Önce bunlar</h2><div class="kh-izgara">${once.map(konuKart).join('')}</div></section>`:''}
+   ${gruplar.map(g=>`<section><h2>${esc(g)}</h2><div class="kh-izgara">${hepsi.filter(m=>m.k.grup===g).map(konuKart).join('')}</div></section>`).join('')}
+   <p class="small muted">Yeşil: son ölçümlerde %85 ve üstü · Sarı: %60–85 · Kırmızı: %60'ın altı. Yeni değerlendirme ya da alıştırma geldikçe kendiliğinden güncellenir.</p>`;
+  $('akbk').onclick=()=>{AI={view:'ana'};render()};
+  $('screen').onclick=e=>{const b=e.target.closest('[data-konu]');if(b){AI={view:'konu',kid:b.dataset.konu};render();window.scrollTo(0,0)}}}
+function iKonuDetay(m){const k=m.k;
+  const eylem=[...(k.ders||[]).map(d=>`<button class="btn" data-kders="${esc(d.dosya)}#${esc(d.b)}">📖 Ders: ${esc(d.ad.replace(/^Konu \d+ · /,''))}</button>`),
+    ...(k.calisma||[]).map(x=>`<button class="btn" data-kcal="${esc(x.id)}#${esc(x.bolum)}">✏️ Alıştırma: ${esc(x.ad)}</button>`),
+    k.arac?`<button class="btn" data-karac="${esc(k.arac)}">${{sayi:'🔢 Sayı dinle',oku:'🎧 Oku-Dinle',kart:'🃏 Kart tekrarı'}[k.arac]||k.arac}</button>`:''].join('');
+  const olaylar=m.ev.map((e,i)=>{const d=e.its.reduce((a,x)=>a+x.s,0),hat=e.its.filter(x=>x.s<1);
+    return `<section><div class="dg-bas"><h2>${esc(e.o.baslik)}${i<m.kul?' <span class="ak-chip">hesapta</span>':''}</h2><span class="muted small">${e.o.tarih?new Date(e.o.tarih).toLocaleDateString('tr-TR'):''} · ${sayi(Math.round(d*10)/10)} / ${e.its.length}</span></div>
+      ${hat.length?`<div class="dg-liste">${hat.map(x=>{const q=x.q,dr=DRM[q.durum]||DRM.bos;return `<div class="dg-q ${dr[1]}"><span class="dg-isaret">${dr[0]}</span><div class="dg-ic"><div class="dg-soru"><b>${esc(q.no||'')}</b> ${mdi(q.soru||'')}</div>
+        <div class="dg-cevap"><span class="hd-yanlis">${mdi(String(q.cevap||'—'))}</span> <span class="hd-ok">→ ${mdi(String(q.dogru??''))}</span></div>${q.neden?`<div class="small muted">${mdi(q.neden)}</div>`:''}</div><span class="dg-puan">${q.max!=null?sayi(q.puan)+' / '+sayi(q.max):''}</span></div>`}).join('')}</div>`:''}
+      ${e.its.length-hat.length?`<p class="small muted">✓ ${e.its.length-hat.length} soru doğru${hat.length?'':' — hepsi'}.</p>`:''}</section>`}).join('');
+  $('screen').innerHTML=akTop(k.ad,true)+`<div class="panel kh-detay ${m.renk}"><div class="row"><span class="kh-nokta"></span><div class="grow"><b>${KRENK[m.renk]}</b>${m.renk==='yok'?'':` · son ölçümlerde ${yuzde(m.oran)} (${m.n} soru${m.n<4?', az veri':''})`}</div></div>
+     <div class="muted">${esc(k.ozet||'')}</div><div class="muted small">${esc(k.grup)}</div></div>
+   ${eylem?`<div class="kh-eylem">${eylem}</div>`:''}
+   ${olaylar||'<div class="ak-note">Bu konu henüz hiçbir değerlendirmede ya da kontrol edilmiş alıştırmada geçmedi.</div>'}`;
+  $('akbk').onclick=()=>{AI={view:'konu'};render()};
+  $('screen').onclick=e=>{let b;
+    if((b=e.target.closest('[data-kders]'))){const [f,h]=b.dataset.kders.split('#');AD={view:'ders',dosya:f,git:h};return setTab('ders')}
+    if((b=e.target.closest('[data-kcal]'))){const [id,bo]=b.dataset.kcal.split('#');return calismaAc(id,bo)}
+    if((b=e.target.closest('[data-karac]'))){const a=b.dataset.karac;if(a==='sayi'){ctx();pack('n.mp3');S={view:'num'};return setTab('tekrar')}if(a==='oku'){R={view:'lib'};return setTab('oku')}S={view:'home'};return setTab('tekrar')}}}
+async function calismaAc(id,bolum){const EX=await exLoad(id).catch(()=>null);if(!EX)return toast('Alıştırma yüklenemedi',true);
+  let s=xState(id);if(!s)s={id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false};
+  const i=EX.bolumler.findIndex(b=>b.id===bolum);s.bi=i<0?0:i;s.bitti=false;xSave(s);AS={view:'kos',id};setTab('sinav')}
+
 /* =============== İLERLEME =============== */
 const AKCACHE=()=>AKLS.get('ak-ilerleme',{});
-async function A_ilerleme(){akStop();akWide();if(AI.view==='bag'||!GH.ok())return iBag();if(AI.view==='deg')return iDeg();if(AI.view==='hata')return iHata();
+async function A_ilerleme(){akStop();akWide();if(AI.view==='bag'||!GH.ok())return iBag();if(AI.view==='deg')return iDeg();if(AI.view==='hata')return iHata();if(AI.view==='konu')return iKonu();
   const c=AKCACHE();iDraw(c,true);
   try{const t=await GH.raw('ilerleme.json');if(t){const j=JSON.parse(t);AKLS.set('ak-ilerleme',j);if(tab==='ilerleme'&&AI.view==='ana')iDraw(j,false)}}catch(e){if(tab==='ilerleme'&&AI.view==='ana'){const n=$('akist');if(n)n.textContent='Güncellenemedi: '+e.message}}}
 function iDraw(c,stale){const sev=c.seviye||{},res=(c.sonuclar||[]).slice().reverse(),yol=c.yol||[],nc=c.nclc||[];
@@ -1238,10 +1334,11 @@ function iDraw(c,stale){const sev=c.seviye||{},res=(c.sonuclar||[]).slice().reve
    ${nc.length?`<section><h2>Beceriler (tahmini NCLC)</h2><div class="ak-grid">${nc.map(x=>`<div class="ak-skill"><div class="muted small">${esc(x.beceri)}</div><div class="ak-big">${esc(x.deger)}</div><div class="small muted">${mdi(x.not||'')}</div></div>`).join('')}</div></section>`:''}
    ${yol.length?`<section><h2>Yol haritası</h2><div class="ak-road">${yol.map(x=>`<div class="ak-step ${x.durum||''}"><b>${esc(x.ad)}</b><span>${esc(x.nclc||'')}</span><span class="muted small">${esc(x.tarih||'')}</span></div>`).join('')}</div></section>`:''}
    ${pend.length?`<section><h2>Değerlendirme bekleyen</h2><div class="list">${pend.map(x=>`<div class="item"><div><div class="t">${esc(x.m.baslik)}</div><div class="s">Teslim: ${new Date(x.s.gonderildi).toLocaleString('tr-TR')}</div></div></div>`).join('')}</div></section>`:''}
+   ${(()=>{const o=AKLS.get('ak-konu-ozet',null);return `<button class="panel kh-giris" id="akkonu"><div class="grow"><div class="kind">Konu haritası</div><b>Hangi konu oturdu, hangisi zayıf?</b>${o?`<div class="kh-ozet kucuk">${['kirmizi','sari','yesil'].map(r=>`<span class="kh-oz ${r}"><span class="kh-nokta"></span>${o[r]||0} ${KRENK[r].toLowerCase()}</span>`).join('')}</div>`:'<div class="muted small">Her konu kırmızı, sarı ya da yeşil; zayıf konuya tek dokunuşla ders ve alıştırma.</div>'}</div><span class="muted">›</span></button>`})()}
    ${res.length?`<section><div class="dg-bas"><h2>Sonuçlar</h2><button class="btn sm" id="akhata">Hata defteri</button></div><div class="list">${res.map(r=>`<button class="item" ${r.degerlendirme?`data-deg="${esc(r.degerlendirme)}"`:''}><div style="min-width:0"><div class="t">${esc(r.baslik)}</div><div class="s">${esc(r.tarih||'')}${r.karar?' · '+esc(r.karar):''}${r.not?' · '+esc(r.not):''}</div></div><b>${esc(String(r.puan))}${r.max?'<span class="muted small"> / '+r.max+'</span>':''}</b></button>`).join('')}</div></section>`:''}
    ${(c.zayif||[]).length?`<section><h2>Üzerinde çalışılacaklar</h2><div class="ak-md"><ul>${c.zayif.map(z=>`<li>${mdi(z)}</li>`).join('')}</ul></div></section>`:''}
    ${c.siradaki?`<section><h2>Sırada</h2><div class="ak-md">${mdr(c.siradaki)}</div></section>`:''}`;
-  $('akset').onclick=()=>{AI={view:'bag'};render()};if($('akhata'))$('akhata').onclick=()=>{AI={view:'hata'};render()};
+  $('akset').onclick=()=>{AI={view:'bag'};render()};if($('akhata'))$('akhata').onclick=()=>{AI={view:'hata'};render()};$('akkonu').onclick=()=>{AI={view:'konu'};render()};
   $('screen').onclick=e=>{const b=e.target.closest('[data-deg]');if(b){const r=(c.sonuclar||[]).find(x=>x.degerlendirme===b.dataset.deg);AI={view:'deg',yol:b.dataset.deg,pdf:r&&r.pdf,evalId:r&&r.id};render()}}}
 async function iDeg(){$('screen').innerHTML=akTop('Değerlendirme',true)+'<p class="muted">Yükleniyor…</p>';$('akbk').onclick=()=>{AI={view:'ana'};render()};
   try{if(/\.pdf$/i.test(AI.yol)){const bl=await GH.blob(AI.yol);if(!bl)throw new Error('dosya yok');const u=URL.createObjectURL(new Blob([bl],{type:'application/pdf'}));
@@ -1600,5 +1697,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=f0f679e8dc').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=fc0aef22eb').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
 </body></html>

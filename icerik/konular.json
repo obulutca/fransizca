@@ -1,0 +1,1234 @@
+{
+ "konular": [
+  {
+   "id": "okunus",
+   "ad": "Okunuş ve okuma kuralları",
+   "ozet": "ou, oi, au, gn, son harf, burun sesi",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b1",
+     "ad": "Konu 1 · Fransızca nasıl okunur"
+    },
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b5",
+     "ad": "Konu 6 · Okuma ve yazım"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "a1",
+     "ad": "A1. Okunuş"
+    },
+    {
+     "id": "u02-calisma",
+     "bolum": "a",
+     "ad": "A. Yeni kelime okuma"
+    },
+    {
+     "id": "u02b-calisma",
+     "bolum": "g",
+     "ad": "G. Yeni kelime okuma"
+    },
+    {
+     "id": "u03-calisma",
+     "bolum": "b",
+     "ad": "B. Okunuş"
+    }
+   ]
+  },
+  {
+   "id": "baglama",
+   "ad": "Bağlama ve kesme",
+   "ozet": "ils‿ont, neuf‿heures; ne + sesli = n'",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b1",
+     "ad": "Konu 1 · Fransızca nasıl okunur"
+    },
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b4",
+     "ad": "Konu 5 · Kesme ve pas de'nin sınırları"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "a4",
+     "ad": "A4. Kesme"
+    },
+    {
+     "id": "u01-calisma",
+     "bolum": "a5",
+     "ad": "A5. Bağlama var mı?"
+    }
+   ]
+  },
+  {
+   "id": "ozne",
+   "ad": "Özne zamirleri ve özneyi bulmak",
+   "ozet": "-lar → ils / elles, -iz → nous",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b2",
+     "ad": "Konu 2 · Özne zamirleri"
+    },
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b3",
+     "ad": "Konu 4 · Özneyi Türkçe ekten bulmak"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "b1",
+     "ad": "B1. Özne zamirleri"
+    },
+    {
+     "id": "u02b-calisma",
+     "bolum": "d",
+     "ad": "D. Özneyi bul ve çevir"
+    }
+   ]
+  },
+  {
+   "id": "tu_vous",
+   "ad": "tu mu, vous mu?",
+   "ozet": "arkadaşa tu, resmî ve çoğul vous",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b2",
+     "ad": "Konu 2 · Özne zamirleri"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "b2",
+     "ad": "B2. tu mu, vous mu?"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "g2",
+     "ad": "G2. E-posta: tu mu, vous mu?"
+    }
+   ]
+  },
+  {
+   "id": "etre",
+   "ad": "être çekimi",
+   "ozet": "je suis, tu es, il est…",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b3",
+     "ad": "Konu 3 · être (olmak)"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "c",
+     "ad": "C. être çekimi"
+    }
+   ]
+  },
+  {
+   "id": "olumsuz",
+   "ad": "Olumsuz cümle",
+   "ozet": "ne … pas, ne … plus",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b4",
+     "ad": "Konu 4 · Olumsuz cümle"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "d",
+     "ad": "D. Olumsuz cümle"
+    },
+    {
+     "id": "u03-calisma",
+     "bolum": "d",
+     "ad": "D. Olumsuz"
+    }
+   ]
+  },
+  {
+   "id": "soru",
+   "ad": "Soru cümlesi",
+   "ozet": "est-ce que, devrik soru, qu'est-ce que, si",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b5",
+     "ad": "Konu 5 · Soru cümlesi"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "e1",
+     "ad": "E1. Est-ce que"
+    },
+    {
+     "id": "u01-calisma",
+     "bolum": "e2",
+     "ad": "E2. Devrik soru"
+    },
+    {
+     "id": "u01-calisma",
+     "bolum": "e4",
+     "ad": "E4. Fransızca sor"
+    },
+    {
+     "id": "u03-calisma",
+     "bolum": "e1",
+     "ad": "E1. İki çeşit soru"
+    }
+   ]
+  },
+  {
+   "id": "uyum",
+   "ad": "Sıfat uyumu",
+   "ozet": "contente, contents, contentes",
+   "grup": "Ünite 1 · Temeller",
+   "ders": [
+    {
+     "dosya": "u01-temeller.md",
+     "b": "b6",
+     "ad": "Konu 6 · Cinsiyet ve sıfat uyumu (giriş)"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u01-calisma",
+     "bolum": "f1",
+     "ad": "F1. Sıfat uyumu"
+    }
+   ]
+  },
+  {
+   "id": "cinsiyet",
+   "ad": "İsimlerin cinsiyeti",
+   "ozet": "le café, la voiture",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b2",
+     "ad": "Konu 2 · İsimlerin cinsiyeti"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "b",
+     "ad": "B. Cinsiyet tahmini"
+    }
+   ]
+  },
+  {
+   "id": "artikel",
+   "ad": "Artikel seçimi",
+   "ozet": "le / un / des: ilk kez mi, belli mi?",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b3",
+     "ad": "Konu 3 · Artikeller"
+    },
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b0",
+     "ad": "Konu 1 · Artikel seçimi: üç soru"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "c1",
+     "ad": "C1. un, une, des"
+    },
+    {
+     "id": "u02-calisma",
+     "bolum": "c2",
+     "ad": "C2. le, la, l', les"
+    },
+    {
+     "id": "u02b-calisma",
+     "bolum": "a",
+     "ad": "A. Artikel seçimi"
+    }
+   ]
+  },
+  {
+   "id": "cogul",
+   "ad": "Çoğul",
+   "ozet": "les réunions, les journaux",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b4",
+     "ad": "Konu 4 · Çoğul isimler"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "d",
+     "ad": "D. Çoğul"
+    }
+   ]
+  },
+  {
+   "id": "avoir",
+   "ad": "avoir ve kalıpları",
+   "ozet": "yaş, açlık, susuzluk, üşümek",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b5",
+     "ad": "Konu 5 · avoir (sahip olmak)"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "e1",
+     "ad": "E1. avoir"
+    },
+    {
+     "id": "u02-calisma",
+     "bolum": "g3",
+     "ad": "G3. Yaş"
+    }
+   ]
+  },
+  {
+   "id": "etre_avoir",
+   "ad": "être mi, avoir mı?",
+   "ozet": "meslek, sıfat, yer → être",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b2",
+     "ad": "Konu 3 · être mi, avoir mı?"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "e2",
+     "ad": "E2. être mi, avoir mı?"
+    },
+    {
+     "id": "u02b-calisma",
+     "bolum": "c",
+     "ad": "C. être mi, avoir mı?"
+    }
+   ]
+  },
+  {
+   "id": "pas_de",
+   "ad": "Olumsuzda pas de",
+   "ozet": "pas de pain; être ile un kalır",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b6",
+     "ad": "Konu 6 · Olumsuzda pas de"
+    },
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b4",
+     "ad": "Konu 5 · Kesme ve pas de'nin sınırları"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "f",
+     "ad": "F. Olumsuz (pas de)"
+    },
+    {
+     "id": "u02b-calisma",
+     "bolum": "e",
+     "ad": "E. Kesme ve pas de"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "g",
+     "ad": "G. Olumsuzda de"
+    }
+   ]
+  },
+  {
+   "id": "il_y_a",
+   "ad": "il y a mı, c'est mi?",
+   "ozet": "var = il y a, bu = c'est",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b8",
+     "ad": "Konu 8 · il y a = var"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "h",
+     "ad": "H. Il y a"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "a2",
+     "ad": "A2. il y a mı, c'est mi?"
+    }
+   ]
+  },
+  {
+   "id": "yer_edat",
+   "ad": "au / aux / à la / à l'",
+   "ozet": "à + le = au, à + les = aux, chez, en bus",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b1",
+     "ad": "Konu 2 · au / aux / à la / à l'"
+    },
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b2",
+     "ad": "Konu 2 · aller ve yer, ulaşım"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "c3",
+     "ad": "C3. au, aux, à la, à l'"
+    },
+    {
+     "id": "u02b-calisma",
+     "bolum": "b",
+     "ad": "B. au, aux, à la, à l'"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "b2",
+     "ad": "B2. au, à la, à l', aux, à, chez"
+    }
+   ]
+  },
+  {
+   "id": "yazim",
+   "ad": "Yazım ve aksanlar",
+   "ozet": "okunmayan harfler yazılır; é / è",
+   "grup": "Ünite 2 · İsimler ve avoir",
+   "ders": [
+    {
+     "dosya": "u02b-tekrar.md",
+     "b": "b5",
+     "ad": "Konu 6 · Okuma ve yazım"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02b-calisma",
+     "bolum": "h",
+     "ad": "H. é mi, è mi?"
+    }
+   ]
+  },
+  {
+   "id": "fiil_cumle",
+   "ad": "Her cümlede bir fiil",
+   "ozet": "Çocuklar evde = Les enfants sont à la maison",
+   "grup": "Ünite 3 · -ER fiilleri",
+   "ders": [
+    {
+     "dosya": "u03-er-fiilleri.md",
+     "b": "b1",
+     "ad": "Konu 1 · Tekrar testinden kalan üç hata"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "a3",
+     "ad": "A3. Eksik fiili ekle"
+    }
+   ]
+  },
+  {
+   "id": "er_fiil",
+   "ad": "-ER fiillerinin çekimi",
+   "ozet": "je parle, nous commençons",
+   "grup": "Ünite 3 · -ER fiilleri",
+   "ders": [
+    {
+     "dosya": "u03-er-fiilleri.md",
+     "b": "b3",
+     "ad": "Konu 3 · -ER fiillerinin çekimi"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u03-calisma",
+     "bolum": "a",
+     "ad": "A. Çekim"
+    },
+    {
+     "id": "u03-calisma",
+     "bolum": "c",
+     "ad": "C. travailler mı, étudier mi?"
+    }
+   ]
+  },
+  {
+   "id": "aimer",
+   "ad": "aimer / préférer / détester + le",
+   "ozet": "Je n'aime pas la viande",
+   "grup": "Ünite 3 · -ER fiilleri",
+   "ders": [
+    {
+     "dosya": "u03-er-fiilleri.md",
+     "b": "b4",
+     "ad": "Konu 4 · Olumsuz, soru ve aimer"
+    }
+   ],
+   "calisma": []
+  },
+  {
+   "id": "sahiplik",
+   "ad": "Sahiplik sıfatları",
+   "ozet": "mon, ma, mes; son usine; vos",
+   "grup": "Ünite 3 · -ER fiilleri",
+   "ders": [
+    {
+     "dosya": "u03-er-fiilleri.md",
+     "b": "b5",
+     "ad": "Konu 5 · Sahiplik sıfatları"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u03-calisma",
+     "bolum": "f",
+     "ad": "F. Sahiplik sıfatları"
+    }
+   ]
+  },
+  {
+   "id": "sayilar",
+   "ad": "Sayılar (yazıyla)",
+   "ozet": "soixante-douze, quatre-vingts, deux cents",
+   "grup": "Ünite 3 · -ER fiilleri",
+   "ders": [
+    {
+     "dosya": "u02-isimler-avoir.md",
+     "b": "b7",
+     "ad": "Konu 7 · Sayılar 0–69 ve yaş"
+    },
+    {
+     "dosya": "u03-er-fiilleri.md",
+     "b": "b6",
+     "ad": "Konu 6 · Sayılar 70–100"
+    },
+    {
+     "dosya": "u05-vouloir-pouvoir-devoir.md",
+     "b": "b8",
+     "ad": "Konu 8 · Fiyatlar ve 100–1000"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u02-calisma",
+     "bolum": "g1",
+     "ad": "G1. Sayıları yazıyla"
+    },
+    {
+     "id": "u03-calisma",
+     "bolum": "g1",
+     "ad": "G1. 70–100 yazıyla"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "i1",
+     "ad": "I1. 100–1000"
+    }
+   ]
+  },
+  {
+   "id": "saat",
+   "ad": "Saat ve günler",
+   "ozet": "Il est neuf heures / à neuf heures; moins le quart",
+   "grup": "Ünite 3 · -ER fiilleri",
+   "ders": [
+    {
+     "dosya": "u03-er-fiilleri.md",
+     "b": "b7",
+     "ad": "Konu 7 · Saat ve günler"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u03-calisma",
+     "bolum": "h",
+     "ad": "H. Saat"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "a1",
+     "ad": "A1. Il est mı, à mı?"
+    }
+   ]
+  },
+  {
+   "id": "aller_faire_venir",
+   "ad": "aller, faire, venir",
+   "ozet": "çekim ve kalıplar (faire le ménage)",
+   "grup": "Ünite 4 · aller, faire, venir",
+   "ders": [
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b2",
+     "ad": "Konu 2 · aller ve yer, ulaşım"
+    },
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b4",
+     "ad": "Konu 4 · faire ve hava durumu"
+    },
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b5",
+     "ad": "Konu 5 · venir ve ülkeler"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "b1",
+     "ad": "B1. aller çekimi"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "d1",
+     "ad": "D1. faire ve dört düzensiz fiil"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "e1",
+     "ad": "E1. venir"
+    }
+   ]
+  },
+  {
+   "id": "yakin_gelecek",
+   "ad": "Yakın gelecek",
+   "ozet": "aller + mastar",
+   "grup": "Ünite 4 · aller, faire, venir",
+   "ders": [
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b3",
+     "ad": "Konu 3 · Yakın gelecek ve ce / cette / ces"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "c1",
+     "ad": "C1. Yakın gelecek"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "c2",
+     "ad": "C2. Olumsuz gelecek"
+    }
+   ]
+  },
+  {
+   "id": "hava",
+   "ad": "Hava durumu",
+   "ozet": "il fait beau, il va faire froid",
+   "grup": "Ünite 4 · aller, faire, venir",
+   "ders": [
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b4",
+     "ad": "Konu 4 · faire ve hava durumu"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "d3",
+     "ad": "D3. faire kalıpları ve hava"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "d5",
+     "ad": "D5. Hava mı, kişi mi?"
+    }
+   ]
+  },
+  {
+   "id": "ulke",
+   "ad": "Ülke ve şehir edatları",
+   "ozet": "en France, au Canada, aux États-Unis; de / du",
+   "grup": "Ünite 4 · aller, faire, venir",
+   "ders": [
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b5",
+     "ad": "Konu 5 · venir ve ülkeler"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "b3",
+     "ad": "B3. en mi, à mı?"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "e2",
+     "ad": "E2. -de / -e"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "e3",
+     "ad": "E3. -den"
+    }
+   ]
+  },
+  {
+   "id": "soru_kelime",
+   "ad": "Soru kelimeleri",
+   "ozet": "où, quand, comment, combien, pourquoi",
+   "grup": "Ünite 4 · aller, faire, venir",
+   "ders": [
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b6",
+     "ad": "Konu 6 · Soru kelimeleri"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "f1",
+     "ad": "F1. Soru kelimesi"
+    },
+    {
+     "id": "u04-calisma",
+     "bolum": "f2",
+     "ad": "F2. Soruyu yaz"
+    }
+   ]
+  },
+  {
+   "id": "yazma",
+   "ad": "Yazma görevi",
+   "ozet": "her madde bir cümle; 60–80 kelime; selam ve kapanış",
+   "grup": "Ünite 4 · aller, faire, venir",
+   "ders": [
+    {
+     "dosya": "u04-aller-faire-venir.md",
+     "b": "b7",
+     "ad": "Konu 7 · Kısa e-posta (TCF görevi)"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "g2",
+     "ad": "G2. E-posta: tu mu, vous mu?"
+    }
+   ]
+  },
+  {
+   "id": "modal",
+   "ad": "vouloir / pouvoir / devoir",
+   "ozet": "je voudrais, est-ce que je peux…?, je dois",
+   "grup": "Ünite 5 · vouloir, pouvoir, devoir",
+   "ders": [
+    {
+     "dosya": "u05-vouloir-pouvoir-devoir.md",
+     "b": "b2",
+     "ad": "Konu 2 · Yardımcı fiil fikri: fiil + mastar"
+    },
+    {
+     "dosya": "u05-vouloir-pouvoir-devoir.md",
+     "b": "b4",
+     "ad": "Konu 4 · pouvoir: -ebilmek, izin istemek"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u05-calisma",
+     "bolum": "b1",
+     "ad": "B1. vouloir"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "c1",
+     "ad": "C1. pouvoir"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "c2",
+     "ad": "C2. vouloir mu, pouvoir mu?"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "d1",
+     "ad": "D1. devoir"
+    }
+   ]
+  },
+  {
+   "id": "partitif",
+   "ad": "du / de la / de l'",
+   "ozet": "belirsiz miktar: du pain, de l'eau",
+   "grup": "Ünite 5 · vouloir, pouvoir, devoir",
+   "ders": [
+    {
+     "dosya": "u05-vouloir-pouvoir-devoir.md",
+     "b": "b6",
+     "ad": "Konu 6 · \"Biraz\" artikeli: du / de la / de l'"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u05-calisma",
+     "bolum": "f1",
+     "ad": "F1. Üç artikel grubu"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "f2",
+     "ad": "F2. Artikel: çeviri"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "h2",
+     "ad": "H2. du mu, de mi?"
+    }
+   ]
+  },
+  {
+   "id": "miktar",
+   "ad": "Miktar + de",
+   "ozet": "un kilo de, beaucoup d'",
+   "grup": "Ünite 5 · vouloir, pouvoir, devoir",
+   "ders": [
+    {
+     "dosya": "u05-vouloir-pouvoir-devoir.md",
+     "b": "b7",
+     "ad": "Konu 7 · Miktar: beaucoup de, un kilo de"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u05-calisma",
+     "bolum": "h1",
+     "ad": "H1. Miktar: de mi, d' mi?"
+    },
+    {
+     "id": "u05-calisma",
+     "bolum": "h3",
+     "ad": "H3. Miktar: çeviri"
+    }
+   ]
+  },
+  {
+   "id": "pc_avoir",
+   "ad": "Geçmiş zaman: avoir + ortaç",
+   "ozet": "j'ai mangé, nous avons pris",
+   "grup": "Ünite 6 · Geçmiş zaman 1",
+   "ders": [
+    {
+     "dosya": "u06-gecmis-zaman-1.md",
+     "b": "b2",
+     "ad": "Konu 2 · Geçmiş zaman iki parçalıdır"
+    },
+    {
+     "dosya": "u06-gecmis-zaman-1.md",
+     "b": "b3",
+     "ad": "Konu 3 · -er fiilleri: sonu -é"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u06-calisma",
+     "bolum": "b1",
+     "ad": "B1. avoir'ı yaz"
+    },
+    {
+     "id": "u06-calisma",
+     "bolum": "c1",
+     "ad": "C1. -er ortaçları"
+    },
+    {
+     "id": "u06-calisma",
+     "bolum": "c2",
+     "ad": "C2. Geçmişe çevir"
+    }
+   ]
+  },
+  {
+   "id": "ortac",
+   "ad": "Ortaçlar (-ir, -re, düzensiz)",
+   "ozet": "fini, pris, vu, bu, dû",
+   "grup": "Ünite 6 · Geçmiş zaman 1",
+   "ders": [
+    {
+     "dosya": "u06-gecmis-zaman-1.md",
+     "b": "b4",
+     "ad": "Konu 4 · -ir, -re ve düzensiz ortaçlar"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u06-calisma",
+     "bolum": "d1",
+     "ad": "D1. Düzensiz ortaçlar"
+    },
+    {
+     "id": "u06-calisma",
+     "bolum": "d2",
+     "ad": "D2. Fiili geçmişte yaz"
+    }
+   ]
+  },
+  {
+   "id": "pc_olumsuz",
+   "ad": "Geçmişte olumsuz ve soru",
+   "ozet": "je n'ai pas mangé; déjà, jamais, rien",
+   "grup": "Ünite 6 · Geçmiş zaman 1",
+   "ders": [
+    {
+     "dosya": "u06-gecmis-zaman-1.md",
+     "b": "b5",
+     "ad": "Konu 5 · Geçmişte olumsuz ve soru"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u06-calisma",
+     "bolum": "e",
+     "ad": "E. Geçmişte olumsuz"
+    },
+    {
+     "id": "u06-calisma",
+     "bolum": "f",
+     "ad": "F. Geçmişte soru"
+    }
+   ]
+  },
+  {
+   "id": "zaman",
+   "ad": "Zaman kelimeleri",
+   "ozet": "depuis / il y a, la semaine dernière, zarfın yeri",
+   "grup": "Ünite 6 · Geçmiş zaman 1",
+   "ders": [
+    {
+     "dosya": "u06-gecmis-zaman-1.md",
+     "b": "b6",
+     "ad": "Konu 6 · Ne zaman? Zaman kelimeleri ve kısa zarflar"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u06-calisma",
+     "bolum": "g1",
+     "ad": "G1. Zaman kelimeleri"
+    },
+    {
+     "id": "u06-calisma",
+     "bolum": "g2",
+     "ad": "G2. Zarfın yeri"
+    },
+    {
+     "id": "u06-calisma",
+     "bolum": "h2",
+     "ad": "H2. depuis mu, il y a mı?"
+    }
+   ]
+  },
+  {
+   "id": "saglik",
+   "ad": "Sağlık",
+   "ozet": "j'ai mal à la tête, j'ai été malade",
+   "grup": "Ünite 6 · Geçmiş zaman 1",
+   "ders": [
+    {
+     "dosya": "u06-gecmis-zaman-1.md",
+     "b": "b7",
+     "ad": "Konu 7 · Sağlık: avoir mal à"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u06-calisma",
+     "bolum": "h1",
+     "ad": "H1. avoir mal à"
+    }
+   ]
+  },
+  {
+   "id": "pc_etre",
+   "ad": "Geçmiş zaman: être ile",
+   "ozet": "je suis allée, ils sont venus",
+   "grup": "Ünite 7 · Geçmiş zaman 2",
+   "ders": [
+    {
+     "dosya": "u07-gecmis-zaman-2.md",
+     "b": "b1",
+     "ad": "Konu 1 · Geçmişin ikinci yardımcı fiili: être"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u07-calisma",
+     "bolum": "c1",
+     "ad": "Ç1. avoir mı, être mi?"
+    }
+   ]
+  },
+  {
+   "id": "pc_uyum",
+   "ad": "Ortaç uyumu",
+   "ozet": "allée, venus, montées",
+   "grup": "Ünite 7 · Geçmiş zaman 2",
+   "ders": [
+    {
+     "dosya": "u07-gecmis-zaman-2.md",
+     "b": "b2",
+     "ad": "Konu 2 · Ortaç uyumu: -e, -s, -es"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u07-calisma",
+     "bolum": "c2",
+     "ad": "Ç2. Ortaç uyumu"
+    }
+   ]
+  },
+  {
+   "id": "donuslu",
+   "ad": "Dönüşlü fiiller",
+   "ozet": "je me lève; kendini … diyebiliyor muyum?",
+   "grup": "Ünite 7 · Geçmiş zaman 2",
+   "ders": [
+    {
+     "dosya": "u07-gecmis-zaman-2.md",
+     "b": "b3",
+     "ad": "Konu 3 · Dönüşlü fiiller (şimdiki zaman)"
+    },
+    {
+     "dosya": "u07-gecmis-zaman-2.md",
+     "b": "b4",
+     "ad": "Konu 4 · Dönüşlü fiiller geçmişte ve yakın gelecekte"
+    },
+    {
+     "dosya": "u08-gecmiste-tasvir.md",
+     "b": "b1",
+     "ad": "Konu 1 · Ünite 7'den kalan: dönüşlü zamir"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u07-calisma",
+     "bolum": "c3",
+     "ad": "Ç3. se coucher: şimdi ve geçmiş"
+    },
+    {
+     "id": "u07-calisma",
+     "bolum": "c4",
+     "ad": "Ç4. Üç zaman"
+    }
+   ]
+  },
+  {
+   "id": "baglac",
+   "ad": "Bağlaçlar ve sıralama",
+   "ozet": "et, mais, parce que; d'abord, ensuite, enfin",
+   "grup": "Ünite 7 · Geçmiş zaman 2",
+   "ders": [
+    {
+     "dosya": "u07-gecmis-zaman-2.md",
+     "b": "b5",
+     "ad": "Konu 5 · Günlük rutin ve sıralama"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u04-calisma",
+     "bolum": "f3",
+     "ad": "F3. parce que"
+    }
+   ]
+  },
+  {
+   "id": "tarih",
+   "ad": "Aylar ve tarihler",
+   "ozet": "le premier mai, en mars",
+   "grup": "Ünite 7 · Geçmiş zaman 2",
+   "ders": [
+    {
+     "dosya": "u07-gecmis-zaman-2.md",
+     "b": "b6",
+     "ad": "Konu 6 · Aylar ve tarihler"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u07-calisma",
+     "bolum": "c5",
+     "ad": "Ç5. Tarihleri kelimeyle yaz"
+    }
+   ]
+  },
+  {
+   "id": "imparfait",
+   "ad": "imparfait",
+   "ozet": "j'étais, il faisait",
+   "grup": "Ünite 8 · Geçmişte tasvir",
+   "ders": [
+    {
+     "dosya": "u08-gecmiste-tasvir.md",
+     "b": "b2",
+     "ad": "Konu 2 · imparfait: geçmişin \"fotoğrafı\""
+    },
+    {
+     "dosya": "u08-gecmiste-tasvir.md",
+     "b": "b3",
+     "ad": "Konu 3 · imparfait ne zaman kullanılır?"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u08-calisma",
+     "bolum": "a",
+     "ad": "A. imparfait çekimi"
+    }
+   ]
+  },
+  {
+   "id": "pc_imparfait",
+   "ad": "passé composé mı, imparfait mi?",
+   "ozet": "olay mı, fotoğraf mı?",
+   "grup": "Ünite 8 · Geçmişte tasvir",
+   "ders": [
+    {
+     "dosya": "u08-gecmiste-tasvir.md",
+     "b": "b4",
+     "ad": "Konu 4 · passé composé ve imparfait birlikte"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u08-calisma",
+     "bolum": "b",
+     "ad": "B. imparfait mi, passé composé mi?"
+    }
+   ]
+  },
+  {
+   "id": "yol",
+   "ad": "Yol tarifi ve ulaşım",
+   "ozet": "tournez à gauche; prendre le métro",
+   "grup": "Ünite 8 · Geçmişte tasvir",
+   "ders": [
+    {
+     "dosya": "u08-gecmiste-tasvir.md",
+     "b": "b5",
+     "ad": "Konu 5 · Yol tarifi"
+    },
+    {
+     "dosya": "u08-gecmiste-tasvir.md",
+     "b": "b6",
+     "ad": "Konu 6 · Şehirde ulaşım ve prendre"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u08-calisma",
+     "bolum": "c",
+     "ad": "C. Yol tarifi"
+    },
+    {
+     "id": "u08-calisma",
+     "bolum": "d",
+     "ad": "D. prendre ve ulaşım"
+    }
+   ]
+  },
+  {
+   "id": "dinleme_sayi",
+   "ad": "Dinlemede sayılar",
+   "ozet": "fiyat, saat, tarih, telefon: sayı bitene kadar yazma",
+   "grup": "Beceriler",
+   "ders": [],
+   "calisma": [],
+   "arac": "sayi"
+  },
+  {
+   "id": "dinleme",
+   "ad": "Dinlediğini anlama",
+   "ozet": "cümleler ve diyaloglar",
+   "grup": "Beceriler",
+   "ders": [],
+   "calisma": [],
+   "arac": "oku"
+  },
+  {
+   "id": "okuma",
+   "ad": "Okuduğunu anlama",
+   "ozet": "metin soruları",
+   "grup": "Beceriler",
+   "ders": [],
+   "calisma": [],
+   "arac": "oku"
+  },
+  {
+   "id": "kelime",
+   "ad": "Kelime seçimi",
+   "ozet": "doğru kelime, doğru kalıp",
+   "grup": "Beceriler",
+   "ders": [],
+   "calisma": [],
+   "arac": "kart"
+  }
+ ]
+}
