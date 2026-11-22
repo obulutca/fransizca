@@ -681,7 +681,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='3c60a054a3';
+const AKV='161fd1a82f';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -828,7 +828,7 @@ async function xIntro(){const EX=await exLoad(AS.id).catch(e=>null);if(!EX){AS={
   const needMic=EX.bolumler.some(b=>b.tip==='eo');
   $('screen').innerHTML=akTop(EX.baslik,true)+`<div class="ak-md">${mdr(EX.aciklama_uzun||EX.aciklama||'')}</div>
    <table class="ak-tbl"><thead><tr><th>Bölüm</th><th>İçerik</th><th>Süre</th></tr></thead><tbody>${rows}</tbody></table>
-   <div class="ak-note">${sinav?'<b>Gerçek sınav kuralları:</b> her bölümün süresi kendiliğinden işler; süre bitince bölüm kapanır. Dinleme kayıtları <b>bir kez</b> çalınır ve soru kayıttan sonra gelir. Bitmiş bir bölüme geri dönülmez. Sözlük, kart ya da not kullanma.':'<b>Ödev:</b> süre yok; dinleme kayıtlarını en fazla belirtilen sayıda dinleyebilirsin. Bölümler arasında gidip gelebilirsin.'}</div>
+   <div class="ak-note">${EX.tur==='alistirma'?'<b>Alıştırma:</b> puansız ve süresiz. Her cevap anında düzeltilir; yanlışsa doğrusu ve nedeni çıkar. Teslim etmen gerekmez.':sinav?'<b>Gerçek sınav kuralları:</b> her bölümün süresi kendiliğinden işler; süre bitince bölüm kapanır. Dinleme kayıtları <b>bir kez</b> çalınır ve soru kayıttan sonra gelir. Bitmiş bir bölüme geri dönülmez. Sözlük, kart ya da not kullanma.':'<b>Ödev:</b> süre yok; dinleme kayıtlarını en fazla belirtilen sayıda dinleyebilirsin. Bölümler arasında gidip gelebilirsin.'}</div>
    ${needMic?`<div class="ak-note">Bu sınavda konuşma bölümü var: mikrofon izni gerekecek. <button class="link" id="akmic">Mikrofonu şimdi dene</button><span id="akmicr" class="small"></span></div>`:''}
    <div class="spacer"></div><div class="bottom">${st&&st.gonderildi?`<div class="ak-note ok">Bu ${TURAD[EX.tur].toLowerCase()} ${new Date(st.gonderildi).toLocaleString('tr-TR')} tarihinde teslim edildi.</div><button class="btn" id="akagain">Baştan yap (yeni deneme)</button>`:
      st&&st.basla?`<button class="big-btn" id="akgo">${st.bitti?'Teslim ekranına git':'Kaldığın yerden devam et'}</button><button class="btn" id="akagain">Sıfırla ve baştan başla</button>`:`<button class="big-btn" id="akgo">Başla</button>`}</div>`;
@@ -1001,15 +1001,15 @@ async function xEnd(){const EX=await exLoad(AS.id),st=xState(EX.id);if(!st){AS={
   const sum=EX.bolumler.map(b=>{if(b.tip==='ee')return `<tr><td>${esc(b.ad)}</td><td>${b.gorevler.map((g,i)=>`Görev ${i+1}: ${wc(st.ans[g.id])} kelime`).join('<br>')}</td></tr>`;
     if(b.tip==='eo')return `<tr><td>${esc(b.ad)}</td><td>${b.gorevler.map((g,i)=>`Görev ${i+1}: ${st.kayit[g.id]?fmtT(st.kayit[g.id].sure)+' kayıt':'kayıt yok'}`).join('<br>')}</td></tr>`;
     const qs=b.sorular||[],n=qs.filter(q=>st.ans[q.id]!=null&&st.ans[q.id]!=='').length;return `<tr><td>${esc(b.ad)}</td><td>${n} / ${qs.length} cevaplandı</td></tr>`}).join('');
-  const sent=st.gonderildi;
+  const sent=st.gonderildi,alis=EX.tur==='alistirma';
   $('screen').innerHTML=akTop(EX.baslik,true)+`<div class="panel"><div class="kind">${sent?'Teslim edildi':'Bitti'}</div><table class="ak-tbl"><tbody>${sum}</tbody></table></div>
-   ${sent?`<div class="ak-note ok"><b>Teslim edildi</b> (${new Date(sent).toLocaleString('tr-TR')}). Şimdi bilgisayarda Claude Code'u aç ve <b>“bitti, bak”</b> yaz. Değerlendirme hazır olunca <b>İlerleme</b> sekmesinde görünür.</div>`
+   ${alis?`<div class="ak-note ok"><b>Alıştırma bitti.</b> Puansız; teslim gerekmez. İstersen cevaplarına geri dönüp yanlışlarını yeniden deneyebilirsin.</div>`:sent?`<div class="ak-note ok"><b>Teslim edildi</b> (${new Date(sent).toLocaleString('tr-TR')}). Şimdi bilgisayarda Claude Code'u aç ve <b>“bitti, bak”</b> yaz. Değerlendirme hazır olunca <b>İlerleme</b> sekmesinde görünür.</div>`
      :GH.ok()?`<p class="muted">Teslim edince cevapların ve ses kayıtların gizli depona yüklenir.</p>`:`<div class="ak-note">Teslim için GitHub bağlantısı gerekli: <button class="link" id="akconn">İlerleme → Bağlantı</button>. Bağlantı yoksa dosyaları indirip bana elle de gönderebilirsin.</div>`}
-   <div id="aklog" class="diag" hidden></div><div class="spacer"></div><div class="bottom">${sent?'':`<button class="big-btn" id="aksend" ${GH.ok()?'':'disabled'}>Teslim et</button>`}<button class="btn" id="akdl">Dosyaları indir</button>${EX.tur!=='sinav'&&!sent?'<button class="btn" id="akbackx">Cevaplara geri dön</button>':''}</div>`;
+   <div id="aklog" class="diag" hidden></div><div class="spacer"></div><div class="bottom">${sent||alis?'':`<button class="big-btn" id="aksend" ${GH.ok()?'':'disabled'}>Teslim et</button>`}${alis?'':'<button class="btn" id="akdl">Dosyaları indir</button>'}${EX.tur!=='sinav'&&!sent?'<button class="btn" id="akbackx">Cevaplara geri dön</button>':''}</div>`;
   $('akbk').onclick=()=>{AS={view:'list'};render()};
   if($('akconn'))$('akconn').onclick=()=>{AI={view:'bag'};setTab('ilerleme')};
   if($('akbackx'))$('akbackx').onclick=()=>{st.bitti=false;st.bi=0;xSave(st);AS={view:'kos',id:EX.id};render()};
-  $('akdl').onclick=async()=>{const pk=await xPackage(EX,st);const dl=(name,blob)=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),500)};
+  if($('akdl'))$('akdl').onclick=async()=>{const pk=await xPackage(EX,st);const dl=(name,blob)=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),500)};
     dl(EX.id+'-cevaplar.json',new Blob([pk.json],{type:'application/json'}));for(const f of pk.files)dl(EX.id+'-'+f.ad,f.blob)};
   if($('aksend'))$('aksend').onclick=async()=>{const btn=$('aksend'),log=$('aklog');btn.disabled=true;log.hidden=false;const L=m=>{log.textContent+=m+'\n'};
     try{const pk=await xPackage(EX,st);const dir=`teslimler/${EX.id}/${pk.stamp}`;
@@ -1518,5 +1518,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=3c60a054a3').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=161fd1a82f').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
 </body></html>
