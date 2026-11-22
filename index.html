@@ -460,6 +460,28 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-block}
 .dene-alt{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
 .ak-ders-md details{margin:.6em 0} .ak-ders-md summary{cursor:pointer;color:var(--accent);font-weight:600}
 
+/* ===== Soru soru değerlendirme ve hata defteri (Adım 6) ===== */
+.dg-bas{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+.dg-bas h2{margin:0;text-transform:none;letter-spacing:0;font-size:1.0625rem;color:var(--ink)}
+.dg-liste,.hd-liste{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.dg-q{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px 14px;border-top:1px solid var(--line)}
+.dg-q:first-child,.hd-satir:first-child{border-top:0}
+.dg-isaret{width:24px;height:24px;border-radius:99px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.8125rem;background:var(--soft);color:var(--muted)}
+.dg-q.ok .dg-isaret{background:var(--good-bg);color:var(--good)} .dg-q.no .dg-isaret{background:var(--bad-bg);color:var(--bad)} .dg-q.yari .dg-isaret{background:var(--warn-bg);color:var(--warn)}
+.dg-q.no{background:color-mix(in srgb,var(--bad-bg) 45%,transparent)} .dg-q.yari{background:color-mix(in srgb,var(--warn-bg) 45%,transparent)}
+.dg-ic{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dg-soru{font-size:.9375rem} .dg-soru b{color:var(--muted);font-weight:700;margin-right:4px}
+.dg-cevap{font-family:var(--metin);font-size:1.0625rem;font-variant-numeric:lining-nums}
+.dg-puan{font-size:.8125rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hd-yanlis{color:var(--bad);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 50%,transparent)}
+.hd-ok{color:var(--good);font-weight:600}
+.dg-metin summary{cursor:pointer;color:var(--accent);font-weight:600;margin:4px 0}
+.dg-sonuc .ak-md{max-width:none}
+.hd-satir{display:flex;flex-direction:column;gap:5px;padding:12px 14px;border-top:1px solid var(--line);align-items:flex-start}
+.hd-ust{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hd-cift{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--metin);font-size:1.0625rem;font-variant-numeric:lining-nums}
+.hd-eklendi{color:var(--good);font-weight:600}
+
 </style>
 <div class="app">
   <div class="screen" id="screen"></div>
@@ -681,7 +703,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='685eabb99d';
+const AKV='14f5436580';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -1103,7 +1125,7 @@ function bgOzet(){try{if(!PLANJ)return null;const d=dueList().length,n=newList()
   return {tarih:bgGun(),kalan:kalan.length,toplam:say.length,dk:kalan.reduce((a,i)=>a+(i.dk||0),0),sira:kalan[0]?String(kalan[0].ad).replace(/[*_`]/g,''):'',gun:B.aktif?B.gi+1:0,t:Date.now()}}catch(e){return null}}
 function senkDurum(){if(!SENK)SENK={sha:null,son:'',yaziyor:false,tekrar:false,zaman:null,sonYaz:0,sonCek:0,durum:'',hata:''};return SENK}
 async function senkCek(){const S_=senkDurum();if(!GH.ok())return;try{const f=await senkDosya('durum.json');S_.sha=f.sha;S_.sonCek=Date.now();
-    if(f.veri){if(f.veri.P){merge(f.veri.P);fill();saveLocal()}bgBirlestir(f.veri.bugun)}S_.durum='ok';S_.hata=''}
+    if(f.veri){if(f.veri.P){merge(f.veri.P);P.hk=P.hk||[];(f.veri.P.hk||[]).forEach(h=>{if(!P.hk.some(x=>x.id===h.id))P.hk.push(h)});fill();saveLocal();hkYukle()}bgBirlestir(f.veri.bugun)}S_.durum='ok';S_.hata=''}
   catch(e){S_.durum='hata';S_.hata=e.message}}
 async function senkYaz(){const S_=senkDurum();if(!GH.ok())return;if(S_.yaziyor){S_.tekrar=true;return}S_.yaziyor=true;
   try{for(let dene=0;dene<3;dene++){const govde={surum:1,P,bugun:AKLS.get('ak-bugun',null),ozet:bgOzet(),cihaz:cihaz().ad,t:Date.now()};
@@ -1145,9 +1167,65 @@ function senkAyarBagla(yeniden){if($('senkSimdi'))$('senkSimdi').onclick=async()
   if($('bildAc'))$('bildAc').onclick=async()=>{const r=$('bildSonuc');r.textContent='Açılıyor…';try{await bildirimAc();r.innerHTML='<span style="color:var(--good)">✓ Bildirimler bu cihazda açık.</span>'}catch(e){r.innerHTML=`<span style="color:var(--bad)">${esc(e.message)}</span>`}};
   if($('bildKapat'))$('bildKapat').onclick=async()=>{await bildirimKapat();yeniden()}}
 
+/* =============== SORU SORU DEĞERLENDİRME ve HATA DEFTERİ (Adım 6) ===============
+   degerlendirmeler/<id>.json (gizli depo): bolumler[].sorular[] = {no, soru, cevap, dogru, durum: ok|yari|yanlis|bos, puan, max, neden, konu},
+   hatalar[] = {id, konu, yazdigin, dogrusu, neden, kart?: {fr, tr, note}}. Hata kartları P.hk'de durur (eşitlenir) ve CARDS'a eklenir. */
+const DRM={ok:['✓','ok'],yari:['½','yari'],yanlis:['✗','no'],bos:['—','bos']};
+const sayi=x=>x==null?'':String(x).replace('.',',');
+const unitOf=id=>{const m=/^u0?(\d+)/.exec(id||'');return m?+m[1]:8};
+function hkKart(h){return {id:h.id,u:h.u,tag:'hata',fr:h.fr,tr:h.tr,en:'',pron:'',lines:[],ex:'',ext:'',parts:'',note:h.note||'',ask:[{q:h.tr,label:'',a:[h.fr]}]}}
+function hkYukle(){(P.hk||[]).forEach(h=>{if(byId[h.id])return;const c=hkKart(h);c.ord=CARDS.length;CARDS.push(c);byId[c.id]=c})}
+const hkId=(evalId,h)=>'h:'+evalId+':'+h.id;
+const hkVar=id=>(P.hk||[]).some(x=>x.id===id);
+function hkEkle(evalId,h){const id=hkId(evalId,h);if(hkVar(id)||!h.kart)return;P.hk=P.hk||[];
+  P.hk.push({id,u:unitOf(evalId),fr:h.kart.fr,tr:h.kart.tr,note:h.kart.note||h.neden||'',src:evalId,t:Date.now()});
+  const u=unitOf(evalId);if(!P.set.units.includes(u)){P.set.units.push(u);P.set.units.sort((a,b)=>a-b)}
+  P.c[id]={due:Date.now(),s:1,d:5,st:2,r:1,l:0,lr:Date.now(),ls:0,sd:1};   // bugün tekrar listesine düşsün
+  hkYukle();scheduleWrite();senkPlanla(1500)}
+function hataSatir(evalId,h,kaynak){const id=hkId(evalId,h),var_=hkVar(id);
+  return `<div class="hd-satir"><div class="hd-ust"><span class="ak-chip">${esc(h.konu||'')}</span>${kaynak?`<span class="muted small">${esc(kaynak)}</span>`:''}</div>
+    <div class="hd-cift"><span class="hd-yanlis">${mdi(h.yazdigin||'')}</span><span class="hd-ok">→ ${mdi(h.dogrusu||'')}</span></div>
+    ${h.neden?`<div class="small muted">${mdi(h.neden)}</div>`:''}
+    ${h.kart?(var_?'<div class="small hd-eklendi">✓ Kartlarda</div>':`<button class="btn sm" data-hk="${esc(evalId)}|${esc(h.id)}">Karta ekle</button>`):''}</div>`}
+function degHtml(D,evalId,pdf){
+  const bol=D.bolumler.map(b=>`<section class="dg-bolum"><div class="dg-bas"><h2>${esc(b.ad)}</h2><b>${sayi(b.puan)}${b.max?' / '+sayi(b.max):''}</b></div>
+    ${b.not?`<div class="small muted">${mdi(b.not)}</div>`:''}
+    ${b.metin?`<details class="dg-metin"><summary>Senin metnin</summary><div class="ak-doc">${mdr(frb(b.metin))}</div></details>`:''}
+    <div class="dg-liste">${b.sorular.map(q=>{const d=DRM[q.durum]||DRM.bos;return `<div class="dg-q ${d[1]}"><span class="dg-isaret">${d[0]}</span>
+      <div class="dg-ic"><div class="dg-soru"><b>${esc(q.no||'')}</b> ${mdi(q.soru||'')}</div>
+       ${q.durum==='ok'?`<div class="dg-cevap">${mdi(String(q.cevap??''))}</div>`:`<div class="dg-cevap"><span class="hd-yanlis">${mdi(String(q.cevap??'—'))}</span> <span class="hd-ok">→ ${mdi(String(q.dogru??''))}</span></div>`}
+       ${q.neden?`<div class="small muted">${mdi(q.neden)}</div>`:''}</div>
+      <span class="dg-puan">${q.max!=null?sayi(q.puan)+' / '+sayi(q.max):''}</span></div>`}).join('')}</div></section>`).join('');
+  return `<div class="panel dg-sonuc"><div class="kind">${esc(D.tarih||'')}</div><div class="row"><div class="grow"><div class="ak-big">${sayi(D.puan)}<span class="muted small"> / ${sayi(D.max)}</span></div><div class="muted">${esc(D.karar||'')}</div></div></div>
+     ${D.ozet?`<div class="ak-md">${mdr(D.ozet)}</div>`:''}</div>
+   ${(D.desenler||[]).map(x=>`<div class="ak-blok dikkat"><p class="ak-etiket">${esc(x.baslik)}</p><p>${mdi(x.aciklama||'')}</p>${x.kural?`<p class="ak-formul"><code>${esc(x.kural)}</code></p>`:''}</div>`).join('')}
+   ${bol}
+   ${(D.hatalar||[]).length?`<section><div class="dg-bas"><h2>Hata defterine giden hatalar</h2><button class="btn sm" id="hkHepsi">Hepsini karta ekle</button></div><div class="hd-liste">${D.hatalar.map(h=>hataSatir(evalId,h)).join('')}</div></section>`:''}
+   ${D.sirada?`<section><h2>Sırada</h2><div class="ak-md">${mdr(D.sirada)}</div></section>`:''}
+   ${pdf?`<p class="small"><button class="link" data-pdf="${esc(pdf)}">Eski değerlendirme belgesini (PDF) aç</button></p>`:''}`}
+function hkBagla(kok,hatalarAl,yeniden){kok.onclick=e=>{const b=e.target.closest('[data-hk]');if(b){const [ev,hid]=b.dataset.hk.split('|'),h=hatalarAl(ev).find(x=>x.id===hid);if(h){hkEkle(ev,h);toast('Karta eklendi: bugünkü tekrara düştü');yeniden()}return}
+  if(e.target.closest('#hkHepsi')){const ev=AI.evalId;hatalarAl(ev).forEach(h=>hkEkle(ev,h));toast('Hepsi kartlara eklendi');yeniden();return}
+  const p=e.target.closest('[data-pdf]');if(p){AI={view:'deg',yol:p.dataset.pdf};render()}}}
+/* Hata defteri: bütün soru soru değerlendirmelerin hataları, konuya göre */
+async function iHata(){$('screen').innerHTML=akTop('Hata defteri',true)+'<p class="muted">Yükleniyor…</p>';$('akbk').onclick=()=>{AI={view:'ana'};render()};
+  const c=AKCACHE(),liste=(c.sonuclar||[]).filter(r=>/\.json$/i.test(r.degerlendirme||''));const H={};let hepsi=[];
+  for(const r of liste){let D=AKLS.get('ak-deg:'+r.id,null);try{const t=await GH.raw(r.degerlendirme);if(t){D=JSON.parse(t);AKLS.set('ak-deg:'+r.id,D)}}catch(e){}
+    if(D)H[r.id]={D,r}}
+  if(tab!=='ilerleme'||AI.view!=='hata')return;
+  Object.values(H).forEach(({D,r})=>(D.hatalar||[]).forEach(h=>hepsi.push({h,ev:r.id,kaynak:r.baslik})));
+  const konular={};hepsi.forEach(x=>{(konular[x.h.konu||'Diğer']=konular[x.h.konu||'Diğer']||[]).push(x)});
+  const eklenmemis=hepsi.filter(x=>x.h.kart&&!hkVar(hkId(x.ev,x.h))).length;
+  $('screen').innerHTML=akTop('Hata defteri',true)+`<p class="muted">Değerlendirmelerdeki hatalar konuya göre. <b>Karta ekle</b> deyince hata, doğrusuyla bir karta döner ve bugünkü tekrara düşer; sonra FSRS ile tekrar edilir. Kartlar telefon ve bilgisayarda eşitlenir.</p>
+    ${hepsi.length?`<div class="row small"><span class="grow">${hepsi.length} hata · ${eklenmemis} tanesi henüz kart değil</span></div>`+
+      Object.entries(konular).sort((a,b)=>b[1].length-a[1].length).map(([k,xs])=>`<section><div class="dg-bas"><h2>${esc(k)}</h2><span class="muted small">${xs.length}</span></div><div class="hd-liste">${xs.map(x=>hataSatir(x.ev,x.h,x.kaynak)).join('')}</div></section>`).join('')
+     :'<div class="ak-note">Henüz soru soru değerlendirilmiş bir teslim yok.</div>'}`;
+  $('akbk').onclick=()=>{AI={view:'ana'};render()};
+  hkBagla($('screen'),ev=>(H[ev]&&H[ev].D.hatalar)||[],()=>render())}
+hkYukle();
+
 /* =============== İLERLEME =============== */
 const AKCACHE=()=>AKLS.get('ak-ilerleme',{});
-async function A_ilerleme(){akStop();akWide();if(AI.view==='bag'||!GH.ok())return iBag();if(AI.view==='deg')return iDeg();
+async function A_ilerleme(){akStop();akWide();if(AI.view==='bag'||!GH.ok())return iBag();if(AI.view==='deg')return iDeg();if(AI.view==='hata')return iHata();
   const c=AKCACHE();iDraw(c,true);
   try{const t=await GH.raw('ilerleme.json');if(t){const j=JSON.parse(t);AKLS.set('ak-ilerleme',j);if(tab==='ilerleme'&&AI.view==='ana')iDraw(j,false)}}catch(e){if(tab==='ilerleme'&&AI.view==='ana'){const n=$('akist');if(n)n.textContent='Güncellenemedi: '+e.message}}}
 function iDraw(c,stale){const sev=c.seviye||{},res=(c.sonuclar||[]).slice().reverse(),yol=c.yol||[],nc=c.nclc||[];
@@ -1158,14 +1236,16 @@ function iDraw(c,stale){const sev=c.seviye||{},res=(c.sonuclar||[]).slice().reve
    ${nc.length?`<section><h2>Beceriler (tahmini NCLC)</h2><div class="ak-grid">${nc.map(x=>`<div class="ak-skill"><div class="muted small">${esc(x.beceri)}</div><div class="ak-big">${esc(x.deger)}</div><div class="small muted">${mdi(x.not||'')}</div></div>`).join('')}</div></section>`:''}
    ${yol.length?`<section><h2>Yol haritası</h2><div class="ak-road">${yol.map(x=>`<div class="ak-step ${x.durum||''}"><b>${esc(x.ad)}</b><span>${esc(x.nclc||'')}</span><span class="muted small">${esc(x.tarih||'')}</span></div>`).join('')}</div></section>`:''}
    ${pend.length?`<section><h2>Değerlendirme bekleyen</h2><div class="list">${pend.map(x=>`<div class="item"><div><div class="t">${esc(x.m.baslik)}</div><div class="s">Teslim: ${new Date(x.s.gonderildi).toLocaleString('tr-TR')}</div></div></div>`).join('')}</div></section>`:''}
-   ${res.length?`<section><h2>Sonuçlar</h2><div class="list">${res.map(r=>`<button class="item" ${r.degerlendirme?`data-deg="${esc(r.degerlendirme)}"`:''}><div style="min-width:0"><div class="t">${esc(r.baslik)}</div><div class="s">${esc(r.tarih||'')}${r.karar?' · '+esc(r.karar):''}${r.not?' · '+esc(r.not):''}</div></div><b>${esc(String(r.puan))}${r.max?'<span class="muted small"> / '+r.max+'</span>':''}</b></button>`).join('')}</div></section>`:''}
+   ${res.length?`<section><div class="dg-bas"><h2>Sonuçlar</h2><button class="btn sm" id="akhata">Hata defteri</button></div><div class="list">${res.map(r=>`<button class="item" ${r.degerlendirme?`data-deg="${esc(r.degerlendirme)}"`:''}><div style="min-width:0"><div class="t">${esc(r.baslik)}</div><div class="s">${esc(r.tarih||'')}${r.karar?' · '+esc(r.karar):''}${r.not?' · '+esc(r.not):''}</div></div><b>${esc(String(r.puan))}${r.max?'<span class="muted small"> / '+r.max+'</span>':''}</b></button>`).join('')}</div></section>`:''}
    ${(c.zayif||[]).length?`<section><h2>Üzerinde çalışılacaklar</h2><div class="ak-md"><ul>${c.zayif.map(z=>`<li>${mdi(z)}</li>`).join('')}</ul></div></section>`:''}
    ${c.siradaki?`<section><h2>Sırada</h2><div class="ak-md">${mdr(c.siradaki)}</div></section>`:''}`;
-  $('akset').onclick=()=>{AI={view:'bag'};render()};
-  $('screen').onclick=e=>{const b=e.target.closest('[data-deg]');if(b){AI={view:'deg',yol:b.dataset.deg};render()}}}
+  $('akset').onclick=()=>{AI={view:'bag'};render()};if($('akhata'))$('akhata').onclick=()=>{AI={view:'hata'};render()};
+  $('screen').onclick=e=>{const b=e.target.closest('[data-deg]');if(b){const r=(c.sonuclar||[]).find(x=>x.degerlendirme===b.dataset.deg);AI={view:'deg',yol:b.dataset.deg,pdf:r&&r.pdf,evalId:r&&r.id};render()}}}
 async function iDeg(){$('screen').innerHTML=akTop('Değerlendirme',true)+'<p class="muted">Yükleniyor…</p>';$('akbk').onclick=()=>{AI={view:'ana'};render()};
   try{if(/\.pdf$/i.test(AI.yol)){const bl=await GH.blob(AI.yol);if(!bl)throw new Error('dosya yok');const u=URL.createObjectURL(new Blob([bl],{type:'application/pdf'}));
       $('screen').innerHTML=akTop('Değerlendirme',true)+`<p><a class="big-btn" style="display:block;text-align:center;text-decoration:none" href="${u}" target="_blank" rel="noopener">PDF'i aç</a></p><iframe class="ak-pdf" src="${u}" title="Değerlendirme"></iframe>`}
+    else if(/\.json$/i.test(AI.yol)){const t=await GH.raw(AI.yol);if(t==null)throw new Error('dosya yok');const D=JSON.parse(t),ev=AI.evalId||D.id;AI.evalId=ev;AKLS.set('ak-deg:'+ev,D);
+      $('screen').innerHTML=akTop(D.baslik||'Değerlendirme',true)+degHtml(D,ev,AI.pdf);hkBagla($('screen'),()=>D.hatalar||[],()=>render())}
     else{const t=await GH.raw(AI.yol);if(t==null)throw new Error('dosya yok');$('screen').innerHTML=akTop('Değerlendirme',true)+`<article class="ak-md">${mdr(t)}</article>`}}
   catch(e){$('screen').insertAdjacentHTML('beforeend',`<p class="muted">Açılamadı: ${esc(e.message)}</p>`)}
   $('akbk').onclick=()=>{AI={view:'ana'};render()}}
@@ -1518,5 +1598,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=685eabb99d').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=14f5436580').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload()})}</script>
 </body></html>
