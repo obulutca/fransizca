@@ -252,6 +252,8 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-block}
 .ak-toc li a:hover{background:var(--soft)}
 .ak-toc li a[aria-current="true"]{background:var(--hl);color:var(--accent);font-weight:700}
 .ak-toc li a.okundu::after{content:" ✓";color:var(--good);font-weight:700}
+.bg-yarim{color:var(--accent);font-weight:700}
+.ak-kaldi{color:var(--accent);font-weight:600}
 .ak-toc-bas{display:none}
 @media (min-width:1150px){
   .ak-ders.tocu{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px;align-items:start}
@@ -580,6 +582,7 @@ function merge(R){if(!R)return;if(R.c)Object.keys(R.c).forEach(id=>{const a=P.c[
   const seenT=new Set((P.tests||[]).map(t=>t.t));(R.tests||[]).forEach(t=>{if(!seenT.has(t.t))P.tests.push(t)});P.tests.sort((a,b)=>a.t-b.t);P.tests=P.tests.slice(-60);
   const seenL=new Set((P.log||[]).map(l=>l.t+l.id));(R.log||[]).forEach(l=>{if(!seenL.has(l.t+l.id))P.log.push(l)});P.log.sort((a,b)=>a.t-b.t);P.log=P.log.slice(-500);
   if(R.sess&&(!P.sess||(R.sess.u_t||0)>(P.sess.u_t||0)))P.sess=R.sess;
+  if(R.sd&&(!P.sd||(R.sd.u_t||0)>(P.sd.u_t||0)))P.sd=R.sd;
   if(R.rpos)Object.keys(R.rpos).forEach(k=>{if(!P.rpos[k]||(R.rpos[k].t||0)>(P.rpos[k].t||0))P.rpos[k]=R.rpos[k]})}
 (async()=>{try{if(!window.claude||!window.claude.use)return;const [db,user]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);if(!db||!user)return;
   const uid=await user.id();if(!uid)return;docRef=db.doc('data/users/'+uid+'/fsrs');const snap=await docRef.get();
@@ -731,7 +734,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='20a47274d1';
+const AKV='eb5cf4eebf';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -801,8 +804,8 @@ async function A_ders(){akStop();akWide();
   if(AD.view==='ders')return A_dersAc();
   const us=DIDX.uniteler.slice().sort((a,b)=>(a.u===0?-1:b.u===0?1:(b.u||0)-(a.u||0)));
   $('screen').innerHTML=akTop('Dersler')+`<p class="muted">${esc(DIDX.aciklama||'')}</p>`+
-   `<div class="list">${us.map(u=>`<div class="item ak-unit"><div style="min-width:0"><div class="t">${esc(u.etiket||('Ünite '+u.u))} · ${esc(u.baslik)}</div><div class="s">${esc(u.ozet||'')}</div>
-     <div class="ak-links">${u.ders?`<button class="btn sm" data-ders="${esc(u.ders)}">Dersi aç</button>`:''}${(u.arsiv||[]).map(a=>`<a class="btn sm" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.ad)}</a>`).join('')}</div></div></div>`).join('')}</div>`;
+   `<div class="list">${us.map(u=>`<div class="item ak-unit"><div style="min-width:0"><div class="t">${esc(u.etiket||('Ünite '+u.u))} · ${esc(u.baslik)}</div><div class="s">${esc(u.ozet||'')}</div>${(()=>{const y=u.ders&&AKLS.get('ak-ders-yer',{})[u.ders];return y&&y.ad&&(y.b>0||y.r>.02)?`<div class="s ak-kaldi">Kaldığın yer: ${esc(y.ad)}</div>`:''})()}
+     <div class="ak-links">${u.ders?`<button class="btn sm" data-ders="${esc(u.ders)}">${(()=>{const y=AKLS.get('ak-ders-yer',{})[u.ders];return y&&(y.b>0||y.r>.02)?'Kaldığın yerden devam et':'Dersi aç'})()}</button>`:''}${(u.arsiv||[]).map(a=>`<a class="btn sm" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.ad)}</a>`).join('')}</div></div></div>`).join('')}</div>`;
   $('screen').onclick=e=>{const b=e.target.closest('[data-ders]');if(b){AD={view:'ders',dosya:b.dataset.ders};render()}}}
 async function A_dersAc(){const un=DIDX.uniteler.find(u=>u.ders===AD.dosya);if(!un){AD={view:'list'};return render()}
   $('screen').innerHTML=akTop((un.etiket||('Ünite '+un.u))+' · '+un.baslik,true)+'<p class="muted">Yükleniyor…</p>';$('akbk').onclick=()=>{stopAudio();AD={view:'list'};render()};
@@ -820,11 +823,24 @@ async function A_dersAc(){const un=DIDX.uniteler.find(u=>u.ders===AD.dosya);if(!
   if(toc){const sc=$('screen'),spy=()=>{const lim=sc.getBoundingClientRect().top+110;let i=0;hs.forEach((h,k)=>{if(h.getBoundingClientRect().top<=lim)i=k});
       if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-4)i=hs.length-1;document.querySelectorAll('#aktoc a').forEach((a,k)=>a.setAttribute('aria-current',k===i));$('aktocsu').textContent=hs[i].textContent};
     sc.onscroll=spy;spy()}
-  if(AD.git){const h=document.getElementById(AD.git);AD.git=null;AD.sc=0;if(h)h.scrollIntoView()}else if(AD.sc)$('screen').scrollTop=AD.sc;
-  {const sc=$('screen'),eski=sc.onscroll;sc.onscroll=()=>{if(eski)eski();if(tab==='ders'&&AD.view==='ders'){AD.sc=sc.scrollTop;konumGecikmeli()}}}
-  // Kendini dene cevapları bu cihazda saklanır: uygulama kapanıp açılınca ya da derse geri dönünce yerinde durur
-  {const dk='ak-dene:'+un.ders,dv=AKLS.get(dk,{}),ins=[...body.querySelectorAll('.dene-in')];ins.forEach((inp,i)=>{if(dv[i]){inp.value=dv[i];deneKontrol(inp)}});
-    body.addEventListener('input',e=>{const i=ins.indexOf(e.target);if(i<0)return;const v=AKLS.get(dk,{});if(e.target.value)v[i]=e.target.value;else delete v[i];AKLS.set(dk,v);senkPlanla()})}
+  // Kendini dene cevapları saklanır ve eşitlenir. Anahtar sorunun cevabı (+ kaçıncı kez geçtiği): derse yeni soru eklense de cevaplar yerinde kalır
+  {const dk='ak-dene:'+un.ders,ins=[...body.querySelectorAll('.dene-in')],say={},anah=ins.map(inp=>{const c=JSON.parse(inp.dataset.c)[0],n=say[c]||0;say[c]=n+1;return c+'#'+n});
+    let dv=AKLS.get(dk,{});
+    if(Object.keys(dv).some(k=>/^\d+$/.test(k))){const y={};Object.entries(dv).forEach(([k,v])=>{if(!/^\d+$/.test(k))y[k]=v});Object.entries(dv).forEach(([k,v])=>{if(/^\d+$/.test(k)&&anah[+k]&&!(anah[+k] in y))y[anah[+k]]=v});dv=y;AKLS.set(dk,dv)}
+    ins.forEach((inp,i)=>{const v=dv[anah[i]];if(v){inp.value=v;deneKontrol(inp)}});
+    body.addEventListener('input',e=>{const i=ins.indexOf(e.target);if(i<0)return;const v=AKLS.get(dk,{});v[anah[i]]=e.target.value;AKLS.set(dk,v);senkPlanla()})}
+  // Kaldığın yer: bölüm no + bölüm içindeki oran (telefonda ve PC'de aynı yere denk gelir). Bugün'den bir bölüme gelince o bölümde yarım kaldıysan oradan devam
+  {const sc=$('screen'),Y=AKLS.get('ak-ders-yer',{}),yer=Y[un.ders],ust=el=>sc.scrollTop+el.getBoundingClientRect().top-sc.getBoundingClientRect().top,
+     sinir=b=>[ust(hs[b]),hs[b+1]?ust(hs[b+1]):ust(body)+body.offsetHeight],
+     yereGit=y=>{if(!hs[y.b])return false;const [a,z]=sinir(y.b);sc.scrollTop=Math.max(0,a+(z-a)*y.r-8);return true};
+   let devam=false;
+   if(AD.git){const n=+String(AD.git).replace(/^b/,''),h=document.getElementById(AD.git);AD.git=null;AD.sc=0;if(yer&&yer.b===n&&yer.r>.03)devam=yereGit(yer);else if(h)h.scrollIntoView()}
+   else if(hs.length&&yer&&(yer.b>0||yer.r>.02))devam=yereGit(yer);
+   else if(AD.sc)sc.scrollTop=AD.sc;
+   if(devam)toast('Kaldığın yerden devam: '+hs[yer.b].textContent);
+   const kaydet=()=>{if(!hs.length||!body.isConnected)return;const s=sc.scrollTop+12;let b=0;hs.forEach((h,i)=>{if(ust(h)<=s)b=i});const [a,z]=sinir(b),r=Math.max(0,Math.min(1,(s-a)/Math.max(1,z-a)));
+     const Y2=AKLS.get('ak-ders-yer',{}),o=Y2[un.ders];if(o&&o.b===b&&Math.abs(o.r-r)<.01)return;Y2[un.ders]={b,r:+r.toFixed(3),ad:hs[b].textContent,t:Date.now()};AKLS.set('ak-ders-yer',Y2);senkPlanla()};
+   let yz=null;const eski=sc.onscroll;sc.onscroll=()=>{if(eski)eski();if(tab==='ders'&&AD.view==='ders'){AD.sc=sc.scrollTop;konumGecikmeli();clearTimeout(yz);yz=setTimeout(kaydet,700)}}}
   dersTakip(un.ders,body,hs);
   if(un.ses){const ix=await akIndex(un.ses);pack('icerik/ses/'+un.ses+'.mp3');bindSay(body,'icerik/ses/'+un.ses+'.mp3',ix)}}
 
@@ -909,9 +925,10 @@ async function xIntro(){const EX=await exLoad(AS.id).catch(e=>null);if(!EX){AS={
      st&&st.basla?`<button class="big-btn" id="akgo">${st.bitti?'Teslim ekranına git':'Kaldığın yerden devam et'}</button><button class="btn" id="akagain">Sıfırla ve baştan başla</button>`:`<button class="big-btn" id="akgo">Başla</button>`}</div>`;
   $('akbk').onclick=()=>{AS={view:'list'};render()};
   if($('akmic'))$('akmic').onclick=async()=>{try{const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop());$('akmicr').textContent=' ✓ Mikrofon çalışıyor.'}catch(e){$('akmicr').textContent=' ✗ İzin verilmedi: '+(e.name||e)}};
-  if($('akgo'))$('akgo').onclick=()=>{ctx();let s=xState(EX.id);if(!s){s={id:EX.id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false};xSave(s)}
+  if($('akgo'))$('akgo').onclick=()=>{ctx();let s=xState(EX.id);if(!s||!s.basla){s={id:EX.id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false,sifir:s&&s.sifir};xSave(s)}
     AS={view:s.bitti?'son':'kos',id:EX.id};render()};
-  if($('akagain'))$('akagain').onclick=async()=>{if(!confirm('Önceki cevapların bu cihazdan silinecek. Emin misin?'))return;const s=xState(EX.id);if(s)for(const k of Object.keys(s.kayit||{}))await IDB.del(EX.id+'/'+k);AKLS.del(xKey(EX.id));render()}}
+  if($('akagain'))$('akagain').onclick=async()=>{if(!confirm('Önceki cevapların bu cihazdan silinecek. Emin misin?'))return;const s=xState(EX.id);if(s)for(const k of Object.keys(s.kayit||{}))await IDB.del(EX.id+'/'+k);
+    if(/-calisma$/.test(EX.id)){const n=Date.now();AKLS.set(xKey(EX.id),{id:EX.id,sifir:n,t:n});senkPlanla(1500)}else AKLS.del(xKey(EX.id));render()}}
 function xTimer(EX,st,b){if(EX.tur!=='sinav'||!b.sure)return null;if(!st.son[b.id]){st.son[b.id]=Date.now()+b.sure*1000;xSave(st)}return st.son[b.id]}
 function xNextSection(EX,st,msg){stopAudio();akRecStop();if(msg)toast(msg);if(st.bi<EX.bolumler.length-1){st.bi++;xSave(st);render()}else{st.bitti=Date.now();xSave(st);AS={view:'son',id:EX.id};render()}}
 /* Sınav çerçevesi (bilgisayarlı TCF'ye benzer): menü gizli; üstte bölüm, soru no ve kalan süre; ortada soru; altta bilgi ve düğmeler.
@@ -1145,19 +1162,29 @@ function bgOturumBitti(s){if(s.kind==='daily')return bgIsaretle((it,gn,gi)=>it.a
 const yalin=s=>String(s||'').replace(/[*_`]/g,'').toLowerCase();
 function okuBitti(baslik){const b=yalin(baslik);
   return bgIsaretle((it,gn,gi)=>it.ac==='oku'&&(yalin(it.ad).includes(b)||(gn<=gi&&!BOOK.some(x=>yalin(it.ad).includes(yalin(x.title))))),true)}
+// Yarım kalan iş: Bugün'de "yarım" notu ve "Devam et" düğmesi; açınca kaldığı yerden sürer
+function bgYarim(it){try{const a=it.ac||'';let m;
+  if(a==='kart'){const s=[P.sess,P.sd].find(x=>sessCanli(x)&&x.kind==='daily');return s&&s.i>0?`${s.i} / ${s.q.length} kart yapıldı`:''}
+  if((m=/^ders:([^#]+)#b(\d+)$/.exec(a))){const y=AKLS.get('ak-ders-yer',{})[m[1]],z=AKLS.get('ak-dersz',{})[m[1]+'#b'+m[2]];return (y&&y.b===+m[2]&&y.r>.03)||(z&&z.s>0)?'yarım kaldı':''}
+  if((m=/^calisma:([^#]+)#(.+)$/.exec(a))){const s=xState(m[1]),bs=m[2].split(',').map(x=>x.trim());if(!s||!s.ans)return '';
+    const n=Object.keys(s.ans).filter(q=>s.ans[q]!==''&&s.ans[q]!=null&&bs.some(b=>q.startsWith(b)&&/^\d+$/.test(q.slice(b.length)))).length;return n?n+' cevap yazıldı':''}
+  if(a==='oku'){const b=BOOK.find(x=>yalin(it.ad).includes(yalin(x.title))),p=b&&P.rpos[b.title];return p?({1:'dinlemede kaldı',2:'okumada kaldı',3:'sorularda kaldı'})[p.step]||'yarım kaldı':''}
+  if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]);return s&&s.basla&&!s.gonderildi?(s.bitti?'bitti, teslim bekliyor':'devam ediyor'):''}
+  if(a==='sayi'){const r=AKLS.get('ak-sayi',null);return r&&r.ns&&r.ns.i<r.ns.q.length?`${r.ns.i} / ${r.ns.q.length} yapıldı`:''}
+  return ''}catch(e){return ''}}
 function bgPlanHtml(d,n){bgYukle();if(!PLANJ)return '';const B=bgDurum(d,n),{isler,uzun,aktif,gi,G,k,hs,bitti}=B;
   const sayilan=[...isler,...(hs?uzun:[])],kalan=sayilan.filter(i=>!bitti(i)),sira=kalan[0]||(!hs&&uzun.find(i=>!bitti(i)));
   const dk=kalan.reduce((a,i)=>a+(i.dk||0),0),yuz=sayilan.length?Math.round((sayilan.length-kalan.length)/sayilan.length*100):0;
   const acik=k.acik&&[...isler,...uzun].find(i=>i.id===k.acik.id&&!bitti(i)&&!bgOto(i));
-  let no=0;const satir=it=>{no++;const b=bitti(it),s=it===sira;
+  let no=0;const satir=it=>{no++;const b=bitti(it),s=it===sira,y=!b&&bgYarim(it);
     return `<li class="${b?'bitti':s?'sira':''}"><button class="bg-d" data-bit="${esc(it.id)}" ${/^sinav:/.test(it.ac||'')?'disabled title="Gönderince kendiliğinden işaretlenir"':''} aria-label="${b?'Yapılmadı olarak işaretle':'Bitti olarak işaretle'}">${b?'✓':no}</button>
-     <button class="bg-is" data-ac="${esc(it.id)}"><span class="t">${mdi(it.ad)}</span><span class="s"><span class="bg-tur ${esc(it.tur)}">${ISTUR[it.tur]||esc(it.tur)}</span>${it.not?`<span>${mdi(it.not)}</span>`:''}</span></button><span class="dk">${it.dk?it.dk+' dk':''}</span></li>`};
+     <button class="bg-is" data-ac="${esc(it.id)}"><span class="t">${mdi(it.ad)}</span><span class="s"><span class="bg-tur ${esc(it.tur)}">${ISTUR[it.tur]||esc(it.tur)}</span>${y?`<span class="bg-yarim">${esc(y)}</span>`:''}${it.not?`<span>${mdi(it.not)}</span>`:''}</span></button><span class="dk">${it.dk?it.dk+' dk':''}</span></li>`};
   const bas=aktif?(gi<G.length?`${esc(PLANJ.baslik||'Ünite '+PLANJ.unite)} · Gün ${gi+1} / ${G.length}`:`${esc(PLANJ.baslik||'Ünite '+PLANJ.unite)} · plan bitti`):esc(PLANJ.bekle_baslik||PLANJ.baslik||'');
   return `<section class="bg-kahraman"><div class="bg-ust"><h2>${bas}</h2><span class="small muted">${aktif||sayilan.length?`${sayilan.length-kalan.length} / ${sayilan.length} iş bitti${dk?' · ≈ '+dk+' dk kaldı':''}`:''}${!aktif&&PLANJ.ozet?`<br>${esc(PLANJ.ozet)}`:''}</span></div>
      ${sayilan.length?`<div class="bg-ilerle"><span style="width:${yuz}%"></span></div>`:''}
      ${!aktif&&PLANJ.not?`<div class="bg-not">${mdi(PLANJ.not)}</div>`:''}
      ${acik?`<div class="bg-sor"><span class="grow">“${mdi(acik.ad)}” bitti mi?</span><button class="btn sm" data-bit="${esc(acik.id)}">Bitti ✓</button><button class="btn sm" data-ac="${esc(acik.id)}">Devam et</button></div>`:''}
-     ${sira?`<button class="bg-basla" data-ac="${esc(sira.id)}"><span class="o">▶</span><span><b>Başla</b><small>Sıradaki: ${ISTUR[sira.tur]?ISTUR[sira.tur]+' · ':''}${mdi(sira.ad)}${sira.dk?' (≈ '+sira.dk+' dk)':''}</small></span></button>`
+     ${sira?(()=>{const y=bgYarim(sira);return `<button class="bg-basla" data-ac="${esc(sira.id)}"><span class="o">▶</span><span><b>${y?'Kaldığın yerden devam et':'Başla'}</b><small>${y?'Yarım kalan':'Sıradaki'}: ${ISTUR[sira.tur]?ISTUR[sira.tur]+' · ':''}${mdi(sira.ad)}${y?' ('+esc(y)+')':sira.dk?' (≈ '+sira.dk+' dk)':''}</small></span></button>`})()
        :`<div class="ak-note ok"><b>Bugünkü işler bitti.</b> İstersen aşağıdan ek çalışma yapabilirsin.</div>`}</section>
    ${isler.length?`<div class="bg-b">Bugünkü işler</div><ol class="bg-isler">${isler.map(satir).join('')}</ol>`:''}
    ${uzun.length?`<div class="bg-b">${hs?'Uzun gün eki (hafta sonu)':'Vaktin olursa (hafta sonu işleri)'}</div><ol class="bg-isler">${uzun.map(satir).join('')}</ol>`:''}`}
@@ -1166,7 +1193,8 @@ function bgGunlerHtml(){if(!PLANJ||PLANJ.durum!=='aktif'||!(PLANJ.gunler||[]).le
     <ol class="bg-plan">${G.map((g,i)=>`<li class="${i===B.gi?'bu':''}"><b>Gün ${i+1}</b><span>${mdi(g.ozet||g.isler.map(x=>x.ad).join(' · '))}</span></li>`).join('')}</ol>
     <div class="muted small">Hafta içi kısa gün ≈ 1 saat, hafta sonu uzun gün ≈ 2 saat. Bir gün kaçarsa plan kayar.</div></div>`}
 function bgAc(it,d,n){const a=it.ac||'';let m;
-  if(a==='kart'){if(d+n)startSession('daily',buildDaily());else toast('Bugünlük kart tekrarı bitti');return}
+  if(a==='kart'){if(sessDevam('daily')){ctx();[...new Set(P.sess.q.map(x=>byId[x.id]&&byId[x.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));S={view:'session',phase:'q'};return render()}
+    if(d+n)startSession('daily',buildDaily());else toast('Bugünlük kart tekrarı bitti');return}
   if(a==='sayi'){ctx();pack('n.mp3');S={view:'num'};return render()}
   if(a==='telaffuz'){S={view:'free',preset:'speak'};return render()}
   if((m=/^serbest:(\d+)$/.exec(a))){S={view:'free',f:{units:[+m[1]],mode:'mix',n:20,which:'all'}};return render()}
@@ -1174,7 +1202,8 @@ function bgAc(it,d,n){const a=it.ac||'';let m;
   if((m=/^sinav:(.+)$/.exec(a))){AS={view:'giris',id:m[1]};return setTab('sinav')}
   if((m=/^calisma:([^#]+)(?:#(.+))?$/.exec(a))){if(m[2]){const s=xState(m[1]),bs=m[2].split(',').map(x=>x.trim());return calismaAc(m[1],bs.find(b=>!(s&&calBitti(s,b)))||bs[0])}
     AS={view:'giris',id:m[1]};return setTab('sinav')}   // alıştırma: bölüm (#a) verilmişse "Cevapları kontrol et" ile kendiliğinden biter
-  if(a==='oku'){R={view:'lib'};return setTab('oku')}
+  if(a==='oku'){const i=BOOK.findIndex(x=>yalin(it.ad).includes(yalin(x.title)));if(i<0){R={view:'lib'};return setTab('oku')}
+    const pos=P.rpos[BOOK[i].title]||{};ctx();pack('s'+i+'.mp3');R={view:'story',i,step:pos.step||1,line:pos.line||0,playing:false,tr:false,slow:false,listens:0};return setTab('oku')}
   toast('Bu iş henüz bir ekrana bağlanmadı',true)}
 function bgBagla(d,n){if(!PLANJ)return;const B=bgDurum(d,n),hepsi=[...B.isler,...B.uzun];
   $('screen').querySelectorAll('[data-bit]').forEach(x=>x.onclick=()=>{const k=bgKayit(),id=x.dataset.bit;
@@ -1187,7 +1216,7 @@ function bgTarih(){const d=new Date(),hs=[0,6].includes(d.getDay());return `<spa
 /* =============== KONUM: kaldığın yer ===============
    iPhone uygulamayı arka planda kapatabiliyor; yeni sürüm gelince sayfa yenileniyor. Her çizimde nerede olduğun (sekme, ders ve
    kaydırma yeri, sınav/alıştırma, ilerleme ekranı, okuma, kart tekrarı) kaydedilir; açılışta oraya dönülür. */
-function konumKaydet(){try{AKLS.set('ak-konum',{tab,S:(S.view==='session'?{view:'session',phase:'q'}:{view:'home'}),R,
+function konumKaydet(){try{AKLS.set('ak-konum',{tab,S:(S.view==='session'?{view:'session',phase:'q'}:S.view==='numq'&&S.ns&&S.ns.i<S.ns.q.length?{view:'numq'}:{view:'home'}),R,
   AD:{view:AD.view,dosya:AD.dosya,sc:AD.view==='ders'?Math.round(AD.sc||0):0},AS:{view:AS.view,id:AS.id},AI,t:Date.now()})}catch(e){}}
 let KONUMZ=null;function konumGecikmeli(){clearTimeout(KONUMZ);KONUMZ=setTimeout(konumKaydet,400)}
 function konumYukle(){const k=AKLS.get('ak-konum',null);if(!k)return;
@@ -1196,7 +1225,8 @@ function konumYukle(){const k=AKLS.get('ak-konum',null);if(!k)return;
     if(k.AS&&k.AS.id&&['giris','kos','son'].includes(k.AS.view))AS={view:k.AS.view,id:k.AS.id};
     if(k.AI&&k.AI.view&&k.AI.view!=='bag')AI=k.AI;
     if(k.R&&(k.R.view==='lib'||(k.R.view==='story'&&typeof k.R.i==='number'&&BOOK[k.R.i])||(k.R.view==='task'&&k.R.id)))R=k.R;
-    if(k.S&&k.S.view==='session'&&P.sess&&P.sess.q&&P.sess.i<P.sess.q.length)S={view:'session',phase:'q'}}catch(e){}}
+    if(k.S&&k.S.view==='session'&&P.sess&&P.sess.q&&P.sess.i<P.sess.q.length)S={view:'session',phase:'q'};
+    if(k.S&&k.S.view==='numq'){const r=AKLS.get('ak-sayi',null);if(r&&r.ns&&r.ns.i<r.ns.q.length)S={view:'numq',ns:r.ns,phase:'q',val:'',played:false}}}catch(e){}}
 // Yeni sürüm sayfayı yeniler: sınavın ya da kart tekrarının ortasındaysan yenileme (yeni sürüm bir sonraki açılışta gelir)
 function yenilemeUygun(){konumKaydet();return !(tab==='sinav'&&AS.view==='kos')&&!(tab==='tekrar'&&S.view==='session')}
 
@@ -1219,19 +1249,21 @@ function bgBirlestir(u){if(!u||!u.plan)return;const k=AKLS.get('ak-bugun',null);
   if(u.acik&&(!k.acik||(u.acikT||0)>(k.acikT||0))){k.acik=u.acik;k.acikT=u.acikT}k.t=Math.max(k.t||0,u.t||0);AKLS.set('ak-bugun',k)}
 // Cihazda duran ama öteki cihazda da gereken bilgiler: alıştırma cevapları (ak-x-*-calisma), Kendini dene cevapları, okunan ders bölümleri.
 // Birleştirme kayıpsız: cevaplar birleşir (aynı soruda yeni olan kalır), işaretler toplanır.
-function xBirles(a,b){if(!a||!b)return a||b;const [y,e]=(b.t||0)>(a.t||0)?[b,a]:[a,b],m=Object.assign({},y);
+function xBirles(a,b){if(!a||!b)return a||b;const [y,e]=(b.t||0)>(a.t||0)?[b,a]:[a,b];if((y.sifir||0)>=(e.t||0))return y;const m=Object.assign({},y);
   ['ans','chk','chkB'].forEach(f=>{m[f]=Object.assign({},e[f]||{},y[f]||{})});m.dinle=Object.assign({},e.dinle||{});Object.entries(y.dinle||{}).forEach(([q,v])=>{m.dinle[q]=Math.max(m.dinle[q]||0,v)});
   if(a.chkT||b.chkT)m.chkT=Math.max(a.chkT||0,b.chkT||0);return m}
 function yerelTopla(){const x={},dene={},dz={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);
     if(/^ak-x-.+-calisma$/.test(k))x[k.slice(5)]=AKLS.get(k,null);else if(k.startsWith('ak-dene:'))dene[k.slice(8)]=AKLS.get(k,{})}}catch(e){}
-  Object.entries(AKLS.get('ak-dersz',{})).forEach(([z,v])=>{if(v&&v.ok)dz[z]=v.ok});return {x,dene,dz}}
+  Object.entries(AKLS.get('ak-dersz',{})).forEach(([z,v])=>{if(v&&v.ok)dz[z]=v.ok});return {x,dene,dz,yer:AKLS.get('ak-ders-yer',{})}}
 function yerelBirles(u,l){if(!u)return l;const o={x:Object.assign({},u.x||{}),dene:Object.assign({},u.dene||{}),dz:Object.assign({},u.dz||{})};
   Object.entries(l.x).forEach(([id,s])=>{o.x[id]=xBirles(o.x[id],s)});Object.entries(l.dene).forEach(([f,v])=>{o.dene[f]=Object.assign({},o.dene[f]||{},v)});
-  Object.entries(l.dz).forEach(([z,t])=>{o.dz[z]=o.dz[z]?Math.min(o.dz[z],t):t});return o}
+  Object.entries(l.dz).forEach(([z,t])=>{o.dz[z]=o.dz[z]?Math.min(o.dz[z],t):t});
+  o.yer=Object.assign({},u.yer||{});Object.entries(l.yer||{}).forEach(([f,v])=>{if(!o.yer[f]||(v.t||0)>(o.yer[f].t||0))o.yer[f]=v});return o}
 function yerelUygula(u){if(!u)return;
   Object.entries(u.x||{}).forEach(([id,r])=>{if(!r||(tab==='sinav'&&AS.view==='kos'&&AS.id===id))return;const l=xState(id),m=xBirles(l,r);if(JSON.stringify(m)!==JSON.stringify(l))AKLS.set(xKey(id),m)});
   Object.entries(u.dene||{}).forEach(([f,v])=>{const k='ak-dene:'+f,l=AKLS.get(k,{}),m=Object.assign({},v,l);if(JSON.stringify(m)!==JSON.stringify(l))AKLS.set(k,m)});
-  const dz=AKLS.get('ak-dersz',{});let deg=false;Object.entries(u.dz||{}).forEach(([z,t])=>{if(!(dz[z]&&dz[z].ok)){dz[z]=Object.assign(dz[z]||{s:0},{ok:t,e:1});deg=true}});if(deg)AKLS.set('ak-dersz',dz)}
+  const dz=AKLS.get('ak-dersz',{});let deg=false;Object.entries(u.dz||{}).forEach(([z,t])=>{if(!(dz[z]&&dz[z].ok)){dz[z]=Object.assign(dz[z]||{s:0},{ok:t,e:1});deg=true}});if(deg)AKLS.set('ak-dersz',dz);
+  {const Y=AKLS.get('ak-ders-yer',{});let d=false;Object.entries(u.yer||{}).forEach(([f,v])=>{if(v&&(!Y[f]||(v.t||0)>(Y[f].t||0))){Y[f]=v;d=true}});if(d)AKLS.set('ak-ders-yer',Y)}}
 // Günün özeti (bildirim için): kaç iş kaldı, sıradaki ne
 function bgOzet(){try{if(!PLANJ)return null;const d=dueList().length,n=newList().length,B=bgDurum(d,n);const say=[...B.isler,...(B.hs?B.uzun:[])],kalan=say.filter(i=>!B.bitti(i));
   return {tarih:bgGun(),kalan:kalan.length,toplam:say.length,dk:kalan.reduce((a,i)=>a+(i.dk||0),0),sira:kalan[0]?String(kalan[0].ad).replace(/[*_`]/g,''):'',gun:B.aktif?B.gi+1:0,t:Date.now()}}catch(e){return null}}
@@ -1246,15 +1278,16 @@ async function senkYaz(){const S_=senkDurum();if(!GH.ok())return;if(S_.yaziyor&&
       catch(e){if(/^(409|422)/.test(e.message)||(/^404/.test(e.message)&&S_.sha)){await senkCek();continue}throw e}}}
   catch(e){S_.durum='hata';S_.hata=e.message}
   S_.yaziyor=false;if(S_.tekrar){S_.tekrar=false;senkPlanla(5000)}}
-// Değişiklik sonrası yazmayı zamanla: birkaç saniye içinde, en fazla 20 saniyede bir (ms verilirse o kadar sonra)
-function senkPlanla(ms){const S_=senkDurum();if(!GH.ok())return;const bekle=ms!=null?ms:Math.max(4000,20000-(Date.now()-S_.sonYaz));clearTimeout(S_.zaman);S_.zaman=setTimeout(senkYaz,bekle)}
+// Değişiklik sonrası yazmayı zamanla: birkaç saniye içinde, en fazla 10 saniyede bir (ms verilirse o kadar sonra)
+function senkPlanla(ms){const S_=senkDurum();if(!GH.ok())return;const bekle=ms!=null?ms:Math.max(3000,10000-(Date.now()-S_.sonYaz));clearTimeout(S_.zaman);S_.zaman=setTimeout(senkYaz,bekle)}
 async function senkBaslat(){if(!GH.ok())return;await senkCek();if(typeof render==='function'&&((tab==='tekrar'&&S.view==='home')||(tab==='ilerleme'&&AI.view==='ana')))render();senkPlanla(3000)}
 document.addEventListener('visibilitychange',()=>{if(!GH.ok())return;const S_=senkDurum();
   if(document.visibilityState==='hidden'){konumKaydet();clearTimeout(S_.zaman);senkYaz()}
   else if(Date.now()-S_.sonCek>5000)senkBaslat()});
 // Uygulama kapanırken (iPhone'da kaydırıp kapatma, sekme kapatma) son durumu gönder
 window.addEventListener('pagehide',()=>{try{konumKaydet()}catch(e){}if(!GH.ok())return;clearTimeout(senkDurum().zaman);senkYaz()});
-setInterval(()=>{if(GH.ok()&&document.visibilityState==='visible'&&Date.now()-senkDurum().sonCek>180000)senkCek().then(()=>{if(tab==='tekrar'&&S.view==='home')render()})},60000);
+// Açık duran cihaz öteki cihazın değişikliklerini 45 saniyede bir çeker; yalnız liste ekranlarını yeniden çizer (yazdığın yer bozulmaz)
+setInterval(()=>{if(GH.ok()&&document.visibilityState==='visible'&&Date.now()-senkDurum().sonCek>40000)senkCek().then(()=>{if((tab==='tekrar'&&S.view==='home')||(tab==='ilerleme'&&AI.view==='ana')||(tab==='ders'&&AD.view==='list'))render()})},15000);
 setTimeout(senkBaslat,1500);
 
 /* --- Bildirim aboneliği (iPhone: iOS 16.4+, uygulama ana ekrana eklenmiş olmalı) --- */
@@ -1404,7 +1437,7 @@ function iKonuDetay(m){const k=m.k;
     if((b=e.target.closest('[data-kcal]'))){const [id,bo]=b.dataset.kcal.split('#');return calismaAc(id,bo)}
     if((b=e.target.closest('[data-karac]'))){const a=b.dataset.karac;if(a==='sayi'){ctx();pack('n.mp3');S={view:'num'};return setTab('tekrar')}if(a==='oku'){R={view:'lib'};return setTab('oku')}S={view:'home'};return setTab('tekrar')}}}
 async function calismaAc(id,bolum){const EX=await exLoad(id).catch(()=>null);if(!EX)return toast('Alıştırma yüklenemedi',true);
-  let s=xState(id);if(!s)s={id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false};
+  let s=xState(id);if(!s||!s.basla)s={id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false,sifir:s&&s.sifir};
   const i=EX.bolumler.findIndex(b=>b.id===bolum);s.bi=i<0?0:i;s.bitti=false;xSave(s);AS={view:'kos',id};setTab('sinav')}
 
 /* =============== İLERLEME =============== */
@@ -1462,8 +1495,12 @@ function newList(){const asc=P.set.order==='asc';return pool().filter(c=>!P.c[c.
 function buildDaily(){const due=dueList(),nw=newList().slice(0,25);const q=[];let ni=0;
   due.slice(0,60).forEach((c,i)=>{q.push({id:c.id,m:pickMode(c)});if(i%3===2&&ni<nw.length)q.push({id:nw[ni++].id,m:'card',isNew:true})});
   while(ni<nw.length)q.push({id:nw[ni++].id,m:'card',isNew:true});return q}
-function startSession(kind,q,extra){ctx();[...new Set(q.map(it=>byId[it.id]&&byId[it.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));P.sess=Object.assign({kind,q,i:0,ok:0,miss:0,wrong:[],t0:Date.now(),u_t:Date.now(),day:dayKey(Date.now())},extra||{});scheduleWrite();S={view:'session',phase:'q'};render()}
-function liveSess(){const s=P.sess;if(!s||!s.q||s.i>=s.q.length)return null;if(s.kind==='daily'&&s.day!==dayKey(Date.now()))return null;return s}
+// Günlük oturum yarımken telaffuz / serbest / test başlarsa günlük oturum P.sd'de saklanır; Bugün'den ya da "devam et"ten geri gelir
+const sessCanli=s=>!!(s&&s.q&&s.i<s.q.length&&!(s.kind==='daily'&&s.day!==dayKey(Date.now())));
+function sessDevam(kind){if(sessCanli(P.sess)&&(!kind||P.sess.kind===kind))return P.sess;
+  if(sessCanli(P.sd)&&(!kind||kind==='daily')){P.sess=Object.assign(P.sd,{u_t:Date.now()});P.sd={u_t:Date.now()};scheduleWrite();return P.sess}return null}
+function startSession(kind,q,extra){if(kind!=='daily'&&sessCanli(P.sess)&&P.sess.kind==='daily')P.sd=Object.assign({},P.sess,{u_t:Date.now()});ctx();[...new Set(q.map(it=>byId[it.id]&&byId[it.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));P.sess=Object.assign({kind,q,i:0,ok:0,miss:0,wrong:[],t0:Date.now(),u_t:Date.now(),day:dayKey(Date.now())},extra||{});scheduleWrite();S={view:'session',phase:'q'};render()}
+function liveSess(){return sessCanli(P.sess)?P.sess:sessCanli(P.sd)?P.sd:null}
 function rHome(){
   const ses=liveSess(),d=dueList().length,n=newList().length,total=pool().length,learned=pool().filter(c=>P.c[c.id]&&P.c[c.id].s>=7).length,started=pool().filter(c=>P.c[c.id]).length;
   const days=[...Array(7)].map((_,i)=>{const t=Date.now()-(6-i)*DAY;return {on:(P.days||[]).includes(dayKey(t)),l:'PSÇPCCP'[(new Date(t).getDay()+6)%7]}});
@@ -1487,7 +1524,7 @@ function rHome(){
   $('free').onclick=()=>{S={view:'free'};render()};
   $('numgo').onclick=()=>{ctx();pack('n.mp3');S={view:'num'};render()};
   $('speakgo').onclick=()=>{S={view:'free',preset:'speak'};render()};
-  if($('resume'))$('resume').onclick=()=>{ctx();[...new Set(P.sess.q.map(it=>byId[it.id]&&byId[it.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));S={view:'session',phase:'q'};render()};
+  if($('resume'))$('resume').onclick=()=>{sessDevam();ctx();[...new Set(P.sess.q.map(it=>byId[it.id]&&byId[it.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));S={view:'session',phase:'q'};render()};
   if(d+n)$('start').onclick=()=>startSession('daily',buildDaily());
   bgBagla(d,n);
 }
@@ -1540,15 +1577,17 @@ function rNumPick(){const F=S.nf||(S.nf={k:'mix',n:20,which:'all'});
    <div class="set"><label>Tür</label><div class="seg" id="nk">${NCAT.map(([k,l])=>{const [n,ok]=nStats(k);return `<button data-k="${k}" aria-pressed="${F.k===k}">${l}${n?` <span class="small">%${Math.round(100*ok/n)}</span>`:''}</button>`}).join('')}</div></div>
    <div class="set"><label>Hangileri</label><div class="seg" id="nw"><button data-w="all" aria-pressed="${F.which==='all'}">Hepsi</button><button data-w="hard" aria-pressed="${F.which==='hard'}">Yanlış yaptıklarım</button></div></div>
    <div class="set"><label>Kaç soru</label><div class="seg" id="nn">${[10,20,40].map(n=>`<button data-n="${n}" aria-pressed="${F.n===n}">${n}</button>`).join('')}</div></div>
+   ${(()=>{const r=AKLS.get('ak-sayi',null);return r&&r.ns&&r.ns.i<r.ns.q.length?`<div class="resume"><div><b>Yarım kalan tur</b><div class="muted small">${r.ns.i} / ${r.ns.q.length} soru yapıldı</div></div><button class="big-btn" id="nres">Kaldığın yerden devam et</button></div>`:''})()}
    ${last?`<div class="muted small">Son tur: %${Math.round(100*last.ok/last.n)} · ${last.ok}/${last.n} · ${NCAT.find(c=>c[0]===last.k)[1]}</div>`:''}
    <div class="spacer"></div><div class="muted small">${xs.length} kayıt</div><button class="big-btn" id="ngo" ${xs.length?'':'disabled'}>Başla</button>`;
   $('bk').onclick=()=>{S={view:'home'};render()};
   const seg=(id,key,num)=>$(id).onclick=e=>{const b=e.target.closest('[data-'+key+']');if(!b)return;F[{k:'k',w:'which',n:'n'}[key]]=num?+b.dataset[key]:b.dataset[key];rNumPick()};
   seg('nk','k');seg('nw','w');seg('nn','n',1);
+  if($('nres'))$('nres').onclick=()=>{const r=AKLS.get('ak-sayi',null);ctx();pack('n.mp3');S={view:'numq',ns:r.ns,phase:'q',val:'',played:false};render()};
   $('ngo').onclick=()=>{const BW={n:1,b:1,p:1.4,h:1,t:.6,d:1};const cand=pool().map(x=>{const r=P.nm[x.id];let w=(F.k==='mix'?BW[x.k]:1)*(r?(r[1]<r[0]?3:.7):1.3);if(x.k==='n'&&NHARD.has(+x.a))w*=2;return {x,w:w*(-Math.log(Math.random()))}});
     const q=cand.sort((a,b)=>a.w-b.w).slice(0,F.n).map(o=>o.x.id);numStart(q,F.k)}}
 function numStart(q,k){ctx();pack('n.mp3');S={view:'numq',ns:{q,i:0,n:q.length,ok:0,wrong:[],k,done:{}},phase:'q',val:'',played:false};render()}
-function rNumQ(){const N=S.ns;
+function rNumQ(){const N=S.ns;if(N.i<N.q.length)AKLS.set('ak-sayi',{ns:N,t:Date.now()});else AKLS.del('ak-sayi');
   if(N.i>=N.q.length){const pct=Math.round(100*N.ok/N.n);
     if(!N.logged){N.logged=true;P.nlog.push({t:Date.now(),k:N.k,n:N.n,ok:N.ok});P.nlog=P.nlog.slice(-200);const dk=dayKey(Date.now());if(!P.days.includes(dk))P.days.push(dk);scheduleWrite();try{bgIsaretle((it,gn,gi)=>it.ac==='sayi'&&gn<=gi,true)}catch(e){}}
     const W=N.wrong.map(id=>NUMS.find(x=>x.id===id));
@@ -1699,7 +1738,7 @@ function doCheck(){const it=cur_().q[cur_().i],c=byId[it.id],u=$('ans').value;if
 function next(){stopAudio();speechStop();const s=cur_();s.i++;S.q=null;
   if(s.i>=s.q.length){const k=dayKey(Date.now());if(!P.days.includes(k)){P.days.push(k);P.days=P.days.slice(-90)}
     if(s.kind==='test'){P.tests.push({t:Date.now(),u:s.u,n:s.q.length,ok:s.ok});P.tests=P.tests.slice(-60)}
-    S={view:'done',last:s};P.sess=null;scheduleWrite();flush();render();try{bgOturumBitti(s)}catch(e){}return}
+    s.u_t=Date.now();S={view:'done',last:s};scheduleWrite();flush();render();try{bgOturumBitti(s)}catch(e){}return}
   s.u_t=Date.now();scheduleWrite();render()}
 function rDone(){const s=S.last,more=dueList().length+newList().length,test=s.kind==='test';const pct=Math.round(100*s.ok/Math.max(1,s.ok+s.miss));
   $('screen').innerHTML=`<div class="top"><h1>${test?'Test bitti · Ünite '+s.u:'Oturum bitti'}</h1></div>
@@ -1754,13 +1793,12 @@ function rStory(){const s=BOOK[R.i];let body='';const multi=Object.keys(s.speake
     <div class="steps" id="steps">${['Dinle','Oku','Sorular'].map((n,j)=>`<button data-st="${j+1}" aria-pressed="${R.step===j+1}">${j+1}. ${n}</button>`).join('')}</div>`+body;
   $('playerSlot').innerHTML=R.step<3?`<div class="player"><button id="pRep" aria-label="Cümleyi tekrarla">${I.again}</button><button id="pPrev" aria-label="Önceki cümle">${I.prev}</button><button class="main" id="pPlay" aria-label="${R.playing?'Durdur':'Oynat'}">${R.playing?I.pause:I.play}</button><button id="pNext" aria-label="Sonraki cümle">${I.next}</button><button class="spd" id="pSpd" aria-label="Hız">${R.slow?'Yavaş':'Normal'}</button></div>`:'';
   $('bk').onclick=()=>{stopAudio();savePos();R={view:'lib'};render()};
-  $('steps').onclick=e=>{const b=e.target.closest('[data-st]');if(!b)return;stopAudio();R.playing=false;R.step=+b.dataset.st;R.line=0;savePos();rStory()};
+  $('steps').onclick=e=>{const b=e.target.closest('[data-st]');if(!b)return;stopAudio();R.playing=false;R.step=+b.dataset.st;R.line=0;savePos();if(R.step===3)try{okuBitti(s.title)}catch(e){}rStory()};
   if($('toRead'))$('toRead').onclick=()=>{stopAudio();R.playing=false;R.step=2;R.line=0;savePos();rStory()};
   if($('trb'))$('trb').onclick=()=>{R.tr=!R.tr;rStory()};
   if($('lines'))$('lines').onclick=e=>{const w=e.target.closest('[data-w]');if(w){e.stopPropagation();const g=s.gloss.find(x=>x[0]===w.dataset.w);showSheet(`<div class="w">${esc(g[0])}</div><div class="tr-big">${esc(g[1])}</div><div class="row"><button class="btn grow" id="shSay">Dinle</button><button class="btn grow" id="shClose">Kapat</button></div>`,()=>sayStory(R.i,g[0],false));return}
     const l=e.target.closest('[data-l]');if(l){R.line=+l.dataset.l;playFrom()}};
   document.querySelectorAll('[data-qa]').forEach(b=>b.onclick=()=>{$('qa'+b.dataset.qa).hidden=false;b.hidden=true});
-  if(R.step===3&&!R.isaretli){R.isaretli=true;try{okuBitti(s.title)}catch(e){}}
   if($('fin'))$('fin').onclick=()=>{if(!P.read.includes(s.title))P.read.push(s.title);delete P.rpos[s.title];scheduleWrite();try{okuBitti(s.title)}catch(e){}R={view:'lib'};render()};
   if($('pPlay')){$('pPlay').onclick=()=>{if(R.playing){stopAudio();R.playing=false;savePos();rStory()}else{if(R.step===1&&R.line===0)R.listens++;playFrom()}};
     $('pRep').onclick=()=>{R.playing=false;hl();sayStory(R.i,s.lines[R.line][0],R.slow)};
@@ -1785,5 +1823,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=20a47274d1').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=eb5cf4eebf').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>
