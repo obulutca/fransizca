@@ -579,6 +579,7 @@ function merge(R){if(!R)return;if(R.c)Object.keys(R.c).forEach(id=>{const a=P.c[
   {const sn=new Set((P.nlog||[]).map(l=>l.t));(R.nlog||[]).forEach(l=>{if(!sn.has(l.t))P.nlog.push(l)});P.nlog.sort((a,b)=>a.t-b.t);P.nlog=P.nlog.slice(-200)}
   if(R.tc)Object.keys(R.tc).forEach(k=>{P.tc[k]=Math.max(P.tc[k]||0,R.tc[k]||0)});
   if(R.daily)Object.keys(R.daily).forEach(k=>{const a=P.daily[k],b=R.daily[k];if(!a||b[0]>a[0])P.daily[k]=b});
+  ['dg','nmd'].forEach(f=>{if(!R[f])return;const M=P[f]||(P[f]={});Object.entries(R[f]).forEach(([c,m])=>{const l=M[c]||(M[c]={});Object.entries(m||{}).forEach(([a,v])=>{if(v&&(!l[a]||v[0]>l[a][0]))l[a]=v})})});
   const seenT=new Set((P.tests||[]).map(t=>t.t));(R.tests||[]).forEach(t=>{if(!seenT.has(t.t))P.tests.push(t)});P.tests.sort((a,b)=>a.t-b.t);P.tests=P.tests.slice(-60);
   const seenL=new Set((P.log||[]).map(l=>l.t+l.id));(R.log||[]).forEach(l=>{if(!seenL.has(l.t+l.id))P.log.push(l)});P.log.sort((a,b)=>a.t-b.t);P.log=P.log.slice(-500);
   if(R.sess&&(!P.sess||(R.sess.u_t||0)>(P.sess.u_t||0)))P.sess=R.sess;
@@ -604,7 +605,14 @@ function grade(id,g){const now=Date.now(),old=P.c[id],wasNew=!old;
   if(g===1)P.c[id].no=(P.c[id].no||0)+1;else P.c[id].ok=(P.c[id].ok||0)+1;
   if(wasNew){if(P.nt.day!==dayKey(now))P.nt={day:dayKey(now),n:0};P.nt.n++}
   return P.c[id].due}
-function record(id,m,res,ans){const now=Date.now(),k=dayKey(now);const d=P.daily[k]||[0,0];d[0]++;if(res!=='no')d[1]++;P.daily[k]=d;
+// Cihaz başına sayaçlar: P.dg (gün → [cevap, doğru]) ve P.nmd (sayı → [deneme, doğru]). Eşitlemede her cihazın kendi sayısı korunur, ekranda toplanır.
+// Eski tek sayaç (P.daily, P.nm) iki cihazda büyük olanı alıyordu; toplam ondan küçükse (eski günler) eskisi kullanılır.
+function cihazNo(){try{return cihaz().id}catch(e){return 'x'}}
+function sayacEkle(alan,a,ok){const c=cihazNo(),M=P[alan]||(P[alan]={}),m=M[c]||(M[c]={}),v=m[a]||(m[a]=[0,0]);v[0]++;if(ok)v[1]++;
+  if(alan==='dg'){const sin=dayKey(Date.now()-90*DAY);Object.keys(m).forEach(x=>{if(+x<sin)delete m[x]})}}
+function sayacTop(alan,eski,a){let n=0,o=0;Object.values(P[alan]||{}).forEach(m=>{const v=m&&m[a];if(v){n+=v[0];o+=v[1]}});const e=eski&&eski[a];return e&&e[0]>n?[e[0],e[1]]:[n,o]}
+const gunSay=k=>sayacTop('dg',P.daily,k),nmSay=id=>{const v=sayacTop('nmd',P.nm,id);return v[0]?v:null};
+function record(id,m,res,ans){const now=Date.now(),k=dayKey(now);const d=P.daily[k]||[0,0];d[0]++;if(res!=='no')d[1]++;P.daily[k]=d;sayacEkle('dg',k,res!=='no');
   const e={t:now,id,m,r:res};if(ans)e.a=String(ans).slice(0,60);P.log.push(e);if(P.log.length>500)P.log=P.log.slice(-500)}
 function fmtIv(ms){const m=ms/6e4;if(m<60)return Math.max(1,Math.round(m))+' dk';const h=m/60;if(h<20)return Math.round(h)+' sa';const d=h/24;if(d<30)return Math.round(d)+' gün';if(d<365)return Math.round(d/30)+' ay';return Math.round(d/365)+' yıl'}
 
@@ -734,7 +742,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='eb5cf4eebf';
+const AKV='1689031cf1';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -858,7 +866,7 @@ function dersTakip(dosya,body,hs){const sc=$('screen'),tocA=[...document.querySe
       const bas=h.getBoundingClientRect().top-r0.top,son=(hs[i+1]?hs[i+1].getBoundingClientRect().top:body.getBoundingClientRect().bottom)-r0.top;
       if(bas<vh*.75&&son>vh*.25){d.s=(d.s||0)+1;deg=true}
       if(son<=vh+8&&!d.e){d.e=1;deg=true}
-      if(d.e&&d.s>=DERSSN){d.ok=Date.now();deg=true;senkPlanla(3000);bgIsaretle(it=>it.tur==='ders'&&it.ac==='ders:'+dosya+'#b'+i)}
+      if(d.e&&(d.s||0)+Object.values(d.so||{}).reduce((a,b)=>a+b,0)>=DERSSN){d.ok=Date.now();deg=true;senkPlanla(3000);bgIsaretle(it=>it.tur==='ders'&&it.ac==='ders:'+dosya+'#b'+i)}
       dz[z]=d});
     if(deg){AKLS.set('ak-dersz',dz);isaret(dz)}},1000)}
 
@@ -897,12 +905,17 @@ async function exLoad(id){if(!EXC[id])EXC[id]=jget('icerik/sinavlar/'+id+'.json'
 function xState(id){return AKLS.get(xKey(id),null)}
 function xSave(st){st.t=Date.now();AKLS.set(xKey(st.id),st);if(/-calisma$/.test(st.id||''))senkPlanla()}
 const TURAD={sinav:'Sınav',odev:'Ödev',alistirma:'Alıştırma'};
+// Öteki cihazda başlatılan / teslim edilen sınav ve ödev (cevaplar ve ses kayıtları o cihazda kalır; burada yalnız durumu görünür)
+function sinavUzak(id){const m=AKLS.get('ak-sinav-uzak',{})[id];if(!m)return null;const v=Object.values(m);return v.find(x=>x.gonderildi)||v.sort((a,b)=>(b.t||0)-(a.t||0))[0]||null}
+const cihazda=ad=>({PC:"PC'de",iPhone:"iPhone'da",iPad:"iPad'de",Android:"Android'de",Mac:"Mac'te"})[ad]||'öteki cihazda',cihazdan=ad=>({PC:"PC'den",iPhone:"iPhone'dan",iPad:"iPad'den",Android:"Android'den",Mac:"Mac'ten"})[ad]||'öteki cihazdan';
 const TURCOK={sinav:'Sınavlar',odev:'Ödevler',alistirma:'Alıştırmalar'};
 function xDurum(m){const st=xState(m.id),res=(AKCACHE().sonuclar||[]).find(r=>r.id===m.id);
   if(res)return {k:'ok',t:'Değerlendirildi · '+res.puan+(res.max?' / '+res.max:'')};
-  if(st&&st.gonderildi)return {k:'wait',t:'Teslim edildi · değerlendirme bekleniyor'};
+  if(st&&st.gonderildi)return {k:'wait',t:'Teslim edildi · değerlendirme bekleniyor'};const u=sinavUzak(m.id);
+  if(u&&u.gonderildi)return {k:'wait',t:'Teslim edildi ('+cihazdan(u.ad)+') · değerlendirme bekleniyor'};
   if(st&&st.bitti)return {k:'warn',t:'Bitti · teslim edilmedi'};
-  if(st&&st.basla)return {k:'warn',t:'Devam ediyor'};return {k:'',t:'Başlanmadı'}}
+  if(st&&st.basla)return {k:'warn',t:'Devam ediyor'};
+  if(u)return {k:'warn',t:(u.bitti?'Bitti, teslim bekliyor':'Devam ediyor')+' · '+cihazda(u.ad)};return {k:'',t:'Başlanmadı'}}
 async function A_sinav(){akStop();akWide();
   if(AS.view==='kos')return xRun();if(AS.view==='giris')return xIntro();if(AS.view==='son')return xEnd();
   if(!SIDXA){$('screen').innerHTML=akTop('Sınavlar')+'<p class="muted">Yükleniyor…</p>';try{SIDXA=await jget('icerik/sinavlar/index.json')}catch(e){$('screen').innerHTML=akTop('Sınavlar')+`<p class="muted">Yüklenemedi (${esc(e.message)}).</p>`;return}}
@@ -914,7 +927,7 @@ async function A_sinav(){akStop();akWide();
    (GH.ok()?'':`<div class="ak-note">Teslim için önce <b>İlerleme → Bağlantı</b> ekranından GitHub anahtarını gir.</div>`);
   $('screen').onclick=e=>{const b=e.target.closest('[data-ex]');if(b){AS={view:'giris',id:b.dataset.ex};render()}}}
 async function xIntro(){const EX=await exLoad(AS.id).catch(e=>null);if(!EX){AS={view:'list'};toast('Sınav yüklenemedi',true);return render()}
-  const st=xState(EX.id),sinav=EX.tur==='sinav';
+  const st=xState(EX.id),sinav=EX.tur==='sinav',uz=!(st&&st.basla)&&EX.tur!=='alistirma'?sinavUzak(EX.id):null,tarihS=t=>new Date(t).toLocaleString('tr-TR',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
   const rows=EX.bolumler.map(b=>`<tr><td><b>${esc(b.ad)}</b>${b.tr?`<div class="muted small">${esc(b.tr)}</div>`:''}</td><td>${(b.sorular||b.gorevler||[]).length} ${b.gorevler?'görev':'soru'}</td><td>${b.sure?Math.round(b.sure/60)+' dk':'süresiz'}</td></tr>`).join('');
   const needMic=EX.bolumler.some(b=>b.tip==='eo');
   $('screen').innerHTML=akTop(EX.baslik,true)+`<div class="ak-md">${mdr(EX.aciklama_uzun||EX.aciklama||'')}</div>
@@ -922,10 +935,12 @@ async function xIntro(){const EX=await exLoad(AS.id).catch(e=>null);if(!EX){AS={
    <div class="ak-note">${EX.tur==='alistirma'?'<b>Alıştırma:</b> puansız ve süresiz. Her cevap anında düzeltilir; yanlışsa doğrusu ve nedeni çıkar. Teslim etmen gerekmez.':sinav?'<b>Gerçek sınav kuralları:</b> her bölümün süresi kendiliğinden işler; süre bitince bölüm kapanır. Dinleme kayıtları <b>bir kez</b> çalınır ve soru kayıttan sonra gelir. Bitmiş bir bölüme geri dönülmez. Sözlük, kart ya da not kullanma.':'<b>Ödev:</b> süre yok; dinleme kayıtlarını en fazla belirtilen sayıda dinleyebilirsin. Bölümler arasında gidip gelebilirsin.'}</div>
    ${needMic?`<div class="ak-note">Bu sınavda konuşma bölümü var: mikrofon izni gerekecek. <button class="link" id="akmic">Mikrofonu şimdi dene</button><span id="akmicr" class="small"></span></div>`:''}
    <div class="spacer"></div><div class="bottom">${st&&st.gonderildi?`<div class="ak-note ok">Bu ${TURAD[EX.tur].toLowerCase()} ${new Date(st.gonderildi).toLocaleString('tr-TR')} tarihinde teslim edildi.</div><button class="btn" id="akagain">Baştan yap (yeni deneme)</button>`:
-     st&&st.basla?`<button class="big-btn" id="akgo">${st.bitti?'Teslim ekranına git':'Kaldığın yerden devam et'}</button><button class="btn" id="akagain">Sıfırla ve baştan başla</button>`:`<button class="big-btn" id="akgo">Başla</button>`}</div>`;
+     st&&st.basla?`<button class="big-btn" id="akgo">${st.bitti?'Teslim ekranına git':'Kaldığın yerden devam et'}</button><button class="btn" id="akagain">Sıfırla ve baştan başla</button>`:
+     uz?`<div class="ak-note${uz.gonderildi?' ok':''}">${uz.gonderildi?`Bu ${TURAD[EX.tur].toLowerCase()} ${tarihS(uz.gonderildi)} tarihinde <b>${cihazdan(uz.ad)}</b> teslim edildi.`:`${EX.tur==='odev'?'Bu ödeve':'Bu sınava'} <b>${cihazda(uz.ad)}</b> başladın (${tarihS(uz.basla)}). Cevapların ve ses kayıtların o cihazda: oradan devam et.`}</div><button class="btn" id="akgo">${uz.gonderildi?'Burada yeni deneme başlat':'Yine de burada baştan başla'}</button>`:
+     `<button class="big-btn" id="akgo">Başla</button>`}</div>`;
   $('akbk').onclick=()=>{AS={view:'list'};render()};
   if($('akmic'))$('akmic').onclick=async()=>{try{const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop());$('akmicr').textContent=' ✓ Mikrofon çalışıyor.'}catch(e){$('akmicr').textContent=' ✗ İzin verilmedi: '+(e.name||e)}};
-  if($('akgo'))$('akgo').onclick=()=>{ctx();let s=xState(EX.id);if(!s||!s.basla){s={id:EX.id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false,sifir:s&&s.sifir};xSave(s)}
+  if($('akgo'))$('akgo').onclick=()=>{if(uz&&!confirm(uz.gonderildi?'Bu '+TURAD[EX.tur].toLowerCase()+' zaten teslim edildi. Burada yeni bir deneme başlatılsın mı?':cihazda(uz.ad)+' yazdığın cevaplar ve ses kayıtları buraya gelmez. Burada baştan başlansın mı?'))return;ctx();let s=xState(EX.id);if(!s||!s.basla){s={id:EX.id,basla:Date.now(),bi:0,qi:{},ans:{},dinle:{},faz:{},son:{},kayit:{},bitti:false,sifir:s&&s.sifir};xSave(s)}
     AS={view:s.bitti?'son':'kos',id:EX.id};render()};
   if($('akagain'))$('akagain').onclick=async()=>{if(!confirm('Önceki cevapların bu cihazdan silinecek. Emin misin?'))return;const s=xState(EX.id);if(s)for(const k of Object.keys(s.kayit||{}))await IDB.del(EX.id+'/'+k);
     if(/-calisma$/.test(EX.id)){const n=Date.now();AKLS.set(xKey(EX.id),{id:EX.id,sifir:n,t:n});senkPlanla(1500)}else AKLS.del(xKey(EX.id));render()}}
@@ -1134,10 +1149,10 @@ const KARTHEDEF=30;
 // Alıştırma bölümü kontrol edildi mi (plan: "calisma:u08-calisma#a" ya da "#c,d")
 const calBitti=(s,b)=>!!((s.chkB&&s.chkB[b])||Object.keys(s.chk||{}).some(q=>q.startsWith(b)&&/^\d+$/.test(q.slice(b.length))));
 function bgDurum(d,n){const k=bgKayit(),bk=bgGun(),hs=[0,6].includes(new Date().getDay()),G=(PLANJ&&PLANJ.gunler)||[],aktif=PLANJ&&PLANJ.durum==='aktif'&&G.length>0;
-  const kartBugun=d+n===0||((P.daily&&P.daily[dayKey(Date.now())])||[0])[0]>=KARTHEDEF;
+  const kartBugun=d+n===0||gunSay(dayKey(Date.now()))[0]>=KARTHEDEF;
   // kendiliğinden anlaşılan işler: kart, gönderilen ya da değerlendirilen sınav/ödev, kontrol edilen alıştırma bölümü
   const oto=it=>{const a=it.ac||'';let m;if(a==='kart')return kartBugun;
-    if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]);return !!((s&&s.gonderildi)||(AKCACHE().sonuclar||[]).some(r=>r.id===m[1]))}
+    if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]),u=sinavUzak(m[1]);return !!((s&&s.gonderildi)||(u&&u.gonderildi)||(AKCACHE().sonuclar||[]).some(r=>r.id===m[1]))}
     if((m=/^calisma:([^#]+)#(.+)$/.exec(a))){const s=xState(m[1]);return !!s&&m[2].split(',').every(b=>calBitti(s,b.trim()))}
     return false};
   const bitti=it=>oto(it)||(aktif?!!k.bitti[it.id]:!!(k.gun[bk]&&k.gun[bk][it.id]));
@@ -1169,7 +1184,8 @@ function bgYarim(it){try{const a=it.ac||'';let m;
   if((m=/^calisma:([^#]+)#(.+)$/.exec(a))){const s=xState(m[1]),bs=m[2].split(',').map(x=>x.trim());if(!s||!s.ans)return '';
     const n=Object.keys(s.ans).filter(q=>s.ans[q]!==''&&s.ans[q]!=null&&bs.some(b=>q.startsWith(b)&&/^\d+$/.test(q.slice(b.length)))).length;return n?n+' cevap yazıldı':''}
   if(a==='oku'){const b=BOOK.find(x=>yalin(it.ad).includes(yalin(x.title))),p=b&&P.rpos[b.title];return p?({1:'dinlemede kaldı',2:'okumada kaldı',3:'sorularda kaldı'})[p.step]||'yarım kaldı':''}
-  if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]);return s&&s.basla&&!s.gonderildi?(s.bitti?'bitti, teslim bekliyor':'devam ediyor'):''}
+  if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]);if(s&&s.basla)return s.gonderildi?'':(s.bitti?'bitti, teslim bekliyor':'devam ediyor');
+    const u=sinavUzak(m[1]);return u&&!u.gonderildi?'devam ediyor ('+cihazda(u.ad)+')':''}
   if(a==='sayi'){const r=AKLS.get('ak-sayi',null);return r&&r.ns&&r.ns.i<r.ns.q.length?`${r.ns.i} / ${r.ns.q.length} yapıldı`:''}
   return ''}catch(e){return ''}}
 function bgPlanHtml(d,n){bgYukle();if(!PLANJ)return '';const B=bgDurum(d,n),{isler,uzun,aktif,gi,G,k,hs,bitti}=B;
@@ -1207,7 +1223,8 @@ function bgAc(it,d,n){const a=it.ac||'';let m;
   toast('Bu iş henüz bir ekrana bağlanmadı',true)}
 function bgBagla(d,n){if(!PLANJ)return;const B=bgDurum(d,n),hepsi=[...B.isler,...B.uzun];
   $('screen').querySelectorAll('[data-bit]').forEach(x=>x.onclick=()=>{const k=bgKayit(),id=x.dataset.bit;
-    if(B.aktif){if(k.bitti[id])delete k.bitti[id];else k.bitti[id]=Date.now()}else{const g=k.gun[B.bk]||(k.gun={},k.gun[B.bk]={});if(g[id])delete g[id];else g[id]=Date.now()}
+    k.geri=k.geri||{};if(B.aktif){if(k.bitti[id]){delete k.bitti[id];k.geri[id]=Date.now()}else{k.bitti[id]=Date.now();delete k.geri[id]}}
+    else{const g=k.gun[B.bk]||(k.gun[B.bk]={}),gk=B.bk+'|'+id;if(g[id]){delete g[id];k.geri[gk]=Date.now()}else{g[id]=Date.now();delete k.geri[gk]}}
     if(k.acik&&k.acik.id===id)k.acik=null;k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla(1500);render()});
   $('screen').querySelectorAll('[data-ac]').forEach(x=>x.onclick=()=>{const it=hepsi.find(i=>i.id===x.dataset.ac);if(!it)return;
     if(!bgOto(it)){const k=bgKayit();k.acik={id:it.id,gun:B.bk};k.acikT=k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla()}bgAc(it,d,n)})}
@@ -1244,7 +1261,10 @@ async function senkDosya(yol){const r=await GH.req('contents/'+yol+'?ref='+SDAL,
 async function senkYazDosya(yol,veri,sha,msg){return GH.req('contents/'+yol,{method:'PUT',zaman:25000,body:JSON.stringify({message:msg,content:b64txt(JSON.stringify(veri)),branch:SDAL,sha:sha||undefined})})}
 // Bugün kayıtlarını birleştir: biten işler birleşir, günlük işler son 7 gün, açık iş en yenisi
 function bgBirlestir(u){if(!u||!u.plan)return;const k=AKLS.get('ak-bugun',null);if(!k||k.plan!==u.plan){if(!k||(u.t||0)>(k.t||0))AKLS.set('ak-bugun',u);return}
-  Object.assign(k.bitti,u.bitti||{});Object.entries(u.gun||{}).forEach(([g,v])=>{k.gun[g]=Object.assign(k.gun[g]||{},v)});
+  Object.entries(u.bitti||{}).forEach(([i,t])=>{k.bitti[i]=Math.max(k.bitti[i]||0,t||0)});Object.entries(u.gun||{}).forEach(([g,v])=>{const G=k.gun[g]||(k.gun[g]={});Object.entries(v||{}).forEach(([i,t])=>{G[i]=Math.max(G[i]||0,t||0)})});
+  // işareti kaldırma: kaldırma işaretlemeden yeniyse iş "yapılmadı" olur (iki cihazda da)
+  const geri=Object.assign({},k.geri||{});Object.entries(u.geri||{}).forEach(([i,t])=>{geri[i]=Math.max(geri[i]||0,t||0)});k.geri=geri;
+  Object.entries(geri).forEach(([i,t])=>{const p=i.indexOf('|');if(p>0){const g=i.slice(0,p),id=i.slice(p+1);if(k.gun[g]&&k.gun[g][id]&&k.gun[g][id]<t)delete k.gun[g][id]}else if(k.bitti[i]&&k.bitti[i]<t)delete k.bitti[i]});
   const gs=Object.keys(k.gun).sort((a,b)=>new Date(b)-new Date(a));gs.slice(7).forEach(g=>delete k.gun[g]);
   if(u.acik&&(!k.acik||(u.acikT||0)>(k.acikT||0))){k.acik=u.acik;k.acikT=u.acikT}k.t=Math.max(k.t||0,u.t||0);AKLS.set('ak-bugun',k)}
 // Cihazda duran ama öteki cihazda da gereken bilgiler: alıştırma cevapları (ak-x-*-calisma), Kendini dene cevapları, okunan ders bölümleri.
@@ -1252,27 +1272,44 @@ function bgBirlestir(u){if(!u||!u.plan)return;const k=AKLS.get('ak-bugun',null);
 function xBirles(a,b){if(!a||!b)return a||b;const [y,e]=(b.t||0)>(a.t||0)?[b,a]:[a,b];if((y.sifir||0)>=(e.t||0))return y;const m=Object.assign({},y);
   ['ans','chk','chkB'].forEach(f=>{m[f]=Object.assign({},e[f]||{},y[f]||{})});m.dinle=Object.assign({},e.dinle||{});Object.entries(y.dinle||{}).forEach(([q,v])=>{m.dinle[q]=Math.max(m.dinle[q]||0,v)});
   if(a.chkT||b.chkT)m.chkT=Math.max(a.chkT||0,b.chkT||0);return m}
-function yerelTopla(){const x={},dene={},dz={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);
-    if(/^ak-x-.+-calisma$/.test(k))x[k.slice(5)]=AKLS.get(k,null);else if(k.startsWith('ak-dene:'))dene[k.slice(8)]=AKLS.get(k,{})}}catch(e){}
-  Object.entries(AKLS.get('ak-dersz',{})).forEach(([z,v])=>{if(v&&v.ok)dz[z]=v.ok});return {x,dene,dz,yer:AKLS.get('ak-ders-yer',{})}}
-function yerelBirles(u,l){if(!u)return l;const o={x:Object.assign({},u.x||{}),dene:Object.assign({},u.dene||{}),dz:Object.assign({},u.dz||{})};
+function yerelTopla(){const x={},dene={},sinav={},c=cihaz();try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);
+    if(/^ak-x-.+-calisma$/.test(k))x[k.slice(5)]=AKLS.get(k,null);
+    else if(k.startsWith('ak-x-')){const s=AKLS.get(k,null);if(s&&s.basla)sinav[k.slice(5)]={[c.id]:{ad:c.ad,basla:s.basla,bitti:s.bitti||0,gonderildi:s.gonderildi||0,yol:s.yol||'',t:s.t||s.basla}}}
+    else if(k.startsWith('ak-dene:'))dene[k.slice(8)]=AKLS.get(k,{})}}catch(e){}
+  const dz={};Object.entries(AKLS.get('ak-dersz',{})).forEach(([z,v])=>{if(v&&(v.ok||v.s||v.e))dz[z]={ok:v.ok||0,e:v.e||0,s:Object.assign({},v.so||{},{[c.id]:v.s||0})}});
+  return {x,dene,dz,yer:AKLS.get('ak-ders-yer',{}),sinav,sayi:AKLS.get('ak-sayi',null)}}
+// ders okuma: s = cihaz başına saniye (toplanır), e = sonu görüldü, ok = okundu. Eski biçim: sayı (okunma zamanı)
+const dzNorm=v=>typeof v==='number'?{ok:v,e:1,s:{}}:(v||{});
+function dzBirles(a,b){if(!a)return {ok:b.ok||0,e:b.e||0,s:Object.assign({},b.s||{})};const s=Object.assign({},a.s||{});Object.entries(b.s||{}).forEach(([c,v])=>{s[c]=Math.max(s[c]||0,v||0)});
+  return {ok:a.ok&&b.ok?Math.min(a.ok,b.ok):(a.ok||b.ok||0),e:Math.max(a.e||0,b.e||0),s}}
+function yerelBirles(u,l){if(!u)return l;const cid=cihaz().id,o={x:Object.assign({},u.x||{}),dene:Object.assign({},u.dene||{}),dz:{},yer:Object.assign({},u.yer||{}),sinav:{},sayi:u.sayi||null};
   Object.entries(l.x).forEach(([id,s])=>{o.x[id]=xBirles(o.x[id],s)});Object.entries(l.dene).forEach(([f,v])=>{o.dene[f]=Object.assign({},o.dene[f]||{},v)});
-  Object.entries(l.dz).forEach(([z,t])=>{o.dz[z]=o.dz[z]?Math.min(o.dz[z],t):t});
-  o.yer=Object.assign({},u.yer||{});Object.entries(l.yer||{}).forEach(([f,v])=>{if(!o.yer[f]||(v.t||0)>(o.yer[f].t||0))o.yer[f]=v});return o}
-function yerelUygula(u){if(!u)return;
+  Object.entries(u.dz||{}).forEach(([z,v])=>{o.dz[z]=dzBirles(null,dzNorm(v))});Object.entries(l.dz).forEach(([z,v])=>{o.dz[z]=dzBirles(o.dz[z],v)});
+  Object.entries(l.yer||{}).forEach(([f,v])=>{if(!o.yer[f]||(v.t||0)>(o.yer[f].t||0))o.yer[f]=v});
+  // sınav/ödev: bu cihazın satırı yalnız bu cihazdan gelir (burada sıfırlanan deneme depoda kalmasın)
+  Object.entries(u.sinav||{}).forEach(([id,m])=>{const r=Object.assign({},m);delete r[cid];if(Object.keys(r).length)o.sinav[id]=r});
+  Object.entries(l.sinav||{}).forEach(([id,m])=>{o.sinav[id]=Object.assign(o.sinav[id]||{},m)});
+  if(l.sayi&&(!o.sayi||(l.sayi.t||0)>(o.sayi.t||0)))o.sayi=l.sayi;return o}
+function yerelUygula(u){if(!u)return;const cid=cihaz().id;
   Object.entries(u.x||{}).forEach(([id,r])=>{if(!r||(tab==='sinav'&&AS.view==='kos'&&AS.id===id))return;const l=xState(id),m=xBirles(l,r);if(JSON.stringify(m)!==JSON.stringify(l))AKLS.set(xKey(id),m)});
   Object.entries(u.dene||{}).forEach(([f,v])=>{const k='ak-dene:'+f,l=AKLS.get(k,{}),m=Object.assign({},v,l);if(JSON.stringify(m)!==JSON.stringify(l))AKLS.set(k,m)});
-  const dz=AKLS.get('ak-dersz',{});let deg=false;Object.entries(u.dz||{}).forEach(([z,t])=>{if(!(dz[z]&&dz[z].ok)){dz[z]=Object.assign(dz[z]||{s:0},{ok:t,e:1});deg=true}});if(deg)AKLS.set('ak-dersz',dz);
-  {const Y=AKLS.get('ak-ders-yer',{});let d=false;Object.entries(u.yer||{}).forEach(([f,v])=>{if(v&&(!Y[f]||(v.t||0)>(Y[f].t||0))){Y[f]=v;d=true}});if(d)AKLS.set('ak-ders-yer',Y)}}
+  {const dz=AKLS.get('ak-dersz',{});let deg=false;Object.entries(u.dz||{}).forEach(([z,v])=>{v=dzNorm(v);const d=dz[z]||{s:0},so=Object.assign({},d.so||{});
+     Object.entries(v.s||{}).forEach(([c,t])=>{if(c!==cid&&(t||0)>(so[c]||0))so[c]=t});
+     const n=Object.assign({},d,{so,e:Math.max(d.e||0,v.e||0),ok:d.ok||v.ok||0});if(JSON.stringify(n)!==JSON.stringify(d)){dz[z]=n;deg=true}});if(deg)AKLS.set('ak-dersz',dz)}
+  {const Y=AKLS.get('ak-ders-yer',{});let d=false;Object.entries(u.yer||{}).forEach(([f,v])=>{if(v&&(!Y[f]||(v.t||0)>(Y[f].t||0))){Y[f]=v;d=true}});if(d)AKLS.set('ak-ders-yer',Y)}
+  {const su={};Object.entries(u.sinav||{}).forEach(([id,m])=>{const r=Object.assign({},m);delete r[cid];if(Object.keys(r).length)su[id]=r});AKLS.set('ak-sinav-uzak',su)}
+  {const r=u.sayi,l=AKLS.get('ak-sayi',null);if(r&&(!l||(r.t||0)>(l.t||0))&&!(tab==='tekrar'&&S.view==='numq'))AKLS.set('ak-sayi',r)}}
 // Günün özeti (bildirim için): kaç iş kaldı, sıradaki ne
 function bgOzet(){try{if(!PLANJ)return null;const d=dueList().length,n=newList().length,B=bgDurum(d,n);const say=[...B.isler,...(B.hs?B.uzun:[])],kalan=say.filter(i=>!B.bitti(i));
   return {tarih:bgGun(),kalan:kalan.length,toplam:say.length,dk:kalan.reduce((a,i)=>a+(i.dk||0),0),sira:kalan[0]?String(kalan[0].ad).replace(/[*_`]/g,''):'',gun:B.aktif?B.gi+1:0,t:Date.now()}}catch(e){return null}}
 function senkDurum(){if(!SENK)SENK={sha:null,son:'',yaziyor:false,tekrar:false,zaman:null,sonYaz:0,sonCek:0,durum:'',hata:''};return SENK}
 async function senkCek(){const S_=senkDurum();if(!GH.ok())return;try{const f=await senkDosya('durum.json');S_.sha=f.sha;S_.sonCek=Date.now();
-    if(f.veri){if(f.veri.P){merge(f.veri.P);P.hk=P.hk||[];(f.veri.P.hk||[]).forEach(h=>{if(!P.hk.some(x=>x.id===h.id))P.hk.push(h)});fill();saveLocal();hkYukle()}bgBirlestir(f.veri.bugun);S_.uzak=f.veri.yerel||null;yerelUygula(f.veri.yerel)}S_.durum='ok';S_.hata=''}
+    if(f.veri){if(f.veri.P){merge(f.veri.P);P.hk=P.hk||[];(f.veri.P.hk||[]).forEach(h=>{if(!P.hk.some(x=>x.id===h.id))P.hk.push(h)});fill();saveLocal();hkYukle()}bgBirlestir(f.veri.bugun);S_.uzak=f.veri.yerel||null;S_.uzakOzet=f.veri.ozet||null;yerelUygula(f.veri.yerel)}S_.durum='ok';S_.hata=''}
   catch(e){S_.durum='hata';S_.hata=e.message}}
 async function senkYaz(){const S_=senkDurum();if(!GH.ok())return;if(S_.yaziyor&&Date.now()-(S_.yazBas||0)<60000){S_.tekrar=true;return}S_.yaziyor=true;S_.yazBas=Date.now();
-  try{for(let dene=0;dene<3;dene++){const ozet=bgOzet(),yerel=yerelBirles(S_.uzak,yerelTopla()),govde={surum:1,P,bugun:AKLS.get('ak-bugun',null),ozet,yerel,cihaz:cihaz().ad,t:Date.now()};
+  // özet planla hesaplanır (plan yüklenmemişse önce yüklenir); yine de hesaplanamazsa öteki cihazın özeti korunur (bildirim boş özete bakıp "hiç çalışmadın" demesin)
+  try{try{await bgPlanHazir()}catch(e){}
+    for(let dene=0;dene<3;dene++){const ozet=bgOzet()||S_.uzakOzet||null,yerel=yerelBirles(S_.uzak,yerelTopla()),govde={surum:1,P,bugun:AKLS.get('ak-bugun',null),ozet,yerel,cihaz:cihaz().ad,t:Date.now()};
       const imza=JSON.stringify([P,govde.bugun,ozet&&[ozet.tarih,ozet.kalan,ozet.sira],yerel]);if(imza===S_.son&&S_.sha)break;
       try{const r=await senkYazDosya('durum.json',govde,S_.sha,'Eşitleme: '+cihaz().ad);S_.sha=r.content.sha;S_.son=imza;S_.uzak=yerel;S_.sonYaz=Date.now();S_.durum='ok';S_.hata='';break}
       catch(e){if(/^(409|422)/.test(e.message)||(/^404/.test(e.message)&&S_.sha)){await senkCek();continue}throw e}}}
@@ -1568,9 +1605,9 @@ function nNorm(s,k){s=String(s).toLowerCase().replace(/dollars?|\$|cents?|¢/g,'
   const d=s.replace(/\D/g,'');return k==='t'?d:(d.replace(/^0+(?=\d)/,'')||(d?'0':''))}
 const nShow=x=>x.k==='p'?x.a+' $':x.a;
 function nPlay(x,slow){const e=(slow&&NIDX['1.4|'+x.t])||NIDX['1.0|'+x.t];if(e)playClip('n.mp3',e[0],e[1])}
-function nStats(k){let n=0,ok=0;NUMS.forEach(x=>{if((k==='mix'||x.k===k)&&P.nm[x.id]){n+=P.nm[x.id][0];ok+=P.nm[x.id][1]}});return [n,ok]}
+function nStats(k){let n=0,ok=0;NUMS.forEach(x=>{const r=(k==='mix'||x.k===k)&&nmSay(x.id);if(r){n+=r[0];ok+=r[1]}});return [n,ok]}
 function rNumPick(){const F=S.nf||(S.nf={k:'mix',n:20,which:'all'});
-  const pool=()=>NUMS.filter(x=>(F.k==='mix'||x.k===F.k)&&(F.which!=='hard'||(P.nm[x.id]&&P.nm[x.id][1]<P.nm[x.id][0])));
+  const pool=()=>NUMS.filter(x=>(F.k==='mix'||x.k===F.k)&&(F.which!=='hard'||(()=>{const r=nmSay(x.id);return !!(r&&r[1]<r[0])})()));
   const xs=pool(),last=(P.nlog||[]).slice(-1)[0];
   $('screen').innerHTML=`<div class="top"><button class="icon" id="bk" aria-label="Geri">${I.back}</button><h1 class="grow">Sayı dinle</h1></div>
    <p class="muted">Bir sayı, fiyat, saat ya da telefon numarası duyacaksın. Rakamla yaz. İstediğin kadar tekrar dinleyebilirsin; yanlış yaptıkların turun sonunda bir kez daha gelir ve sonraki turlarda daha sık çıkar.</p>
@@ -1584,10 +1621,10 @@ function rNumPick(){const F=S.nf||(S.nf={k:'mix',n:20,which:'all'});
   const seg=(id,key,num)=>$(id).onclick=e=>{const b=e.target.closest('[data-'+key+']');if(!b)return;F[{k:'k',w:'which',n:'n'}[key]]=num?+b.dataset[key]:b.dataset[key];rNumPick()};
   seg('nk','k');seg('nw','w');seg('nn','n',1);
   if($('nres'))$('nres').onclick=()=>{const r=AKLS.get('ak-sayi',null);ctx();pack('n.mp3');S={view:'numq',ns:r.ns,phase:'q',val:'',played:false};render()};
-  $('ngo').onclick=()=>{const BW={n:1,b:1,p:1.4,h:1,t:.6,d:1};const cand=pool().map(x=>{const r=P.nm[x.id];let w=(F.k==='mix'?BW[x.k]:1)*(r?(r[1]<r[0]?3:.7):1.3);if(x.k==='n'&&NHARD.has(+x.a))w*=2;return {x,w:w*(-Math.log(Math.random()))}});
+  $('ngo').onclick=()=>{const BW={n:1,b:1,p:1.4,h:1,t:.6,d:1};const cand=pool().map(x=>{const r=nmSay(x.id);let w=(F.k==='mix'?BW[x.k]:1)*(r?(r[1]<r[0]?3:.7):1.3);if(x.k==='n'&&NHARD.has(+x.a))w*=2;return {x,w:w*(-Math.log(Math.random()))}});
     const q=cand.sort((a,b)=>a.w-b.w).slice(0,F.n).map(o=>o.x.id);numStart(q,F.k)}}
 function numStart(q,k){ctx();pack('n.mp3');S={view:'numq',ns:{q,i:0,n:q.length,ok:0,wrong:[],k,done:{}},phase:'q',val:'',played:false};render()}
-function rNumQ(){const N=S.ns;if(N.i<N.q.length)AKLS.set('ak-sayi',{ns:N,t:Date.now()});else AKLS.del('ak-sayi');
+function rNumQ(){const N=S.ns;if(N.i<N.q.length)AKLS.set('ak-sayi',{ns:N,t:Date.now()});else if(AKLS.get('ak-sayi',{}).ns)AKLS.set('ak-sayi',{t:Date.now()});
   if(N.i>=N.q.length){const pct=Math.round(100*N.ok/N.n);
     if(!N.logged){N.logged=true;P.nlog.push({t:Date.now(),k:N.k,n:N.n,ok:N.ok});P.nlog=P.nlog.slice(-200);const dk=dayKey(Date.now());if(!P.days.includes(dk))P.days.push(dk);scheduleWrite();try{bgIsaretle((it,gn,gi)=>it.ac==='sayi'&&gn<=gi,true)}catch(e){}}
     const W=N.wrong.map(id=>NUMS.find(x=>x.id===id));
@@ -1608,7 +1645,7 @@ function rNumQ(){const N=S.ns;if(N.i<N.q.length)AKLS.set('ak-sayi',{ns:N,t:Date.
   $('nq').onclick=()=>{stopAudio();N.q=N.q.slice(0,N.i);N.n=Math.min(N.n,Object.keys(N.done).length);rNumQ()};
   $('np').onclick=()=>nPlay(x);$('nps').onclick=()=>nPlay(x,true);
   const judge=v=>{S.val=v;S.ok=!!v.trim()&&nNorm(v,x.k)===nNorm(x.a,x.k);const r=P.nm[x.id]||[0,0];
-    if(!N.done[x.id]){N.done[x.id]=1;P.nm[x.id]=[r[0]+1,r[1]+(S.ok?1:0)];if(S.ok)N.ok++;else{N.wrong.push(x.id);N.q.push(x.id)}}
+    if(!N.done[x.id]){N.done[x.id]=1;P.nm[x.id]=[r[0]+1,r[1]+(S.ok?1:0)];sayacEkle('nmd',x.id,S.ok);if(S.ok)N.ok++;else{N.wrong.push(x.id);N.q.push(x.id)}}
     else if(S.ok)P.nm[x.id]=[r[0],r[1]];scheduleWrite();S.phase='a';rNumQ();if(!S.ok)setTimeout(()=>nPlay(x),250)};
   if($('nans')){const i=$('nans');setTimeout(()=>{try{i.focus({preventScroll:true})}catch(e){}},30);i.oninput=()=>{S.val=i.value};i.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();if(i.value.trim())judge(i.value)}}}
   if($('nchk'))$('nchk').onclick=()=>{const v=$('nans').value;if(v.trim())judge(v)};
@@ -1752,7 +1789,7 @@ function rDone(){const s=S.last,more=dueList().length+newList().length,test=s.ki
 
 /* ================= TEKRAR: progress & records ================= */
 function rStats(){
-  const days=[...Array(14)].map((_,i)=>{const t=Date.now()-(13-i)*DAY,k=dayKey(t),d=P.daily[k]||[0,0];return {k,t,n:d[0],ok:d[1]}});const mx=Math.max(10,...days.map(d=>d.n));
+  const days=[...Array(14)].map((_,i)=>{const t=Date.now()-(13-i)*DAY,k=dayKey(t),d=gunSay(k);return {k,t,n:d[0],ok:d[1]}});const mx=Math.max(10,...days.map(d=>d.n));
   const byM={};P.log.forEach(l=>{const a=byM[l.m]||(byM[l.m]=[0,0]);a[0]++;if(l.r!=='no')a[1]++});
   const hard=Object.keys(P.c).filter(id=>byId[id]&&(P.c[id].no||0)>0).sort((a,b)=>(P.c[b].no-(P.c[b].ok||0)*.3)-(P.c[a].no-(P.c[a].ok||0)*.3)).slice(0,12);
   const recent=P.log.slice(-25).reverse();
@@ -1823,5 +1860,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=eb5cf4eebf').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=1689031cf1').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>

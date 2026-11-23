@@ -1,4 +1,4 @@
-const VER='eb5cf4eebf',CORE='core-'+VER,MEDIA='media-'+VER;
+const VER='1689031cf1',CORE='core-'+VER,MEDIA='media-'+VER;
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CORE).then(c=>c.addAll(['./','index.html','fsrs.js','marked.js','manifest.webmanifest','icon-180.png'])))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CORE&&k!==MEDIA&&!k.startsWith('ext')).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET')return;
