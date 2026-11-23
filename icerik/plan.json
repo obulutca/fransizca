@@ -18,13 +18,13 @@
     {"id": "u8g1-k2", "tur": "ders", "ad": "Konu 2: imparfait, geçmişin fotoğrafı", "not": "Fikir → Örnek → Kural → Kendini dene", "dk": 25, "ac": "ders:u08-gecmiste-tasvir.md#b2"},
     {"id": "u8g1-oku", "tur": "dinleme", "ad": "Hikâye: *Le Petit Chaperon rouge*", "not": "Oku-Dinle · önce dinle, sonra oku", "dk": 15, "ac": "oku"}],
    "uzun": [
-    {"id": "u8g1-cal", "tur": "alistirma", "ad": "Çalışma kitabı A: imparfait çekimi", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma"},
+    {"id": "u8g1-cal", "tur": "alistirma", "ad": "Çalışma kitabı A: imparfait çekimi", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma#a"},
     {"id": "u8g1-tel", "tur": "konusma", "ad": "Telaffuz: je parle / je parlais / j'ai parlé", "dk": 10, "ac": "telaffuz"}]},
   {"ozet": "Konu 3 imparfait ne zaman? · çalışma A · *Au poste de police*",
    "isler": [
     {"id": "u8g2-kart", "tur": "kart", "ad": "Kartlar: günlük tekrar", "dk": 10, "ac": "kart"},
     {"id": "u8g2-k3", "tur": "ders", "ad": "Konu 3: imparfait ne zaman kullanılır?", "not": "tasvir · alışkanlık · süren eylem", "dk": 25, "ac": "ders:u08-gecmiste-tasvir.md#b3"},
-    {"id": "u8g2-cal", "tur": "alistirma", "ad": "Çalışma kitabı A: imparfait çekimi", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma"},
+    {"id": "u8g2-cal", "tur": "alistirma", "ad": "Çalışma kitabı A: imparfait çekimi", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma#a"},
     {"id": "u8g2-oku", "tur": "dinleme", "ad": "Hikâye: *Au poste de police*", "not": "Oku-Dinle", "dk": 15, "ac": "oku"}],
    "uzun": [
     {"id": "u8g2-ser", "tur": "alistirma", "ad": "Serbest çalış: Ünite 8 kartları", "dk": 15, "ac": "serbest:8"},
@@ -33,7 +33,7 @@
    "isler": [
     {"id": "u8g3-kart", "tur": "kart", "ad": "Kartlar: günlük tekrar", "dk": 10, "ac": "kart"},
     {"id": "u8g3-k4", "tur": "ders", "ad": "Konu 4: passé composé ve imparfait birlikte", "not": "arka plan + olay", "dk": 30, "ac": "ders:u08-gecmiste-tasvir.md#b4"},
-    {"id": "u8g3-cal", "tur": "alistirma", "ad": "Çalışma kitabı B: hangi zaman?", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma"}],
+    {"id": "u8g3-cal", "tur": "alistirma", "ad": "Çalışma kitabı B: hangi zaman?", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma#b"}],
    "uzun": [
     {"id": "u8g3-oku", "tur": "dinleme", "ad": "Hikâyeyi tekrar dinle: *Le Petit Chaperon rouge*", "not": "imparfait ve passé composé'yi ayır", "dk": 15, "ac": "oku"},
     {"id": "u8g3-ser", "tur": "alistirma", "ad": "Serbest çalış: Ünite 8 kartları", "dk": 15, "ac": "serbest:8"}]},
@@ -44,7 +44,7 @@
     {"id": "u8g4-k6", "tur": "ders", "ad": "Konu 6: şehirde ulaşım ve prendre", "dk": 20, "ac": "ders:u08-gecmiste-tasvir.md#b6"},
     {"id": "u8g4-oku", "tur": "dinleme", "ad": "Gerçek metin: *Annonce dans le métro*", "not": "Oku-Dinle", "dk": 10, "ac": "oku"}],
    "uzun": [
-    {"id": "u8g4-cal", "tur": "alistirma", "ad": "Çalışma kitabı C ve D: yol ve ulaşım", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma"},
+    {"id": "u8g4-cal", "tur": "alistirma", "ad": "Çalışma kitabı C ve D: yol ve ulaşım", "not": "anında düzeltme · puansız", "dk": 15, "ac": "calisma:u08-calisma#c,d"},
     {"id": "u8g4-kon", "tur": "konusma", "ad": "Konuşma: evinden metroya yolu tarif et", "dk": 10, "ac": "ders:u08-gecmiste-tasvir.md#b5"}]},
   {"ozet": "**Ödev** (süresiz, ses 3 kez) · hata kartları",
    "isler": [
