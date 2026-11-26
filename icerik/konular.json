@@ -1195,6 +1195,166 @@
    ]
   },
   {
+   "id": "tanimlama",
+   "ad": "İnsan tanımlama",
+   "ozet": "être grand; avoir les cheveux longs; karakter",
+   "grup": "Ünite 9 · Sıfatlar ve tanımlama",
+   "ders": [
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b2",
+     "ad": "Konu 2 · İnsanları tanımlamak: dış görünüş"
+    },
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b3",
+     "ad": "Konu 3 · Karakter ve duygular"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u09-calisma",
+     "bolum": "b1",
+     "ad": "B1. être mi, avoir mı, porter mı?"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "b2",
+     "ad": "B2. Bir insanı tanımla"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "c1",
+     "ad": "C1. Karakter: zıttını yaz"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "c2",
+     "ad": "C2. Karakter cümleleri"
+    }
+   ]
+  },
+  {
+   "id": "sifat_uyum2",
+   "ad": "Sıfat uyumu (düzensiz)",
+   "ozet": "heureuse, sportive, belle, blanche",
+   "grup": "Ünite 9 · Sıfatlar ve tanımlama",
+   "ders": [
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b4",
+     "ad": "Konu 4 · Sıfat uyumu: düzensiz dişiller ve çoğullar"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u09-calisma",
+     "bolum": "d1",
+     "ad": "D1. Dişilini yaz"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "d2",
+     "ad": "D2. Uyumu yap"
+    }
+   ]
+  },
+  {
+   "id": "sifat_yer",
+   "ad": "Sıfatın yeri",
+   "ozet": "une robe rouge, une petite ville, un vieil ami",
+   "grup": "Ünite 9 · Sıfatlar ve tanımlama",
+   "ders": [
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b5",
+     "ad": "Konu 5 · Sıfatın yeri: önce mi, sonra mı?"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u09-calisma",
+     "bolum": "e1",
+     "ad": "E1. Önde mi, arkada mı?"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "e2",
+     "ad": "E2. Sıfatı yerine koy"
+    }
+   ]
+  },
+  {
+   "id": "kiyafet",
+   "ad": "Kıyafet ve renkler",
+   "ozet": "porter / mettre; une robe noire",
+   "grup": "Ünite 9 · Sıfatlar ve tanımlama",
+   "ders": [
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b6",
+     "ad": "Konu 6 · Kıyafet ve renkler: porter, mettre"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u09-calisma",
+     "bolum": "f1",
+     "ad": "F1. Kıyafetler"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "f2",
+     "ad": "F2. Kıyafet + renk"
+    },
+    {
+     "id": "u09-calisma",
+     "bolum": "f3",
+     "ad": "F3. porter mı, mettre mi?"
+    }
+   ]
+  },
+  {
+   "id": "karsilastirma",
+   "ad": "Karşılaştırma",
+   "ozet": "plus / moins / aussi … que; meilleur",
+   "grup": "Ünite 9 · Sıfatlar ve tanımlama",
+   "ders": [
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b7",
+     "ad": "Konu 7 · Karşılaştırma: plus, moins, aussi … que"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u09-calisma",
+     "bolum": "g",
+     "ad": "G. Karşılaştırma"
+    }
+   ]
+  },
+  {
+   "id": "magaza",
+   "ad": "Mağazada ve kışın",
+   "ozet": "Je cherche…; Quelle taille ?; très / trop",
+   "grup": "Ünite 9 · Sıfatlar ve tanımlama",
+   "ders": [
+    {
+     "dosya": "u09-sifatlar-tanimlama.md",
+     "b": "b8",
+     "ad": "Konu 8 · Kanada'da hayat: kışa göre giyinmek ve mağazada"
+    }
+   ],
+   "calisma": [
+    {
+     "id": "u09-calisma",
+     "bolum": "h",
+     "ad": "H. Mağazada ve kışın"
+    }
+   ]
+  },
+  {
    "id": "dinleme_sayi",
    "ad": "Dinlemede sayılar",
    "ozet": "fiyat, saat, tarih, telefon: sayı bitene kadar yazma",

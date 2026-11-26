@@ -1,12 +1,12 @@
 {
  "aciklama": "Çalış ekranının planı (Adım 10: gün yok, bölüm var). surum 2. durum: \"bekle\" (yeni ünite için \"geçelim\" bekleniyor; bekle listesi serbest öneri) ya da \"aktif\" (bolumler: [{id, ad, ozet, kart: [kart etiketi…], isler: [{id, tur, ad, ac, dk, not}]}]). Bölümler sırayla açılır; İlknur onaylı olarak erken açabilir, geri kilitleyebilir. Kilitli bölümün kart etiketleri yeni kart sırasına girmez. tur: ders | video | kelime | alistirma | kart | dinleme | konusma | odev | test. ac: ders:<dosya.md>#bN | calisma:<id>#a[,b] | kart:<etiket,…> | sinav:<id> | oku | sayi | telaffuz | serbest:<ünite> | kart",
  "surum": 2,
- "unite": 8,
- "baslik": "Ünite 8",
- "durum": "bekle",
- "bekle_baslik": "Ünite 9 hazırlanıyor",
- "ozet": "Ünite 8 bitti · değerlendirme İlerleme'de",
- "not": "Önce dersler yenileniyor: Ünite 1–7 eski PDF kılavuzlar kadar dolu olacak (kelime tabloları, okunuş, Türkçe, videolar). Sonra Ünite 9, ardından genel A1. Bu arada aşağıdakilerden istediğini yap.",
+ "unite": 9,
+ "baslik": "Ünite 9 · İnsanları ve kıyafetleri anlatmak",
+ "durum": "aktif",
+ "bekle_baslik": "Ünite 10 hazırlanıyor",
+ "ozet": "",
+ "not": "Her konuda önce videoyu izle, sonra dersi oku. Bölümler sırayla açılır; istersen ileri bir bölümü erkenden açabilirsin.",
  "bekle": [
   {
    "id": "b-kart",
@@ -39,5 +39,328 @@
    "ac": "sayi"
   }
  ],
- "bolumler": []
+ "bolumler": [
+  {
+   "id": "u9b1",
+   "ad": "Başlangıç: kelimeler ve Ünite 8 tekrarı",
+   "ozet": "yeni kelimeler, aynı sesli sonlar",
+   "kart": [
+    "duzelt9"
+   ],
+   "isler": [
+    {
+     "id": "u9-1a",
+     "tur": "kelime",
+     "ad": "Yeni kelimeler (hepsine bir göz at, sesli dinle)",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b0",
+     "dk": 25
+    },
+    {
+     "id": "u9-1b",
+     "tur": "ders",
+     "ad": "Konu 1: Ünite 8'den kalan, aynı sesli sonlar",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b1",
+     "dk": 15,
+     "not": "video + Kendini dene"
+    },
+    {
+     "id": "u9-1c",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı A",
+     "ac": "calisma:u09-calisma#a",
+     "dk": 10
+    },
+    {
+     "id": "u9-1d",
+     "tur": "kart",
+     "ad": "Tekrar kartları (Ü8 düzeltmeleri)",
+     "ac": "kart:duzelt9",
+     "dk": 5
+    }
+   ]
+  },
+  {
+   "id": "u9b2",
+   "ad": "Dış görünüş",
+   "ozet": "être grand, avoir les cheveux longs",
+   "kart": [
+    "tanim"
+   ],
+   "isler": [
+    {
+     "id": "u9-2a",
+     "tur": "ders",
+     "ad": "Konu 2: insanları tanımlamak",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b2",
+     "dk": 30,
+     "not": "önce video"
+    },
+    {
+     "id": "u9-2b",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı B1–B2",
+     "ac": "calisma:u09-calisma#b1,b2",
+     "dk": 20
+    },
+    {
+     "id": "u9-2c",
+     "tur": "kart",
+     "ad": "Dış görünüş kartları",
+     "ac": "kart:tanim",
+     "dk": 15
+    }
+   ]
+  },
+  {
+   "id": "u9b3",
+   "ad": "Karakter ve duygular",
+   "ozet": "zıt çiftler, un peu / très / trop",
+   "kart": [
+    "karakter"
+   ],
+   "isler": [
+    {
+     "id": "u9-3a",
+     "tur": "ders",
+     "ad": "Konu 3: karakter ve duygular",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b3",
+     "dk": 25,
+     "not": "önce video"
+    },
+    {
+     "id": "u9-3b",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı C1–C2",
+     "ac": "calisma:u09-calisma#c1,c2",
+     "dk": 15
+    },
+    {
+     "id": "u9-3c",
+     "tur": "kart",
+     "ad": "Karakter kartları",
+     "ac": "kart:karakter",
+     "dk": 15
+    }
+   ]
+  },
+  {
+   "id": "u9b4",
+   "ad": "Sıfat uyumu ve yeri",
+   "ozet": "heureuse, belle; une robe rouge, un vieil ami",
+   "kart": [
+    "uyum9"
+   ],
+   "isler": [
+    {
+     "id": "u9-4a",
+     "tur": "ders",
+     "ad": "Konu 4: düzensiz dişiller ve çoğullar",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b4",
+     "dk": 25
+    },
+    {
+     "id": "u9-4b",
+     "tur": "ders",
+     "ad": "Konu 5: sıfat önde mi arkada mı?",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b5",
+     "dk": 20
+    },
+    {
+     "id": "u9-4c",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı D1–D2",
+     "ac": "calisma:u09-calisma#d1,d2",
+     "dk": 15
+    },
+    {
+     "id": "u9-4d",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı E1–E2",
+     "ac": "calisma:u09-calisma#e1,e2",
+     "dk": 15
+    },
+    {
+     "id": "u9-4e",
+     "tur": "kart",
+     "ad": "Uyum ve yer kartları",
+     "ac": "kart:uyum9",
+     "dk": 10
+    }
+   ]
+  },
+  {
+   "id": "u9b5",
+   "ad": "Kıyafet ve renkler",
+   "ozet": "porter / mettre; une robe noire",
+   "kart": [
+    "kiyafet",
+    "renk"
+   ],
+   "isler": [
+    {
+     "id": "u9-5a",
+     "tur": "ders",
+     "ad": "Konu 6: kıyafet ve renkler",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b6",
+     "dk": 30,
+     "not": "iki video"
+    },
+    {
+     "id": "u9-5b",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı F1–F3",
+     "ac": "calisma:u09-calisma#f1,f2,f3",
+     "dk": 20
+    },
+    {
+     "id": "u9-5c",
+     "tur": "kart",
+     "ad": "Kıyafet ve renk kartları",
+     "ac": "kart:kiyafet,renk",
+     "dk": 20
+    },
+    {
+     "id": "u9-5d",
+     "tur": "dinleme",
+     "ad": "Hikâye: *Cendrillon*",
+     "ac": "oku",
+     "dk": 15,
+     "not": "önce dinle, sonra oku"
+    }
+   ]
+  },
+  {
+   "id": "u9b6",
+   "ad": "Karşılaştırma",
+   "ozet": "plus / moins / aussi … que, meilleur",
+   "kart": [
+    "karsilastirma"
+   ],
+   "isler": [
+    {
+     "id": "u9-6a",
+     "tur": "ders",
+     "ad": "Konu 7: karşılaştırma",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b7",
+     "dk": 25
+    },
+    {
+     "id": "u9-6b",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı G",
+     "ac": "calisma:u09-calisma#g",
+     "dk": 15
+    },
+    {
+     "id": "u9-6c",
+     "tur": "kart",
+     "ad": "Karşılaştırma kartları",
+     "ac": "kart:karsilastirma",
+     "dk": 5
+    }
+   ]
+  },
+  {
+   "id": "u9b7",
+   "ad": "Kanada'da kış ve mağaza",
+   "ozet": "Je cherche…, Quelle taille ?, très / trop",
+   "kart": [
+    "magaza"
+   ],
+   "isler": [
+    {
+     "id": "u9-7a",
+     "tur": "ders",
+     "ad": "Konu 8: kışa göre giyinmek ve mağazada",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b8",
+     "dk": 25
+    },
+    {
+     "id": "u9-7b",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı H",
+     "ac": "calisma:u09-calisma#h",
+     "dk": 15
+    },
+    {
+     "id": "u9-7c",
+     "tur": "dinleme",
+     "ad": "Hikâye: *Au magasin de vêtements*",
+     "ac": "oku",
+     "dk": 15
+    },
+    {
+     "id": "u9-7d",
+     "tur": "dinleme",
+     "ad": "Gerçek metin: *Avertissement de froid extrême*",
+     "ac": "oku",
+     "dk": 10
+    },
+    {
+     "id": "u9-7e",
+     "tur": "kart",
+     "ad": "Mağaza kartları",
+     "ac": "kart:magaza",
+     "dk": 5
+    }
+   ]
+  },
+  {
+   "id": "u9b8",
+   "ad": "Konuşma ve büyük tekrar",
+   "ozet": "ailenden birini 2 dakika anlat",
+   "isler": [
+    {
+     "id": "u9-8a",
+     "tur": "konusma",
+     "ad": "Konuşma: ailenden iki kişiyi anlat (kaydet, 2 dk)",
+     "ac": "ders:u09-sifatlar-tanimlama.md#b10",
+     "dk": 20,
+     "not": "iskelet derste"
+    },
+    {
+     "id": "u9-8b",
+     "tur": "alistirma",
+     "ad": "Çalışma kitabı I: büyük tablo",
+     "ac": "calisma:u09-calisma#i",
+     "dk": 20
+    },
+    {
+     "id": "u9-8c",
+     "tur": "kart",
+     "ad": "Serbest çalış: Ünite 9 kartları",
+     "ac": "serbest:9",
+     "dk": 15
+    }
+   ]
+  },
+  {
+   "id": "u9odev",
+   "ad": "Ödev",
+   "isler": [
+    {
+     "id": "u9-odev",
+     "tur": "odev",
+     "ad": "Ünite 9 ödevi",
+     "ac": "sinav:u09-odev",
+     "dk": 75,
+     "not": "süresiz · sessiz odada kaydet"
+    }
+   ]
+  },
+  {
+   "id": "u9test",
+   "ad": "Test",
+   "isler": [
+    {
+     "id": "u9-test",
+     "tur": "test",
+     "ad": "Ünite 9 testi",
+     "ac": "sinav:u09-test",
+     "dk": 60,
+     "not": "TCF biçimi · süreli"
+    }
+   ]
+  }
+ ]
 }
