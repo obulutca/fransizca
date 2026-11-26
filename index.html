@@ -436,6 +436,22 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-block}
 .bg-plan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.875rem}
 .bg-plan li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px}
 .bg-plan li b{color:var(--muted)} .bg-plan li.bu b{color:var(--accent)}
+/* Ünite yolu (Adım 10): bölümler sırayla açılır, istenirse erken açılır, geri kilitlenir */
+.yol-ust{display:flex;justify-content:space-between;align-items:center;margin:2px 0 -6px}
+.yol-ust .bg-b{margin:0}
+.yol{display:flex;flex-direction:column;gap:10px}
+.yol-b{border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+.yol-bas{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:12px 16px}
+.yol-no{width:32px;height:32px;border-radius:99px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.875rem;background:var(--soft);color:var(--muted)}
+.yol-ad{display:flex;flex-direction:column;gap:2px;min-width:0}
+.yol-ad b{line-height:1.3}
+.yol-say{font-variant-numeric:tabular-nums;white-space:nowrap}
+.yol-b .bg-isler{border:0;border-top:1px solid var(--line);border-radius:0}
+.yol-b.simdi{border:2px solid var(--accent)} .yol-b.simdi .yol-no{background:var(--accent);color:var(--accent-ink)}
+.yol-b.tamam .yol-no{background:var(--good-bg);color:var(--good)}
+.yol-b.tamam .yol-ad b{color:var(--muted)}
+.yol-b.kilitli{background:var(--soft);border-style:dashed}
+.yol-b.kilitli .yol-ad b{color:var(--muted)}
 @media (min-width:900px){
   .bg-izgara{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
   .bg-top h1{font-size:2rem}
@@ -450,6 +466,15 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-block}
 .ak-blok.dene{border-left-color:var(--good)} .ak-blok.dene>.ak-etiket{background:var(--good-bg);color:var(--good)}
 .ak-blok.dikkat{border-left-color:var(--bad);background:var(--bad-bg)} .ak-blok.dikkat>.ak-etiket{background:var(--surface);color:var(--bad)}
 .ak-blok p{margin:.45em 0} .ak-blok table{margin:.5em 0}
+.ak-blok.video{border-left-color:#d93025} .ak-blok.video>.ak-etiket{background:#fde8e7;color:#b3261e}
+.ak-blok.podcast{border-left-color:#7b4fd6} .ak-blok.podcast>.ak-etiket{background:#efe8fc;color:#5b34b0}
+.ak-blok.konus{border-left-color:var(--accent)} .ak-blok.konus>.ak-etiket{background:var(--accent);color:#fff}
+.ak-video{position:relative;aspect-ratio:16/9;max-width:720px;border-radius:12px;overflow:hidden;background:#000;margin:.6em 0 .3em}
+.ak-video iframe,.ak-video-kapak{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ak-video-kapak{padding:0;margin:0;cursor:pointer;background:#000;display:block}
+.ak-video-kapak img{width:100%;height:100%;object-fit:cover;opacity:.88;display:block}
+.ak-video-oynat{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:48px;border-radius:14px;background:#e62117;color:#fff;font-size:22px;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.ak-video-kapak:hover .ak-video-oynat{background:#ff0000}
 .ak-formul{font-weight:700;text-align:center;background:var(--soft);border-radius:10px;padding:10px;margin:.4em 0 .8em!important}
 .ak-formul code{font-family:var(--ui);font-size:1rem;background:none}
 .ak-ders-md code{font-family:var(--ui);font-weight:700;background:var(--soft);border-radius:6px;padding:1px 6px}
@@ -518,7 +543,7 @@ button.panel.kh-giris:hover{border-color:var(--accent)}
   <div id="playerSlot"></div>
   <nav class="nav" id="nav" aria-label="Bölümler">
     <div class="nav-marka" aria-hidden="true"><i>F</i>Fransızca Akademi</div>
-    <button data-tab="tekrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Bugün</button>
+    <button data-tab="tekrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Çalış</button>
     <button data-tab="ders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7M8 11h7"/></svg>Dersler</button>
     <button data-tab="sinav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg>Sınavlar</button>
     <button data-tab="oku"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2z"/><path d="M22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg>Oku-Dinle</button>
@@ -742,7 +767,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='86bb26d242';
+const AKV='e586e897f9';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -857,7 +882,7 @@ async function A_dersAc(){const un=DIDX.uniteler.find(u=>u.ders===AD.dosya);if(!
 const DERSSN=20;
 function dersTakip(dosya,body,hs){const sc=$('screen'),tocA=[...document.querySelectorAll('#aktoc a')];
   // ✓: bölüm okundu ya da Bugün'deki ders işi bitti olarak işaretli
-  const planOk=i=>{try{const k=AKLS.get('ak-bugun',null);return !!(PLANJ&&k&&k.bitti&&(PLANJ.gunler||[]).some(g=>[...g.isler,...(g.uzun||[])].some(it=>it.tur==='ders'&&it.ac==='ders:'+dosya+'#b'+i&&k.bitti[it.id])))}catch(e){return false}};
+  const planOk=i=>{try{const k=AKLS.get('ak-bugun',null);return !!(PLANJ&&k&&k.bitti&&yolBolumler().some(b=>b.isler.some(it=>/^(ders|video)$/.test(it.tur)&&it.ac==='ders:'+dosya+'#b'+i&&k.bitti[it.id])))}catch(e){return false}};
   const isaret=dz=>tocA.forEach((a,i)=>a.classList.toggle('okundu',!!(dz[dosya+'#b'+i]&&dz[dosya+'#b'+i].ok)||planOk(i)));isaret(AKLS.get('ak-dersz',{}));bgPlanHazir().then(()=>isaret(AKLS.get('ak-dersz',{})));
   const tik=setInterval(()=>{if(tab!=='ders'||AD.view!=='ders'||AD.dosya!==dosya||!body.isConnected){clearInterval(tik);return}
     if(document.visibilityState!=='visible')return;
@@ -866,19 +891,27 @@ function dersTakip(dosya,body,hs){const sc=$('screen'),tocA=[...document.querySe
       const bas=h.getBoundingClientRect().top-r0.top,son=(hs[i+1]?hs[i+1].getBoundingClientRect().top:body.getBoundingClientRect().bottom)-r0.top;
       if(bas<vh*.75&&son>vh*.25){d.s=(d.s||0)+1;deg=true}
       if(son<=vh+8&&!d.e){d.e=1;deg=true}
-      if(d.e&&(d.s||0)+Object.values(d.so||{}).reduce((a,b)=>a+b,0)>=DERSSN){d.ok=Date.now();deg=true;senkPlanla(3000);bgIsaretle(it=>it.tur==='ders'&&it.ac==='ders:'+dosya+'#b'+i)}
+      if(d.e&&(d.s||0)+Object.values(d.so||{}).reduce((a,b)=>a+b,0)>=DERSSN){d.ok=Date.now();deg=true;senkPlanla(3000);bgIsaretle(it=>it.ac==='ders:'+dosya+'#b'+i)}
       dz[z]=d});
-    if(deg){AKLS.set('ak-dersz',dz);isaret(dz)}},1000)}
+    if(deg){AKLS.set('ak-dersz',dz);isaret(dz);aktifIsaretle()}},1000)}
 
 /* --- Ders biçimi: "> **Fikir**" gibi başlayan alıntılar renkli kutu olur; Kendini dene'deki {{cevap}} anında kontrol edilen kutucuk olur.
    Cevapta (e), (s), (es) gibi kısa parantezler isteğe bağlı; "|" ile birden çok doğru cevap. Aksan eksikliği hata sayılmaz (yalnız hatırlatılır). --- */
 const dersOn=md=>String(md).replace(/\{\{(.+?)\}\}/g,(_,c)=>`<span class="dene-cvp" data-c="${encodeURIComponent(c)}"></span>`);
-const BLOKTUR=[[/^Fikir/,'fikir'],[/^Çözümlü/,'ornek'],[/^Kural/,'kural'],[/^Kendini dene/,'dene'],[/^Dikkat/,'dikkat']];
+const BLOKTUR=[[/^Fikir/,'fikir'],[/^Çözümlü/,'ornek'],[/^Kural/,'kural'],[/^Kendini dene/,'dene'],[/^Dikkat/,'dikkat'],[/^Video/,'video'],[/^Podcast/,'podcast'],[/^Konuş/,'konus']];
+// "> **Video**" kutusundaki YouTube bağlantısı dokununca oynayan kapak olur (iframe ancak dokununca yüklenir: telefonda veri harcamaz)
+const ytId=u=>(/(?:[?&]v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/.exec(u)||[])[1];
+function dersVideolar(body){
+  body.querySelectorAll('.ak-blok.video a[href*="youtu"]').forEach(a=>{const id=ytId(a.href),p=a.closest('p');if(!id||!p||p.previousElementSibling?.classList.contains('ak-video'))return;
+    const v=document.createElement('div');v.className='ak-video';v.innerHTML=`<button class="ak-video-kapak" data-yt="${id}" aria-label="Videoyu oynat: ${esc(a.textContent)}"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><span class="ak-video-oynat">▶</span></button>`;p.before(v)});
+  body.addEventListener('click',e=>{const b=e.target.closest('.ak-video-kapak');if(!b)return;const f=document.createElement('iframe');
+    f.src=`https://www.youtube-nocookie.com/embed/${b.dataset.yt}?autoplay=1&rel=0&playsinline=1&cc_load_policy=1`;f.title='YouTube video';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;b.replaceWith(f)});
+  body.querySelectorAll('a[href^="http"]').forEach(a=>{a.target='_blank';a.rel='noopener'})}
 function deneSecenek(s){const out=[];(function g(t){const m=/\(([a-zà-ÿ]{1,3})\)/i.exec(t);if(!m){out.push(t);return}g(t.slice(0,m.index)+m[1]+t.slice(m.index+m[0].length));g(t.slice(0,m.index)+t.slice(m.index+m[0].length))})(s);return out}
 const deneNorm=(s,aksan)=>{s=String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s+([?!:;])/g,'$1').replace(/\s+/g,' ').trim().replace(/[.!?]+$/,'').trim();
   return aksan?s:s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/œ/g,'oe')};
 function deneKontrol(inp){const cv=JSON.parse(inp.dataset.c),v=inp.value,g=inp.parentNode.querySelector('.dene-geri'),q=inp.closest('li')||inp.parentNode;
-  if(!v.trim()){q.classList.remove('ok','no');g.textContent='';return}
+  if(!v.trim()){q.classList.remove('ok','no');g.textContent='';return}aktifIsaretle();
   const tum=cv.flatMap(deneSecenek),tam=tum.some(a=>deneNorm(a,true)===deneNorm(v,true)),yakin=tum.some(a=>deneNorm(a)===deneNorm(v));
   q.classList.toggle('ok',yakin);q.classList.toggle('no',!yakin);
   g.innerHTML=yakin?(tam?'✓ Doğru':'✓ Doğru · aksanlara bak: <b>'+esc(cv[0])+'</b>'):'Doğrusu: <b>'+esc(cv[0])+'</b>'}
@@ -887,6 +920,7 @@ function dersBloklar(body){
     if(!f||f.tagName!=='P'||!s||s.tagName!=='STRONG'||f.textContent.trim()!==s.textContent.trim())return;const ad=s.textContent.trim(),t=BLOKTUR.find(([r])=>r.test(ad));if(!t)return;
     bq.className='ak-blok '+t[1];f.className='ak-etiket';f.textContent=ad;
     bq.querySelectorAll('p').forEach(p=>{if(p.firstChild&&p.firstChild.nodeName==='CODE')p.classList.add('ak-formul')})});
+  dersVideolar(body);
   body.querySelectorAll('.dene-cvp').forEach(sp=>{const cv=decodeURIComponent(sp.dataset.c).split('|').map(x=>x.trim()),li=sp.closest('li');if(li)li.classList.add('dene-q');
     const w=document.createElement('span');w.className='dene-g';w.innerHTML=`<input class="dene-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Cevabın"><span class="dene-geri" aria-live="polite"></span>`;
     w.firstChild.dataset.c=JSON.stringify(cv);sp.replaceWith(w)});
@@ -903,7 +937,7 @@ let SIDXA=null;const EXC={};
 const xKey=id=>'ak-x-'+id;
 async function exLoad(id){if(!EXC[id])EXC[id]=jget('icerik/sinavlar/'+id+'.json');return EXC[id]}
 function xState(id){return AKLS.get(xKey(id),null)}
-function xSave(st){st.t=Date.now();AKLS.set(xKey(st.id),st);if(/-calisma$/.test(st.id||''))senkPlanla()}
+function xSave(st){st.t=Date.now();AKLS.set(xKey(st.id),st);aktifIsaretle();if(/-calisma$/.test(st.id||''))senkPlanla()}
 const TURAD={sinav:'Sınav',odev:'Ödev',alistirma:'Alıştırma'};
 // Öteki cihazda başlatılan / teslim edilen sınav ve ödev (cevaplar ve ses kayıtları o cihazda kalır; burada yalnız durumu görünür)
 function sinavUzak(id){const m=AKLS.get('ak-sinav-uzak',{})[id];if(!m)return null;const v=Object.values(m);return v.find(x=>x.gonderildi)||v.sort((a,b)=>(b.t||0)-(a.t||0))[0]||null}
@@ -1131,54 +1165,61 @@ async function xPackage(EX,st){const stamp=new Date().toISOString().slice(0,16).
     bolumler:EX.bolumler.map(b=>({id:b.id,tip:b.tip,ad:b.ad,sure:b.sure||null,kapanis:st.son[b.id]?new Date(st.son[b.id]).toISOString():null})),cevaplar:st.ans,dinleme:st.dinle,kayitlar:kay},null,1);
   return {stamp,files,json}}
 
-/* =============== BUGÜN (Tekrar sekmesinin ana ekranı): ünitenin 6 günlük planı, tek "Başla" ===============
-   Plan: icerik/plan.json. durum "bekle" → her gün "bekle" işleri; "aktif" → gunler[i].isler (+ hafta sonu uzun).
-   Gün takvime değil işe göre ilerler: bugünkü gün = temel işleri bitmemiş ilk gün (atlanan gün kayar).
-   Biten işler ak-bugun'da (eşitlenir). Kendiliğinden biten işler: kart (bugün 30 cevap ya da günlük oturum bitti), "ders:<dosya>#bN"
-   (bölüm okundu: dersTakip), "calisma:<id>#a" ya da "#c,d" (bölüm kontrol edildi), "oku" (hikâye Sorular'a geldi), "sayi" (bir tur bitti),
-   telaffuz/serbest (açılan iş, oturum bitti), "sinav:<id>" (gönderildi). Konuşma gibi anlaşılamayanlar dönüşte "bitti mi?" diye sorulur. */
+/* =============== ÇALIŞ (Tekrar sekmesinin ana ekranı): ünite yolu, tek "Devam et" ===============
+   Adım 10 (25 Kasım 2026): gün yok, bölüm var; tempo İlknur'un. Plan: icerik/plan.json.
+   durum "bekle" → "bekle" listesi serbest öneri olarak görünür. "aktif" → bolumler[] = {id, ad, ozet, kart:[etiket…], isler:[…]}.
+   Bölüm i açık: ilk bölümse, önceki bölüm bittiyse ya da elle açıldıysa (k.ac[id] > k.kap[id]). Elle açmak, geri kilitlemek
+   ve "Hepsini aç" onay sorar. Yeni kartlar da bölümle açılır: kilitli bölümün "kart" etiketlerindeki kartlar yeni kart sırasına girmez.
+   Biten işler ak-bugun'da (eşitlenir). Kendiliğinden biten işler: "ders:<dosya>#bN" (bölüm okundu), "calisma:<id>#a" ya da "#c,d"
+   (bölüm kontrol edildi), "oku" (hikâye Sorular'a geldi), "sayi" (bir tur), "kart:<etiket,…>" (o kartların hepsi en az bir kez
+   çalışıldı), "sinav:<id>" (gönderildi). Konuşma gibi anlaşılamayanlar dönüşte "bitti mi?" diye sorulur. Eski biçim (gunler) bölüme çevrilir. */
 let PLANJ=null,PLANY=false;
-const GUNAD=['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'],GUNK=['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
-const ISTUR={kart:'Kart',ders:'Ders',alistirma:'Alıştırma',dinleme:'Dinleme',odev:'Ödev',test:'Test',konusma:'Konuşma'};
+const ISTUR={kart:'Kart',ders:'Ders',video:'Video',kelime:'Kelime',alistirma:'Alıştırma',dinleme:'Dinleme',odev:'Ödev',test:'Test',konusma:'Konuşma'};
 function bgYukle(){if(PLANY)return;PLANY=true;jget('icerik/plan.json').then(j=>{PLANJ=j;if(tab==='tekrar'&&S.view==='home')render()}).catch(()=>{PLANY=false})}
 const bgGun=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
-function bgKayit(){const k=AKLS.get('ak-bugun',null),pid=PLANJ?PLANJ.unite+'|'+PLANJ.durum:'';return k&&k.plan===pid?k:{plan:pid,bitti:{},gun:{},acik:null}}
-const bgOto=it=>it.ac==='kart'||/^sinav:/.test(it.ac||'');
-// Kart işi: bugün en az KARTHEDEF kart cevaplandıysa, günlük tekrar oturumu bittiyse ya da tekrar edilecek kart kalmadıysa biter
-const KARTHEDEF=30;
+function yolBolumler(){if(!PLANJ)return [];if(Array.isArray(PLANJ.bolumler))return PLANJ.bolumler;
+  return (PLANJ.gunler||[]).map((g,i)=>({id:'g'+(i+1),ad:'Bölüm '+(i+1),ozet:g.ozet||'',isler:[...(g.isler||[]),...(g.uzun||[])]}))}
+function bgKayit(){const k=AKLS.get('ak-bugun',null),pid=PLANJ?PLANJ.unite+'|'+PLANJ.durum:'',o=k&&k.plan===pid?k:{plan:pid,bitti:{},acik:null};
+  o.bitti=o.bitti||{};o.ac=o.ac||{};o.kap=o.kap||{};return o}
+const bgOto=it=>/^(sinav|kart):/.test(it.ac||'');
 // Alıştırma bölümü kontrol edildi mi (plan: "calisma:u08-calisma#a" ya da "#c,d")
 const calBitti=(s,b)=>!!((s.chkB&&s.chkB[b])||Object.keys(s.chk||{}).some(q=>q.startsWith(b)&&/^\d+$/.test(q.slice(b.length))));
-function bgDurum(d,n){const k=bgKayit(),bk=bgGun(),hs=[0,6].includes(new Date().getDay()),G=(PLANJ&&PLANJ.gunler)||[],aktif=PLANJ&&PLANJ.durum==='aktif'&&G.length>0;
-  const kartBugun=d+n===0||gunSay(dayKey(Date.now()))[0]>=KARTHEDEF;
-  // kendiliğinden anlaşılan işler: kart, gönderilen ya da değerlendirilen sınav/ödev, kontrol edilen alıştırma bölümü
-  const oto=it=>{const a=it.ac||'';let m;if(a==='kart')return kartBugun;
-    if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]),u=sinavUzak(m[1]);return !!((s&&s.gonderildi)||(u&&u.gonderildi)||(AKCACHE().sonuclar||[]).some(r=>r.id===m[1]))}
-    if((m=/^calisma:([^#]+)#(.+)$/.exec(a))){const s=xState(m[1]);return !!s&&m[2].split(',').every(b=>calBitti(s,b.trim()))}
-    return false};
-  const bitti=it=>oto(it)||(aktif?!!k.bitti[it.id]:!!(k.gun[bk]&&k.gun[bk][it.id]));
-  let gi=0,isler=[],uzun=[];
-  if(aktif){gi=G.findIndex(g=>!g.isler.every(bitti));if(gi<0)gi=G.length;else{isler=G[gi].isler;uzun=G[gi].uzun||[]}}
-  else if(PLANJ)isler=PLANJ.bekle||[];
-  // kendiliğinden biten işler kalıcı (ve eşitlenen) "bitti" olur; kart işi bugüne kadarki günler için (ertesi gün de bitmiş sayılır)
-  const yeni=[];if(aktif){G.forEach((g,gn)=>[...g.isler,...(g.uzun||[])].forEach(it=>{if(k.bitti[it.id]||(it.ac==='kart'&&gn>gi)||!oto(it))return;k.bitti[it.id]=Date.now();yeni.push(it)}));
+// "kart:imparfait,yol" → bu ünitenin o etiketli kartları
+const kartEtiket=a=>{const m=/^kart:(.+)$/.exec(a||'');return m?m[1].split(',').map(x=>x.trim()).filter(Boolean):null};
+const etiketKartlari=ts=>CARDS.filter(c=>PLANJ&&c.u===PLANJ.unite&&c.tag!=='yapi'&&ts.includes(c.tag));
+function isOto(it){const a=it.ac||'';let m;
+  if((m=/^sinav:(.+)$/.exec(a))){const s=xState(m[1]),u=sinavUzak(m[1]);return !!((s&&s.gonderildi)||(u&&u.gonderildi)||(AKCACHE().sonuclar||[]).some(r=>r.id===m[1]))}
+  if((m=/^calisma:([^#]+)#(.+)$/.exec(a))){const s=xState(m[1]);return !!s&&m[2].split(',').every(b=>calBitti(s,b.trim()))}
+  const ts=kartEtiket(a);if(ts){const cs=etiketKartlari(ts);return cs.length>0&&cs.every(c=>P.c[c.id])}
+  return false}
+function bgDurum(){const k=bgKayit(),B=yolBolumler(),aktif=!!(PLANJ&&PLANJ.durum==='aktif'&&B.length);
+  const bitti=it=>!!k.bitti[it.id]||isOto(it);
+  // kendiliğinden biten işler kalıcı (ve eşitlenen) "bitti" olur
+  const yeni=[];if(aktif){B.forEach(b=>b.isler.forEach(it=>{if(!k.bitti[it.id]&&isOto(it)){k.bitti[it.id]=Date.now();yeni.push(it)}}));
     if(yeni.length){if(k.acik&&yeni.some(i=>i.id===k.acik.id))k.acik=null;k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla(2000)}}
-  return {k,bk,hs,G,aktif,gi,isler,uzun,bitti,yeni}}
+  const tamam=B.map(b=>b.isler.length>0&&b.isler.every(bitti)),elle=b=>(k.ac[b.id]||0)>(k.kap[b.id]||0);
+  const sirali=B.map((b,i)=>i===0||tamam[i-1]),acik=B.map((b,i)=>sirali[i]||elle(b));
+  const sira=B.findIndex((b,i)=>acik[i]&&!tamam[i]);   // Devam et: açık ve bitmemiş ilk bölüm
+  return {k,B,aktif,bitti,tamam,sirali,acik,elle,sira,yeni}}
+// Yeni kart sırası için kilitli bölümlerin kart etiketleri (template.html → newList)
+function kapaliEtiketler(){try{if(!PLANJ||PLANJ.durum!=='aktif')return null;const D=bgDurum(),ac=new Set(),kap=new Set();
+  D.B.forEach((b,i)=>(b.kart||[]).forEach(t=>(D.acik[i]?ac:kap).add(t)));ac.forEach(t=>kap.delete(t));return kap.size?{u:PLANJ.unite,t:kap}:null}catch(e){return null}}
 async function bgPlanHazir(){if(!PLANJ){try{PLANJ=await jget('icerik/plan.json');PLANY=true}catch(e){}}return PLANJ}
-// Bir iş yapılınca Bugün'deki karşılığı kalıcı "bitti" olur ve eşitlenir. sec(iş, gün no, bugünkü gün no); tek: yalnız ilk eşleşen
+// Bir iş yapılınca yoldaki karşılığı kalıcı "bitti" olur ve eşitlenir. sec(iş, bölüm no, Devam et'in bölüm no); tek: yalnız ilk eşleşen
 async function bgIsaretle(sec,tek){if(!await bgPlanHazir()||PLANJ.durum!=='aktif')return;
-  const B=bgDurum(dueList().length,newList().length),k=B.k,yeni=[...B.yeni];
-  B.G.some((g,gn)=>[...g.isler,...(g.uzun||[])].some(it=>{if(k.bitti[it.id]||!sec(it,gn,B.gi))return false;k.bitti[it.id]=Date.now();yeni.push(it);return !!tek}));
+  const D=bgDurum(),k=D.k,yeni=[...D.yeni],si=D.sira<0?D.B.length:D.sira;
+  D.B.some((b,bi)=>b.isler.some(it=>{if(k.bitti[it.id]||!sec(it,bi,si))return false;k.bitti[it.id]=Date.now();yeni.push(it);return !!tek}));
   if(!yeni.length)return;if(k.acik&&yeni.some(i=>i.id===k.acik.id))k.acik=null;k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla(1500);
-  toast('✓ Bugünkü iş bitti: '+[...new Set(yeni.map(i=>String(i.ad).replace(/[*_`]/g,'')))].join(' · '));if(tab==='tekrar'&&S.view==='home')render()}
-// Kart oturumu bitince: günlük tekrar → kart işi; serbest çalışma / telaffuz → açık olan iş
-function bgOturumBitti(s){if(s.kind==='daily')return bgIsaretle((it,gn,gi)=>it.ac==='kart'&&gn<=gi,true);
-  const k=AKLS.get('ak-bugun',null),a=k&&k.acik&&k.acik.id;if(a)return bgIsaretle(it=>it.id===a&&(it.ac==='telaffuz'||/^serbest:/.test(it.ac||'')),true)}
-// Hikâye bitince (Sorular adımı ya da Bitirdim): adı geçen hikâyenin işi, yoksa bugüne kadarki ilk hikâye işi
+  toast('✓ Bitti: '+[...new Set(yeni.map(i=>String(i.ad).replace(/[*_`]/g,'')))].join(' · '));if(tab==='tekrar'&&S.view==='home')render()}
+// Kart oturumu bitince: yoldan açılan serbest çalışma / telaffuz / kart işi biter
+function bgOturumBitti(s){const k=AKLS.get('ak-bugun',null),a=k&&k.acik&&k.acik.id;if(a)return bgIsaretle(it=>it.id===a&&(it.ac==='telaffuz'||it.ac==='kart'||/^serbest:/.test(it.ac||'')),true)}
+// Hikâye bitince (Sorular adımı ya da Bitirdim): adı geçen hikâyenin işi, yoksa sıradaki bölüme kadarki ilk hikâye işi
 const yalin=s=>String(s||'').replace(/[*_`]/g,'').toLowerCase();
 function okuBitti(baslik){const b=yalin(baslik);
-  return bgIsaretle((it,gn,gi)=>it.ac==='oku'&&(yalin(it.ad).includes(b)||(gn<=gi&&!BOOK.some(x=>yalin(it.ad).includes(yalin(x.title))))),true)}
-// Yarım kalan iş: Bugün'de "yarım" notu ve "Devam et" düğmesi; açınca kaldığı yerden sürer
-function bgYarim(it){try{const a=it.ac||'';let m;
+  return bgIsaretle((it,bi,si)=>it.ac==='oku'&&(yalin(it.ad).includes(b)||(bi<=si&&!BOOK.some(x=>yalin(it.ad).includes(yalin(x.title))))),true)}
+// Yarım kalan iş: yolda "yarım" notu; Devam et kaldığı yerden açar
+function bgYarim(it){try{const a=it.ac||'';let m;const ts=kartEtiket(a);
+  if(ts){const cs=etiketKartlari(ts),g=cs.filter(c=>P.c[c.id]).length;return g&&g<cs.length?`${g} / ${cs.length} kart görüldü`:''}
   if(a==='kart'){const s=[P.sess,P.sd].find(x=>sessCanli(x)&&x.kind==='daily');return s&&s.i>0?`${s.i} / ${s.q.length} kart yapıldı`:''}
   if((m=/^ders:([^#]+)#b(\d+)$/.exec(a))){const y=AKLS.get('ak-ders-yer',{})[m[1]],z=AKLS.get('ak-dersz',{})[m[1]+'#b'+m[2]];return (y&&y.b===+m[2]&&y.r>.03)||(z&&z.s>0)?'yarım kaldı':''}
   if((m=/^calisma:([^#]+)#(.+)$/.exec(a))){const s=xState(m[1]),bs=m[2].split(',').map(x=>x.trim());if(!s||!s.ans)return '';
@@ -1188,29 +1229,43 @@ function bgYarim(it){try{const a=it.ac||'';let m;
     const u=sinavUzak(m[1]);return u&&!u.gonderildi?'devam ediyor ('+cihazda(u.ad)+')':''}
   if(a==='sayi'){const r=AKLS.get('ak-sayi',null);return r&&r.ns&&r.ns.i<r.ns.q.length?`${r.ns.i} / ${r.ns.q.length} yapıldı`:''}
   return ''}catch(e){return ''}}
-function bgPlanHtml(d,n){bgYukle();if(!PLANJ)return '';const B=bgDurum(d,n),{isler,uzun,aktif,gi,G,k,hs,bitti}=B;
-  const sayilan=[...isler,...(hs?uzun:[])],kalan=sayilan.filter(i=>!bitti(i)),sira=kalan[0]||(!hs&&uzun.find(i=>!bitti(i)));
-  const dk=kalan.reduce((a,i)=>a+(i.dk||0),0),yuz=sayilan.length?Math.round((sayilan.length-kalan.length)/sayilan.length*100):0;
-  const acik=k.acik&&[...isler,...uzun].find(i=>i.id===k.acik.id&&!bitti(i)&&!bgOto(i));
-  let no=0;const satir=it=>{no++;const b=bitti(it),s=it===sira,y=!b&&bgYarim(it);
-    return `<li class="${b?'bitti':s?'sira':''}"><button class="bg-d" data-bit="${esc(it.id)}" ${/^sinav:/.test(it.ac||'')?'disabled title="Gönderince kendiliğinden işaretlenir"':''} aria-label="${b?'Yapılmadı olarak işaretle':'Bitti olarak işaretle'}">${b?'✓':no}</button>
-     <button class="bg-is" data-ac="${esc(it.id)}"><span class="t">${mdi(it.ad)}</span><span class="s"><span class="bg-tur ${esc(it.tur)}">${ISTUR[it.tur]||esc(it.tur)}</span>${y?`<span class="bg-yarim">${esc(y)}</span>`:''}${it.not?`<span>${mdi(it.not)}</span>`:''}</span></button><span class="dk">${it.dk?it.dk+' dk':''}</span></li>`};
-  const bas=aktif?(gi<G.length?`${esc(PLANJ.baslik||'Ünite '+PLANJ.unite)} · Gün ${gi+1} / ${G.length}`:`${esc(PLANJ.baslik||'Ünite '+PLANJ.unite)} · plan bitti`):esc(PLANJ.bekle_baslik||PLANJ.baslik||'');
-  return `<section class="bg-kahraman"><div class="bg-ust"><h2>${bas}</h2><span class="small muted">${aktif||sayilan.length?`${sayilan.length-kalan.length} / ${sayilan.length} iş bitti${dk?' · ≈ '+dk+' dk kaldı':''}`:''}${!aktif&&PLANJ.ozet?`<br>${esc(PLANJ.ozet)}`:''}</span></div>
-     ${sayilan.length?`<div class="bg-ilerle"><span style="width:${yuz}%"></span></div>`:''}
-     ${!aktif&&PLANJ.not?`<div class="bg-not">${mdi(PLANJ.not)}</div>`:''}
-     ${acik?`<div class="bg-sor"><span class="grow">“${mdi(acik.ad)}” bitti mi?</span><button class="btn sm" data-bit="${esc(acik.id)}">Bitti ✓</button><button class="btn sm" data-ac="${esc(acik.id)}">Devam et</button></div>`:''}
-     ${sira?(()=>{const y=bgYarim(sira);return `<button class="bg-basla" data-ac="${esc(sira.id)}"><span class="o">▶</span><span><b>${y?'Kaldığın yerden devam et':'Başla'}</b><small>${y?'Yarım kalan':'Sıradaki'}: ${ISTUR[sira.tur]?ISTUR[sira.tur]+' · ':''}${mdi(sira.ad)}${y?' ('+esc(y)+')':sira.dk?' (≈ '+sira.dk+' dk)':''}</small></span></button>`})()
-       :`<div class="ak-note ok"><b>Bugünkü işler bitti.</b> İstersen aşağıdan ek çalışma yapabilirsin.</div>`}</section>
-   ${isler.length?`<div class="bg-b">Bugünkü işler</div><ol class="bg-isler">${isler.map(satir).join('')}</ol>`:''}
-   ${uzun.length?`<div class="bg-b">${hs?'Uzun gün eki (hafta sonu)':'Vaktin olursa (hafta sonu işleri)'}</div><ol class="bg-isler">${uzun.map(satir).join('')}</ol>`:''}`}
-function bgGunlerHtml(){if(!PLANJ||PLANJ.durum!=='aktif'||!(PLANJ.gunler||[]).length)return '';const B=bgDurum(1,1),G=B.G;
-  return `<div class="panel bg-gunler"><b>${esc(PLANJ.baslik||'Ünite '+PLANJ.unite)} · ${G.length} gün</b><div class="bg-serit">${G.map((g,i)=>`<div class="${i<B.gi?'ok':i===B.gi?'bu':''}"><b>${i+1}</b>${i<B.gi?'✓':i===B.gi?'bugün':''}</div>`).join('')}</div>
-    <ol class="bg-plan">${G.map((g,i)=>`<li class="${i===B.gi?'bu':''}"><b>Gün ${i+1}</b><span>${mdi(g.ozet||g.isler.map(x=>x.ad).join(' · '))}</span></li>`).join('')}</ol>
-    <div class="muted small">Hafta içi kısa gün ≈ 1 saat, hafta sonu uzun gün ≈ 2 saat. Bir gün kaçarsa plan kayar.</div></div>`}
-function bgAc(it,d,n){const a=it.ac||'';let m;
+// Bugün hiç çalışıldı mı (bildirim için): kart cevabı, ders okuma, alıştırma, Kendini dene, hikâye, sınav
+function aktifIsaretle(){const g=bgGun(),a=AKLS.get('ak-aktif',null);if(!a||a.gun!==g){AKLS.set('ak-aktif',{gun:g,t:Date.now()});senkPlanla()}}
+function bugunCalisti(){const a=AKLS.get('ak-aktif',null),dk=dayKey(Date.now());return !!((a&&a.gun===bgGun())||gunSay(dk)[0]>0||(P.days||[]).includes(dk))}
+const isSatir=(it,no,D,sira)=>{const b=D?D.bitti(it):false,y=!b&&bgYarim(it),kilitli=D===null;
+  return `<li class="${b?'bitti':it===sira?'sira':''}">${D?`<button class="bg-d" data-bit="${esc(it.id)}" ${bgOto(it)?'disabled title="Yapınca kendiliğinden işaretlenir"':''} aria-label="${b?'Yapılmadı olarak işaretle':'Bitti olarak işaretle'}">${b?'✓':no}</button>`:`<span class="bg-d" aria-hidden="true">${kilitli?'·':no}</span>`}
+   <button class="bg-is" data-ac="${esc(it.id)}"><span class="t">${mdi(it.ad)}</span><span class="s"><span class="bg-tur ${esc(it.tur)}">${ISTUR[it.tur]||esc(it.tur)}</span>${y?`<span class="bg-yarim">${esc(y)}</span>`:''}${it.not?`<span>${mdi(it.not)}</span>`:''}</span></button><span class="dk">${it.dk?it.dk+' dk':''}</span></li>`};
+function bgPlanHtml(){bgYukle();if(!PLANJ)return '';const D=bgDurum(),bas=esc(PLANJ.baslik||'Ünite '+PLANJ.unite);
+  if(!D.aktif){const L=PLANJ.bekle||[];
+    return `<section class="bg-kahraman"><div class="bg-ust"><h2>${esc(PLANJ.bekle_baslik||PLANJ.baslik||'')}</h2>${PLANJ.ozet?`<span class="small muted">${esc(PLANJ.ozet)}</span>`:''}</div>
+      ${PLANJ.not?`<div class="bg-not">${mdi(PLANJ.not)}</div>`:''}</section>
+      ${L.length?`<div class="bg-b">Bu arada istersen</div><ol class="bg-isler">${L.map((it,i)=>isSatir(it,i+1,null,null)).join('')}</ol>`:''}`}
+  const {B,tamam,acik,sirali,elle,sira,bitti,k}=D,top=B.reduce((a,b)=>a+b.isler.length,0),biten=B.reduce((a,b)=>a+b.isler.filter(bitti).length,0),yuz=top?Math.round(biten/top*100):0;
+  const sb=sira>=0?B[sira]:null,sIs=sb&&sb.isler.find(i=>!bitti(i)),bolBitti=tamam.filter(Boolean).length;
+  const acikIs=k.acik&&B.flatMap(b=>b.isler).find(i=>i.id===k.acik.id&&!bitti(i)&&!bgOto(i)),kilitli=B.filter((b,i)=>!acik[i]).length;
+  const ustBtn=sIs?(()=>{const y=bgYarim(sIs);return `<button class="bg-basla" data-ac="${esc(sIs.id)}"><span class="o">▶</span><span><b>${y?'Kaldığın yerden devam et':'Devam et'}</b><small>${esc(sb.ad)} · ${ISTUR[sIs.tur]?ISTUR[sIs.tur]+' · ':''}${mdi(sIs.ad)}${y?' ('+esc(y)+')':sIs.dk?' (≈ '+sIs.dk+' dk)':''}</small></span></button>`})()
+    :bolBitti===B.length?`<div class="ak-note ok"><b>Ünitenin bütün bölümleri bitti.</b> Değerlendirmeden sonra "geçelim" ile sonraki ünite açılır.</div>`
+    :`<div class="ak-note">Açık bölümlerin hepsi bitti. Sıradaki bölümün kilidini aşağıdan açabilirsin.</div>`;
+  const bolum=(b,i)=>{const t=tamam[i],a=acik[i],geriAl=a&&!sirali[i]&&elle(b)&&!t,n=b.isler.filter(bitti).length;
+    return `<section class="yol-b ${t?'tamam':a?(i===sira?'simdi':'acik'):'kilitli'}"><div class="yol-bas"><span class="yol-no">${t?'✓':a?i+1:'🔒'}</span>
+      <div class="yol-ad"><b>${mdi(b.ad)}</b>${b.ozet?`<span class="small muted">${mdi(b.ozet)}</span>`:''}</div>
+      <span class="small muted yol-say">${n} / ${b.isler.length}</span>
+      ${!a?`<button class="btn sm" data-yac="${esc(b.id)}">Kilidi aç</button>`:geriAl?`<button class="link small" data-ykap="${esc(b.id)}">Geri kilitle</button>`:''}</div>
+      ${a?`<ol class="bg-isler">${b.isler.map((it,j)=>isSatir(it,j+1,D,sIs)).join('')}</ol>`:''}</section>`};
+  return `<section class="bg-kahraman"><div class="bg-ust"><h2>${bas}</h2><span class="small muted">${bolBitti} / ${B.length} bölüm bitti · %${yuz}</span></div>
+     <div class="bg-ilerle"><span style="width:${yuz}%"></span></div>
+     ${PLANJ.not?`<div class="bg-not">${mdi(PLANJ.not)}</div>`:''}
+     ${acikIs?`<div class="bg-sor"><span class="grow">“${mdi(acikIs.ad)}” bitti mi?</span><button class="btn sm" data-bit="${esc(acikIs.id)}">Bitti ✓</button><button class="btn sm" data-ac="${esc(acikIs.id)}">Devam et</button></div>`:''}
+     ${ustBtn}</section>
+   <div class="yol-ust"><div class="bg-b">Bölümler</div>${kilitli?`<button class="link small" data-yhepsi="1">Hepsini aç</button>`:''}</div>
+   <div class="yol">${B.map(bolum).join('')}</div>`}
+function bgGunlerHtml(){return ''}
+function bgAc(it){const a=it.ac||'';let m;const ts=kartEtiket(a);
+  if(ts){const cs=etiketKartlari(ts);if(!cs.length)return toast('Bu bölümün kartı yok',true);
+    const yeni=cs.filter(c=>!P.c[c.id]),eski=cs.filter(c=>P.c[c.id]),q=[...yeni.map(c=>({id:c.id,m:'card',isNew:true})),...eski.map(c=>({id:c.id,m:pickMode(c)}))];
+    return startSession('practice',q)}
   if(a==='kart'){if(sessDevam('daily')){ctx();[...new Set(P.sess.q.map(x=>byId[x.id]&&byId[x.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));S={view:'session',phase:'q'};return render()}
-    if(d+n)startSession('daily',buildDaily());else toast('Bugünlük kart tekrarı bitti');return}
+    const q=buildDaily();if(q.length)startSession('daily',q);else toast('Şu an tekrar edilecek kart yok');return}
   if(a==='sayi'){ctx();pack('n.mp3');S={view:'num'};return render()}
   if(a==='telaffuz'){S={view:'free',preset:'speak'};return render()}
   if((m=/^serbest:(\d+)$/.exec(a))){S={view:'free',f:{units:[+m[1]],mode:'mix',n:20,which:'all'}};return render()}
@@ -1221,14 +1276,24 @@ function bgAc(it,d,n){const a=it.ac||'';let m;
   if(a==='oku'){const i=BOOK.findIndex(x=>yalin(it.ad).includes(yalin(x.title)));if(i<0){R={view:'lib'};return setTab('oku')}
     const pos=P.rpos[BOOK[i].title]||{};ctx();pack('s'+i+'.mp3');R={view:'story',i,step:pos.step||1,line:pos.line||0,playing:false,tr:false,slow:false,listens:0};return setTab('oku')}
   toast('Bu iş henüz bir ekrana bağlanmadı',true)}
-function bgBagla(d,n){if(!PLANJ)return;const B=bgDurum(d,n),hepsi=[...B.isler,...B.uzun];
-  $('screen').querySelectorAll('[data-bit]').forEach(x=>x.onclick=()=>{const k=bgKayit(),id=x.dataset.bit;
-    k.geri=k.geri||{};if(B.aktif){if(k.bitti[id]){delete k.bitti[id];k.geri[id]=Date.now()}else{k.bitti[id]=Date.now();delete k.geri[id]}}
-    else{const g=k.gun[B.bk]||(k.gun[B.bk]={}),gk=B.bk+'|'+id;if(g[id]){delete g[id];k.geri[gk]=Date.now()}else{g[id]=Date.now();delete k.geri[gk]}}
-    if(k.acik&&k.acik.id===id)k.acik=null;k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla(1500);render()});
+function bgBagla(){if(!PLANJ)return;const D=bgDurum(),hepsi=D.aktif?D.B.flatMap(b=>b.isler):(PLANJ.bekle||[]);
+  const kaydet=k=>{k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla(1500);render()};
+  $('screen').querySelectorAll('[data-bit]').forEach(x=>x.onclick=()=>{const k=bgKayit(),id=x.dataset.bit;k.geri=k.geri||{};
+    if(k.bitti[id]){delete k.bitti[id];k.geri[id]=Date.now()}else{k.bitti[id]=Date.now();delete k.geri[id]}if(k.acik&&k.acik.id===id)k.acik=null;kaydet(k)});
   $('screen').querySelectorAll('[data-ac]').forEach(x=>x.onclick=()=>{const it=hepsi.find(i=>i.id===x.dataset.ac);if(!it)return;
-    if(!bgOto(it)){const k=bgKayit();k.acik={id:it.id,gun:B.bk};k.acikT=k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla()}bgAc(it,d,n)})}
-function bgTarih(){const d=new Date(),hs=[0,6].includes(d.getDay());return `<span class="bg-tarih">${GUNAD[d.getDay()]}, ${d.getDate()} ${d.toLocaleDateString('tr-TR',{month:'long'})}</span><span class="ak-chip ${hs?'wait':''}">${hs?'Hafta sonu · uzun gün ≈ 2 saat':'Hafta içi · kısa gün ≈ 1 saat'}</span>`}
+    if(D.aktif&&!bgOto(it)){const k=bgKayit();k.acik={id:it.id};k.acikT=k.t=Date.now();AKLS.set('ak-bugun',k);senkPlanla()}bgAc(it)});
+  const ad=id=>{const b=D.B.find(x=>x.id===id);return b?String(b.ad).replace(/[*_`]/g,''):'bu bölüm'};
+  $('screen').querySelectorAll('[data-yac]').forEach(x=>x.onclick=()=>{const id=x.dataset.yac;
+    if(!confirm(`"${ad(id)}" bölümünü şimdi açmak istiyor musun?\n\nÖnceki bölümler bitmeden açılır; kartları da yeni kart sırasına girer. İstersen sonra geri kilitleyebilirsin.`))return;
+    const k=bgKayit();k.ac[id]=Date.now();kaydet(k)});
+  $('screen').querySelectorAll('[data-ykap]').forEach(x=>x.onclick=()=>{const id=x.dataset.ykap;
+    if(!confirm(`"${ad(id)}" bölümünü geri kilitleyelim mi?\n\nYaptıkların silinmez; sırası gelince yine açılır.`))return;
+    const k=bgKayit();k.kap[id]=Date.now();kaydet(k)});
+  $('screen').querySelectorAll('[data-yhepsi]').forEach(x=>x.onclick=()=>{const kil=D.B.filter((b,i)=>!D.acik[i]);
+    if(!confirm(`Kilitli ${kil.length} bölümün hepsini açmak istiyor musun?\n\nSıra beklemeden hepsine girebilirsin; kartları da açılır. Her bölümü sonra tek tek geri kilitleyebilirsin.`))return;
+    const k=bgKayit(),t=Date.now();kil.forEach(b=>{k.ac[b.id]=t});kaydet(k)})}
+// Başlık yanındaki not: bugün çalışıldıysa küçük bir onay (gün planı yok)
+function bgTarih(){return bugunCalisti()?`<span class="ak-chip ok">Bugün çalıştın ✓</span>`:''}
 
 /* =============== KONUM: kaldığın yer ===============
    iPhone uygulamayı arka planda kapatabiliyor; yeni sürüm gelince sayfa yenileniyor. Her çizimde nerede olduğun (sekme, ders ve
@@ -1251,7 +1316,7 @@ function yenilemeUygun(){konumKaydet();return !(tab==='sinav'&&AS.view==='kos')&
    Gizli depodaki "senkron" dalında durum.json: kartlar (P), Bugün işleri ve günün özeti. Her cihaz açılışta, öne gelince ve birkaç
    dakikada bir çeker ve birleştirir; değişiklik olunca (en fazla 2 dakikada bir, arka plana geçerken ve iş bitince hemen) yazar.
    Aynı anda iki cihaz yazarsa (sha çakışması) yeniden çekip birleştirir ve tekrar dener. Bildirim abonelikleri: senkron/bildirim/<cihaz>.json.
-   Akşam 18:00 ve 20:00'de gizli depodaki GitHub Actions işi (araclar/bildirim.py) özeti okur; işler bitmediyse bildirim gönderir. */
+   Akşam 18:00 ve 20:00'de gizli depodaki GitHub Actions işi (araclar/bildirim.py) özeti okur; o gün hiç çalışılmadıysa bildirim gönderir. */
 var SENK=null;
 const VAPID_PUB='BDu0TAwIGG3_o5IIQCQA4iXGPEY28XKKGMXNOysnjz1kuJI9wwpB1JrIDZWSofSF2XKBuk3yL5nriebvlgOXyF4';
 const SDAL='senkron';
@@ -1259,13 +1324,12 @@ const b64oku=s=>new TextDecoder().decode(Uint8Array.from(atob(String(s||'').repl
 function cihaz(){let c=AKLS.get('ak-cihaz',null);if(!c){const u=navigator.userAgent;c={id:Math.random().toString(36).slice(2,10),ad:/iPhone/.test(u)?'iPhone':/iPad/.test(u)?'iPad':/Android/.test(u)?'Android':/Windows/.test(u)?'PC':/Mac/.test(u)?'Mac':'Cihaz'};AKLS.set('ak-cihaz',c)}return c}
 async function senkDosya(yol){const r=await GH.req('contents/'+yol+'?ref='+SDAL,{ok404:true,zaman:20000});return r?{sha:r.sha,veri:r.content?JSON.parse(b64oku(r.content)):null}:{sha:null,veri:null}}
 async function senkYazDosya(yol,veri,sha,msg){return GH.req('contents/'+yol,{method:'PUT',zaman:25000,body:JSON.stringify({message:msg,content:b64txt(JSON.stringify(veri)),branch:SDAL,sha:sha||undefined})})}
-// Bugün kayıtlarını birleştir: biten işler birleşir, günlük işler son 7 gün, açık iş en yenisi
+// Yol kayıtlarını birleştir: biten işler, elle açılan / kilitlenen bölümler (zamanı yeni olan) birleşir; açık iş en yenisi
 function bgBirlestir(u){if(!u||!u.plan)return;const k=AKLS.get('ak-bugun',null);if(!k||k.plan!==u.plan){if(!k||(u.t||0)>(k.t||0))AKLS.set('ak-bugun',u);return}
-  Object.entries(u.bitti||{}).forEach(([i,t])=>{k.bitti[i]=Math.max(k.bitti[i]||0,t||0)});Object.entries(u.gun||{}).forEach(([g,v])=>{const G=k.gun[g]||(k.gun[g]={});Object.entries(v||{}).forEach(([i,t])=>{G[i]=Math.max(G[i]||0,t||0)})});
+  const enBuyuk=(a,b)=>{const o=Object.assign({},a||{});Object.entries(b||{}).forEach(([i,t])=>{o[i]=Math.max(o[i]||0,t||0)});return o};
+  k.bitti=enBuyuk(k.bitti,u.bitti);k.ac=enBuyuk(k.ac,u.ac);k.kap=enBuyuk(k.kap,u.kap);
   // işareti kaldırma: kaldırma işaretlemeden yeniyse iş "yapılmadı" olur (iki cihazda da)
-  const geri=Object.assign({},k.geri||{});Object.entries(u.geri||{}).forEach(([i,t])=>{geri[i]=Math.max(geri[i]||0,t||0)});k.geri=geri;
-  Object.entries(geri).forEach(([i,t])=>{const p=i.indexOf('|');if(p>0){const g=i.slice(0,p),id=i.slice(p+1);if(k.gun[g]&&k.gun[g][id]&&k.gun[g][id]<t)delete k.gun[g][id]}else if(k.bitti[i]&&k.bitti[i]<t)delete k.bitti[i]});
-  const gs=Object.keys(k.gun).sort((a,b)=>new Date(b)-new Date(a));gs.slice(7).forEach(g=>delete k.gun[g]);
+  k.geri=enBuyuk(k.geri,u.geri);Object.entries(k.geri).forEach(([i,t])=>{if(k.bitti[i]&&k.bitti[i]<t)delete k.bitti[i]});delete k.gun;
   if(u.acik&&(!k.acik||(u.acikT||0)>(k.acikT||0))){k.acik=u.acik;k.acikT=u.acikT}k.t=Math.max(k.t||0,u.t||0);AKLS.set('ak-bugun',k)}
 // Cihazda duran ama öteki cihazda da gereken bilgiler: alıştırma cevapları (ak-x-*-calisma), Kendini dene cevapları, okunan ders bölümleri.
 // Birleştirme kayıpsız: cevaplar birleşir (aynı soruda yeni olan kalır), işaretler toplanır.
@@ -1299,9 +1363,9 @@ function yerelUygula(u){if(!u)return;const cid=cihaz().id;
   {const Y=AKLS.get('ak-ders-yer',{});let d=false;Object.entries(u.yer||{}).forEach(([f,v])=>{if(v&&(!Y[f]||(v.t||0)>(Y[f].t||0))){Y[f]=v;d=true}});if(d)AKLS.set('ak-ders-yer',Y)}
   {const su={};Object.entries(u.sinav||{}).forEach(([id,m])=>{const r=Object.assign({},m);delete r[cid];if(Object.keys(r).length)su[id]=r});AKLS.set('ak-sinav-uzak',su)}
   {const r=u.sayi,l=AKLS.get('ak-sayi',null);if(r&&(!l||(r.t||0)>(l.t||0))&&!(tab==='tekrar'&&S.view==='numq'))AKLS.set('ak-sayi',r)}}
-// Günün özeti (bildirim için): kaç iş kaldı, sıradaki ne
-function bgOzet(){try{if(!PLANJ)return null;const d=dueList().length,n=newList().length,B=bgDurum(d,n);const say=[...B.isler,...(B.hs?B.uzun:[])],kalan=say.filter(i=>!B.bitti(i));
-  return {tarih:bgGun(),kalan:kalan.length,toplam:say.length,dk:kalan.reduce((a,i)=>a+(i.dk||0),0),sira:kalan[0]?String(kalan[0].ad).replace(/[*_`]/g,''):'',gun:B.aktif?B.gi+1:0,t:Date.now()}}catch(e){return null}}
+// Günün özeti (bildirim için): bugün hiç çalışıldı mı, sıradaki iş ne. Bildirim yalnız hiç çalışılmayan günde gider.
+function bgOzet(){try{const D=PLANJ?bgDurum():null,sb=D&&D.aktif&&D.sira>=0?D.B[D.sira]:null,sIs=sb&&sb.isler.find(i=>!D.bitti(i));
+  return {tarih:bgGun(),calisti:bugunCalisti(),sira:sIs?String(sIs.ad).replace(/[*_`]/g,''):'',t:Date.now()}}catch(e){return null}}
 function senkDurum(){if(!SENK)SENK={sha:null,son:'',yaziyor:false,tekrar:false,zaman:null,sonYaz:0,sonCek:0,durum:'',hata:''};return SENK}
 async function senkCek(){const S_=senkDurum();if(!GH.ok())return;try{const f=await senkDosya('durum.json');S_.sha=f.sha;S_.sonCek=Date.now();
     if(f.veri){if(f.veri.P){merge(f.veri.P);P.hk=P.hk||[];(f.veri.P.hk||[]).forEach(h=>{if(!P.hk.some(x=>x.id===h.id))P.hk.push(h)});fill();saveLocal();hkYukle()}bgBirlestir(f.veri.bugun);S_.uzak=f.veri.yerel||null;S_.uzakOzet=f.veri.ozet||null;yerelUygula(f.veri.yerel)}S_.durum='ok';S_.hata=''}
@@ -1309,8 +1373,10 @@ async function senkCek(){const S_=senkDurum();if(!GH.ok())return;try{const f=awa
 async function senkYaz(){const S_=senkDurum();if(!GH.ok())return;if(S_.yaziyor&&Date.now()-(S_.yazBas||0)<60000){S_.tekrar=true;return}S_.yaziyor=true;S_.yazBas=Date.now();
   // özet planla hesaplanır (plan yüklenmemişse önce yüklenir); yine de hesaplanamazsa öteki cihazın özeti korunur (bildirim boş özete bakıp "hiç çalışmadın" demesin)
   try{try{await bgPlanHazir()}catch(e){}
-    for(let dene=0;dene<3;dene++){const ozet=bgOzet()||S_.uzakOzet||null,yerel=yerelBirles(S_.uzak,yerelTopla()),govde={surum:1,P,bugun:AKLS.get('ak-bugun',null),ozet,yerel,cihaz:cihaz().ad,t:Date.now()};
-      const imza=JSON.stringify([P,govde.bugun,ozet&&[ozet.tarih,ozet.kalan,ozet.sira],yerel]);if(imza===S_.son&&S_.sha)break;
+    for(let dene=0;dene<3;dene++){const ozet=bgOzet()||S_.uzakOzet||null,uo=S_.uzakOzet,yerel=yerelBirles(S_.uzak,yerelTopla());
+      if(ozet&&uo&&uo.tarih===ozet.tarih&&uo.calisti)ozet.calisti=true;   // öteki cihazda çalışıldıysa bu cihaz "çalışmadı" yazmasın
+      const govde={surum:1,P,bugun:AKLS.get('ak-bugun',null),ozet,yerel,cihaz:cihaz().ad,t:Date.now()};
+      const imza=JSON.stringify([P,govde.bugun,ozet&&[ozet.tarih,ozet.calisti,ozet.sira],yerel]);if(imza===S_.son&&S_.sha)break;
       try{const r=await senkYazDosya('durum.json',govde,S_.sha,'Eşitleme: '+cihaz().ad);S_.sha=r.content.sha;S_.son=imza;S_.uzak=yerel;S_.sonYaz=Date.now();S_.durum='ok';S_.hata='';break}
       catch(e){if(/^(409|422)/.test(e.message)||(/^404/.test(e.message)&&S_.sha)){await senkCek();continue}throw e}}}
   catch(e){S_.durum='hata';S_.hata=e.message}
@@ -1345,9 +1411,9 @@ async function bildirimKapat(){try{const reg=await navigator.serviceWorker.ready
   AKLS.set('ak-bildirim',{acik:false,t:Date.now()})}
 // Ayarlar ekranındaki "Eşitleme ve bildirimler" bölümü
 function senkAyarHtml(){const S_=senkDurum(),b=AKLS.get('ak-bildirim',{}),saat=t=>t?new Date(t).toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}):'—';
-  return `<div class="set"><label>Telefon ↔ bilgisayar eşitleme</label>${GH.ok()?`<div class="muted small">Kartların ve Bugün işlerin gizli GitHub deponla kendiliğinden eşitlenir (açılışta, uygulamaya dönünce, değişiklikten sonra). ${S_.durum==='hata'?`<span style="color:var(--bad)">Son deneme olmadı: ${esc(S_.hata)}</span>`:`Son çekme ${saat(S_.sonCek)} · son gönderme ${saat(S_.sonYaz)}`}</div>
+  return `<div class="set"><label>Telefon ↔ bilgisayar eşitleme</label>${GH.ok()?`<div class="muted small">Kartların ve ünite ilerlemen gizli GitHub deponla kendiliğinden eşitlenir (açılışta, uygulamaya dönünce, değişiklikten sonra). ${S_.durum==='hata'?`<span style="color:var(--bad)">Son deneme olmadı: ${esc(S_.hata)}</span>`:`Son çekme ${saat(S_.sonCek)} · son gönderme ${saat(S_.sonYaz)}`}</div>
      <div class="row"><button class="btn" id="senkSimdi">Şimdi eşitle</button></div>`:`<div class="muted small">Eşitleme için bu cihazda <b>İlerleme → Bağlantı</b> ekranından GitHub anahtarını gir (her cihazda bir kez).</div>`}</div>
-   <div class="set"><label>Bildirimler (18:00 ve 20:00)</label><div class="muted small">Günün işleri bitmemişse akşam 18:00'de ve 20:00'de bu cihaza bildirim gelir. İşler bittiyse gelmez. iPhone'da uygulama ana ekrana eklenmiş olmalı.</div>
+   <div class="set"><label>Bildirimler (18:00 ve 20:00)</label><div class="muted small">O gün hiç çalışmadıysan akşam 18:00'de, hâlâ girmediysen 20:00'de bu cihaza hatırlatma gelir. Biraz bile çalıştıysan gelmez. iPhone'da uygulama ana ekrana eklenmiş olmalı.</div>
      <div class="row"><button class="btn" id="bildAc">${b.acik?'Bildirimleri yenile':'Bildirimleri aç'}</button>${b.acik?'<button class="btn" id="bildKapat">Kapat</button>':''}</div><div class="small" id="bildSonuc">${b.acik?'✓ Bu cihazda açık.':''}</div></div>`}
 function senkAyarBagla(yeniden){if($('senkSimdi'))$('senkSimdi').onclick=async()=>{$('senkSimdi').disabled=true;await senkCek();await senkYaz();yeniden()};
   if($('bildAc'))$('bildAc').onclick=async()=>{const r=$('bildSonuc');r.textContent='Açılıyor…';try{await bildirimAc();r.innerHTML='<span style="color:var(--good)">✓ Bildirimler bu cihazda açık.</span>'}catch(e){r.innerHTML=`<span style="color:var(--bad)">${esc(e.message)}</span>`}};
@@ -1389,7 +1455,7 @@ function degHtml(D,evalId,pdf){
    ${(D.hatalar||[]).length?`<section><div class="dg-bas"><h2>Hata defterine giden hatalar</h2><button class="btn sm" id="hkHepsi">Hepsini karta ekle</button></div><div class="hd-liste">${D.hatalar.map(h=>hataSatir(evalId,h)).join('')}</div></section>`:''}
    ${D.sirada?`<section><h2>Sırada</h2><div class="ak-md">${mdr(D.sirada)}</div></section>`:''}
    ${pdf?`<p class="small"><button class="link" data-pdf="${esc(pdf)}">Eski değerlendirme belgesini (PDF) aç</button></p>`:''}`}
-function hkBagla(kok,hatalarAl,yeniden){kok.onclick=e=>{const b=e.target.closest('[data-hk]');if(b){const [ev,hid]=b.dataset.hk.split('|'),h=hatalarAl(ev).find(x=>x.id===hid);if(h){hkEkle(ev,h);toast('Karta eklendi: bugünkü tekrara düştü');yeniden()}return}
+function hkBagla(kok,hatalarAl,yeniden){kok.onclick=e=>{const b=e.target.closest('[data-hk]');if(b){const [ev,hid]=b.dataset.hk.split('|'),h=hatalarAl(ev).find(x=>x.id===hid);if(h){hkEkle(ev,h);toast('Karta eklendi: tekrar sırasına girdi');yeniden()}return}
   if(e.target.closest('#hkHepsi')){const ev=AI.evalId;hatalarAl(ev).forEach(h=>hkEkle(ev,h));toast('Hepsi kartlara eklendi');yeniden();return}
   const p=e.target.closest('[data-pdf]');if(p){AI={view:'deg',yol:p.dataset.pdf};render()}}}
 /* Hata defteri: bütün soru soru değerlendirmelerin hataları, konuya göre */
@@ -1401,7 +1467,7 @@ async function iHata(){$('screen').innerHTML=akTop('Hata defteri',true)+'<p clas
   Object.values(H).forEach(({D,r})=>(D.hatalar||[]).forEach(h=>hepsi.push({h,ev:r.id,kaynak:r.baslik})));
   const konular={};hepsi.forEach(x=>{(konular[x.h.konu||'Diğer']=konular[x.h.konu||'Diğer']||[]).push(x)});
   const eklenmemis=hepsi.filter(x=>x.h.kart&&!hkVar(hkId(x.ev,x.h))).length;
-  $('screen').innerHTML=akTop('Hata defteri',true)+`<p class="muted">Değerlendirmelerdeki hatalar konuya göre. <b>Karta ekle</b> deyince hata, doğrusuyla bir karta döner ve bugünkü tekrara düşer; sonra FSRS ile tekrar edilir. Kartlar telefon ve bilgisayarda eşitlenir.</p>
+  $('screen').innerHTML=akTop('Hata defteri',true)+`<p class="muted">Değerlendirmelerdeki hatalar konuya göre. <b>Karta ekle</b> deyince hata, doğrusuyla bir karta döner ve tekrar sırasına girer; sonra FSRS ile tekrar edilir. Kartlar telefon ve bilgisayarda eşitlenir.</p>
     ${hepsi.length?`<div class="row small"><span class="grow">${hepsi.length} hata · ${eklenmemis} tanesi henüz kart değil</span></div>`+
       Object.entries(konular).sort((a,b)=>b[1].length-a[1].length).map(([k,xs])=>`<section><div class="dg-bas"><h2>${esc(k)}</h2><span class="muted small">${xs.length}</span></div><div class="hd-liste">${xs.map(x=>hataSatir(x.ev,x.h,x.kaynak)).join('')}</div></section>`).join('')
      :'<div class="ak-note">Henüz soru soru değerlendirilmiş bir teslim yok.</div>'}`;
@@ -1526,9 +1592,13 @@ function render(){document.querySelectorAll('#nav button').forEach(b=>b.setAttri
 
 /* ================= TEKRAR: home ================= */
 function pool(){return CARDS.filter(c=>P.set.units.includes(c.u))}
-function newLeft(){return Math.max(0,P.set.npd-(P.nt.day===dayKey(Date.now())?P.nt.n:0))}
+// Yeni kart sınırı esnek: "15 yeni kart daha" o günün sınırını artırır (P.ek, cihazda)
+function newLeft(){const g=dayKey(Date.now()),ek=P.ek&&P.ek.day===g?P.ek.n:0;return Math.max(0,P.set.npd+ek-(P.nt.day===g?P.nt.n:0))}
 function dueList(){const e=endOfToday();return pool().filter(c=>{const r=P.c[c.id];return r&&r.due<=e}).sort((a,b)=>P.c[a.id].due-P.c[b.id].due)}
-function newList(){const asc=P.set.order==='asc';return pool().filter(c=>!P.c[c.id]).sort((a,b)=>(asc?a.u-b.u:b.u-a.u)||a.ord-b.ord).slice(0,newLeft())}
+// Yeni kartlar ünite bölümleriyle açılır: kilitli bölümün kart etiketleri sıraya girmez (akademi.js → kapaliEtiketler)
+function yeniHazir(){const kap=typeof kapaliEtiketler==='function'?kapaliEtiketler():null,asc=P.set.order==='asc';
+  return pool().filter(c=>!P.c[c.id]&&!(kap&&c.u===kap.u&&kap.t.has(c.tag))).sort((a,b)=>(asc?a.u-b.u:b.u-a.u)||a.ord-b.ord)}
+function newList(){return yeniHazir().slice(0,newLeft())}
 function buildDaily(){const due=dueList(),nw=newList().slice(0,25);const q=[];let ni=0;
   due.slice(0,60).forEach((c,i)=>{q.push({id:c.id,m:pickMode(c)});if(i%3===2&&ni<nw.length)q.push({id:nw[ni++].id,m:'card',isNew:true})});
   while(ni<nw.length)q.push({id:nw[ni++].id,m:'card',isNew:true});return q}
@@ -1542,12 +1612,13 @@ function rHome(){
   const ses=liveSess(),d=dueList().length,n=newList().length,total=pool().length,learned=pool().filter(c=>P.c[c.id]&&P.c[c.id].s>=7).length,started=pool().filter(c=>P.c[c.id]).length;
   const days=[...Array(7)].map((_,i)=>{const t=Date.now()-(6-i)*DAY;return {on:(P.days||[]).includes(dayKey(t)),l:'PSÇPCCP'[(new Date(t).getDay()+6)%7]}});
   const mins=Math.max(1,Math.round((d+n*1.6)*0.3));
-  const plan=bgPlanHtml(d,n);document.body.classList.add('genis');
-  $('screen').innerHTML=`<div class="top bg-top"><h1>Bugün</h1>${bgTarih()}<span class="grow"></span><button class="icon" id="gear" aria-label="Ayarlar">${I.gear}</button></div>
+  const plan=bgPlanHtml();document.body.classList.add('genis');const dahaYeni=n?0:yeniHazir().length;
+  $('screen').innerHTML=`<div class="top bg-top"><h1>Çalış</h1>${bgTarih()}<span class="grow"></span><button class="icon" id="gear" aria-label="Ayarlar">${I.gear}</button></div>
    <div class="bg-izgara"><div class="bg-sol">${ses?`<div class="resume"><div><b>Yarım kalan ${ses.kind==='test'?'test (Ünite '+ses.u+')':'oturum'}</b><div class="muted small">${ses.i} / ${ses.q.length} soru yapıldı</div></div><button class="big-btn" id="resume">Kaldığın yerden devam et</button></div>`:''}${plan}</div>
-   <div class="bg-sag">${bgGunlerHtml()}<div class="panel"><div><b>Kartlar</b><div class="count">${d+n}<span>kart · ~${mins} dk</span></div>
+   <div class="bg-sag"><div class="panel"><div><b>Kartlar</b><div class="count">${d+n}<span>kart · ~${mins} dk</span></div>
      <div class="muted small" style="margin-top:6px">${d} tekrar · ${n} yeni · Ünite ${P.set.units.join(', ')}</div></div>
-     <button class="${ses||plan?'btn':'big-btn'}" id="start" ${d+n?'':'disabled'}>${d+n?(ses?'Yeni oturum başlat':'Başla'):'Bugünlük tekrar bitti'}</button></div>
+     <button class="${ses||plan?'btn':'big-btn'}" id="start" ${d+n?'':'disabled'}>${d+n?(ses?'Yeni oturum başlat':'Başla'):'Şu an tekrar edilecek kart yok'}</button>
+     ${dahaYeni?`<button class="btn" id="dahayeni">${Math.min(15,dahaYeni)} yeni kart daha aç</button>`:''}</div>
    <div class="panel"><div><b>İstediğin kadar çalış</b><div class="muted small">Günlük tekrar bitse de çalışabilirsin: üniteyi ve soru türünü seç. Cevapların yine kaydedilir.</div></div>
      <div class="row"><button class="btn grow" id="free">Serbest çalış</button><button class="btn grow" id="speakgo">Telaffuz çalış</button></div>
      <button class="btn" id="numgo">Sayı dinle (fiyat, saat, telefon)</button><button class="btn" id="test">Ünite testi (20 soru, puanlı)</button></div>
@@ -1563,7 +1634,8 @@ function rHome(){
   $('speakgo').onclick=()=>{S={view:'free',preset:'speak'};render()};
   if($('resume'))$('resume').onclick=()=>{sessDevam();ctx();[...new Set(P.sess.q.map(it=>byId[it.id]&&byId[it.id].u))].filter(Boolean).forEach(u=>pack('a'+u+'.mp3'));S={view:'session',phase:'q'};render()};
   if(d+n)$('start').onclick=()=>startSession('daily',buildDaily());
-  bgBagla(d,n);
+  if($('dahayeni'))$('dahayeni').onclick=()=>{const g=dayKey(Date.now());P.ek={day:g,n:(P.ek&&P.ek.day===g?P.ek.n:0)+15};scheduleWrite();render()};
+  bgBagla();
 }
 const FREE_MODES=[['mix','Karışık',null],['card','Kart çevirme',['card']],['mc','Çoktan seçmeli',['mcfr','mctr','mcau','cloze']],['type','Yazma',['type']],['dict','Dikte',['dict']],['build','Cümle kurma',['build']],['speak','Telaffuz',['speak']]];
 function rFree(){const units=[...new Set(CARDS.map(c=>c.u))].sort();const F=S.f||(S.f={units:[Math.max(...units)],mode:S.preset||'mix',n:20,which:'all'});
@@ -1820,7 +1892,7 @@ function rTask(){const T=TASKS.find(x=>x.id===R.id);if(!T){R={view:'lib'};return
   $('screen').onclick=e=>{const b=e.target.closest('[data-tk]');if(!b)return;e.stopPropagation();const [gi,ii]=b.dataset.tk.split(':').map(Number),it=T.groups[gi].items[ii],k=T.id+':'+gi+':'+ii;
     P.tc[k]=(P.tc[k]||0)+1;scheduleWrite();const n=P.tc[k];$('tc-'+gi+'-'+ii).textContent=n+' kez dinlendi'+(n>=3?' · bitti':'');
     const slow=!!b.dataset.slow,e1=(slow&&TIDX[`1.4|${it.v}|${it.t}`])||TIDX[`1.0|${it.v}|${it.t}`];if(!e1)return;playClip('t.mp3',e1[0],e1[1])}}
-function savePos(){const s=BOOK[R.i];P.rpos[s.title]={step:R.step,line:R.line,t:Date.now()};scheduleWrite()}
+function savePos(){const s=BOOK[R.i];P.rpos[s.title]={step:R.step,line:R.line,t:Date.now()};scheduleWrite();try{aktifIsaretle()}catch(e){}}
 function markGloss(text,gloss){let h=esc(text);gloss.forEach(([w])=>{const ew=esc(w).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');h=h.replace(new RegExp('(^|[^\\p{L}])('+ew+')(?=[^\\p{L}]|$)','iu'),(m,a,b)=>a+'<span class="gw" data-w="'+esc(w)+'">'+b+'</span>')});return h}
 function rStory(){const s=BOOK[R.i];let body='';const multi=Object.keys(s.speakers).filter(k=>s.speakers[k].label).length>0;
   if(R.step===1)body=`<div class="listen"><div class="kind">1. adım · metne bakmadan dinle</div><div class="t">${esc(s.title)}</div><div class="muted">İki kez dinle. Ne anladığını kendine Türkçe anlat, sonra okumaya geç.${multi?' Bu bir diyalog: her kişinin sesi farklı.':''}</div><div class="muted small">${R.listens} kez dinlendi</div></div><button class="btn" id="toRead">Okuyarak dinle ›</button>`;
@@ -1860,5 +1932,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=86bb26d242').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=e586e897f9').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>
