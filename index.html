@@ -767,7 +767,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='551bbcce25';
+const AKV='2708c9341c';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -838,7 +838,7 @@ async function A_ders(){akStop();akWide();
   const us=DIDX.uniteler.slice().sort((a,b)=>(a.u===0?-1:b.u===0?1:(b.u||0)-(a.u||0)));
   $('screen').innerHTML=akTop('Dersler')+`<p class="muted">${esc(DIDX.aciklama||'')}</p>`+
    `<div class="list">${us.map(u=>`<div class="item ak-unit"><div style="min-width:0"><div class="t">${esc(u.etiket||('Ünite '+u.u))} · ${esc(u.baslik)}</div><div class="s">${esc(u.ozet||'')}</div>${(()=>{const y=u.ders&&AKLS.get('ak-ders-yer',{})[u.ders];return y&&y.ad&&(y.b>0||y.r>.02)?`<div class="s ak-kaldi">Kaldığın yer: ${esc(y.ad)}</div>`:''})()}
-     <div class="ak-links">${u.ders?`<button class="btn sm" data-ders="${esc(u.ders)}">${(()=>{const y=AKLS.get('ak-ders-yer',{})[u.ders];return y&&(y.b>0||y.r>.02)?'Kaldığın yerden devam et':'Dersi aç'})()}</button>`:''}${(u.arsiv||[]).map(a=>`<a class="btn sm" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.ad)}</a>`).join('')}</div></div></div>`).join('')}</div>`;
+     <div class="ak-links">${u.ders?`<button class="btn sm" data-ders="${esc(u.ders)}">${(()=>{const y=AKLS.get('ak-ders-yer',{})[u.ders];return y&&(y.b>0||y.r>.02)?'Kaldığın yerden devam et':'Dersi aç'})()}</button>`:''}${u.pdf?`<a class="btn sm" href="${esc(u.pdf)}" download target="_blank" rel="noopener">PDF indir</a>`:''}${(u.arsiv||[]).map(a=>`<a class="btn sm" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.ad)}</a>`).join('')}</div></div></div>`).join('')}</div>`;
   $('screen').onclick=e=>{const b=e.target.closest('[data-ders]');if(b){AD={view:'ders',dosya:b.dataset.ders};render()}}}
 async function A_dersAc(){const un=DIDX.uniteler.find(u=>u.ders===AD.dosya);if(!un){AD={view:'list'};return render()}
   $('screen').innerHTML=akTop((un.etiket||('Ünite '+un.u))+' · '+un.baslik,true)+'<p class="muted">Yükleniyor…</p>';$('akbk').onclick=()=>{stopAudio();AD={view:'list'};render()};
@@ -1932,5 +1932,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=551bbcce25').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=2708c9341c').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>
