@@ -1229,6 +1229,14 @@
    "ders": [],
    "calisma": [],
    "arac": "kart"
+  },
+  {
+   "id": "konusma",
+   "ad": "Konuşma görevi",
+   "ozet": "süreyi doldurmak, soru sormak, hazır kalıplar",
+   "grup": "Beceriler",
+   "ders": [],
+   "calisma": []
   }
  ]
 }
