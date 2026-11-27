@@ -767,7 +767,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='48a9fdc9f7';
+const AKV='d3bdcb78cf';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -1569,7 +1569,7 @@ async function iKonus(){const geri=()=>{AI={view:'ana'};render()};
    <details class="panel"><summary><b>Kurulum (bir kez)</b></summary><ol class="small">
     <li>Bilgisayarda claude.ai → <b>Projects</b> → yeni proje: <b>Fransızca Konuşma (İlknur)</b>.</li>
     <li><button class="btn sm" id="kTal">Talimatı kopyala</button> ve projenin <b>Instructions</b> alanına yapıştırıp kaydet.</li>
-    <li>Telefonda Claude uygulaması → Projects → bu proje → <b>yeni sohbet</b>. Aşağıdan bir senaryoyu kopyalayıp ilk mesaj olarak gönder, sonra ses düğmesine bas ve konuş. Her konuşmayı bu projenin içinden başlat: hepsi orada toplanır, Osman'ın sohbetlerine karışmaz.</li>
+    <li>Telefonda Claude uygulaması → Projects → bu proje → <b>yeni sohbet</b>. İlk mesaj olarak yalnız <b>Başla</b> yaz (Claude senaryoyu kendi seçer) ya da aşağıdan bir senaryoyu kopyalayıp gönder. Kısa yollar: <b>1</b>, <b>2</b>, <b>3</b> (TCF görevleri), <b>aile</b>, <b>mağaza</b>, <b>doktor</b>, <b>market</b>, <b>yol</b>, <b>geçmiş</b>. Sonra ses düğmesine bas ve konuş. Her konuşmayı bu projenin içinden başlat: hepsi orada toplanır, Osman'ın sohbetlerine karışmaz.</li>
     <li>Bitince <b>"rapor"</b> de. Raporu kopyala, aşağıya yapıştır, <b>Kaydet</b>.</li></ol></details>
    <section><h2>Senaryolar</h2><div class="list">${KSENARYO.map((s,i)=>`<button class="item" data-ks="${i}"><div style="min-width:0"><div class="t">${esc(s[0])}</div><div class="s">${esc(s[1])}</div></div><span class="btn sm">Kopyala</span></button>`).join('')}</div></section>
    <section><h2>Rapor ekle</h2><textarea id="kRap" class="answer" rows="6" placeholder="Claude'un yazdığı raporu buraya yapıştır"></textarea>
@@ -1983,5 +1983,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=48a9fdc9f7').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=d3bdcb78cf').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>
