@@ -73,6 +73,10 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 
 ## Konu 1 · Ünite 7'den kalan: dönüşlü zamir
 
+> **Video**
+>
+> [French Made Easy: Reflexive Verbs](https://www.youtube.com/watch?v=DybxlyAQrxo) · 6 dk.
+
 > **Fikir**
 >
 > Ünite 7'nin en sık hatası dönüşlü zamirdi: gerekmeyen yere *me / se* (*je me pars*, *je me pris le petit-déjeuner*), gereken yerde yok (*nous habillons*, *tu va reposer*). Tek bir soru ikisini de çözer: **"kendini … diyebiliyor muyum?"** Kendini kaldırmak (kalkmak) → evet → *je me lève*. Kendini gitmek? Kendini kahvaltı almak? → hayır → *je pars*, *j'ai pris*.
@@ -97,6 +101,10 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 > 6. ✗ Je me pris le petit-déjeuner. {{J'ai pris le petit-déjeuner.}}
 
 ## Konu 2 · imparfait: geçmişin "fotoğrafı"
+
+> **Video**
+>
+> [Être (To Be) — Imperfect Tense](https://www.youtube.com/watch?v=H8DXTTbxXAU) · 6 dk. Sonra: [Practise your French Imparfait ER Verbs](https://www.youtube.com/watch?v=yMSHdUyMvQg) · 14 dk.
 
 > **Fikir**
 >
@@ -152,6 +160,10 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 
 ## Konu 3 · imparfait ne zaman kullanılır?
 
+> **Video**
+>
+> [Avoir (To Have) — Imperfect Tense](https://www.youtube.com/watch?v=LTjaA3BEZdU) · 7 dk. Sonra: [French Past Tenses explained in 15 minutes!](https://www.youtube.com/watch?v=Gh0zDhAwG0s) · 15 dk.
+
 > **Fikir**
 >
 > imparfait'nin üç işi var, hepsi "fotoğraf" fikrinden çıkar: (1) **tasvir**: hava, yer, insanlar, duygular, yaş; (2) **alışkanlık**: eskiden hep yaptığın şeyler ("-erdim"); (3) **süren bir şey**: o sırada devam eden eylem ("-yordum").
@@ -193,6 +205,10 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 
 ## Konu 4 · passé composé ve imparfait birlikte
 
+> **Video**
+>
+> [French Imperfect Tense VS Passé Composé Tense](https://www.youtube.com/watch?v=JK5OMjjAc8A) · 9 dk.
+
 > **Fikir**
 >
 > Bir hikâye anlatırken ikisi hep birlikte gelir: imparfait **sahneyi kurar**, passé composé sahnede **olanları** anlatır. Bir film düşün: kamera önce ortamı gösterir (yağmur yağıyordu, sokak boştu), sonra bir şey olur (bir köpek çıktı).
@@ -232,6 +248,10 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 
 ## Konu 5 · Yol tarifi
 
+> **Video**
+>
+> [21 French phrases to do with "ASKING DIRECTIONS"](https://www.youtube.com/watch?v=9DPiY2dt0Cc) · 8 dk.
+
 > **Fikir**
 >
 > Yol tarifinde emir kipi kullanılır: "sola dönün", "dümdüz gidin". Fransızcada emir çok kolay: **şimdiki zamandan özneyi at**. *Vous tournez à gauche.* (Sola dönüyorsunuz.) → *Tournez à gauche !* (Sola dönün!). Türkçedeki "dönüyorsunuz" → "dönün" gibi.
@@ -266,6 +286,10 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 > 6. Affedersiniz, gar nerede? {{Excusez-moi, où est la gare ?}}
 
 ## Konu 6 · Şehirde ulaşım ve prendre
+
+> **Video**
+>
+> [Prendre (to take) — Present Tense](https://www.youtube.com/watch?v=WhHcYofEqxI) · 5 dk. Sonra: [Pronounce A2 French Vocab with Me! Transportation Edition](https://www.youtube.com/watch?v=ejthT_RABNk) · 1 dk.
 
 > **Fikir**
 >
@@ -312,6 +336,21 @@ Bu paragrafta ünitenin iki büyük fikri var: *il faisait*, *il y avait*, *j'é
 | "tu ta ku" | *tout à coup* | birdenbire: arkasından bir olay gelecek |
 
 En zor üçlü: *je parle* (jö parl) · *je parlais* (jö parle) · *j'ai parlé* (je parle). Baştaki küçük kelimeye ve sondaki "e"ye dikkat.
+
+> **Konuş**
+>
+> **1. Çocukluğun (2 dakika).** Telefonuna kaydet, dinle:
+>
+> - *Quand j'étais petite, j'habitais à …*
+> - *Ma maison était …* (büyük, küçük, eski…)
+> - *Il y avait …* (bir bahçe, bir park, çok çocuk…)
+> - *Le dimanche, nous allions …* (alışkanlık)
+> - *J'aimais … / Je n'aimais pas …*
+> - *Un jour, …* (bir olay: passé composé)
+>
+> **2. Yol tarifi (1 dakika).** Evinden en yakın metroya ya da markete yolu anlat: *Sortez de la maison. Tournez à gauche. Allez tout droit jusqu'au feu…*
+>
+> Kontrol: tasvirde **imparfait** (*j'étais, il y avait*), olayda **passé composé** (*je suis tombée*) mı? Emirde **-ez** var mı (*tournez*, ✗ *tourne*)? Sonra **🎙 Claude ile konuş** düğmesiyle aynı görevi Claude'la yap: o sana soru sorar, sen anlatırsın.
 
 ## Formül özeti
 
