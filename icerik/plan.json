@@ -1,5 +1,5 @@
 {
- "aciklama": "Çalış ekranının planı (Adım 10: gün yok, bölüm var). surum 2. durum: \"bekle\" (yeni ünite için \"geçelim\" bekleniyor; bekle listesi serbest öneri) ya da \"aktif\" (bolumler: [{id, ad, ozet, kart: [kart etiketi…], isler: [{id, tur, ad, ac, dk, not}]}]). Bölümler sırayla açılır; İlknur onaylı olarak erken açabilir, geri kilitleyebilir. Kilitli bölümün kart etiketleri yeni kart sırasına girmez. tur: ders | video | kelime | alistirma | kart | dinleme | konusma | odev | test. ac: ders:<dosya.md>#bN | calisma:<id>#a[,b] | kart:<etiket,…> | sinav:<id> | oku | sayi | telaffuz | serbest:<ünite> | kart",
+ "aciklama": "Çalış ekranının planı (Adım 10: gün yok, bölüm var). surum 2. durum: \"bekle\" (yeni ünite için \"geçelim\" bekleniyor; bekle listesi serbest öneri) ya da \"aktif\" (bolumler: [{id, ad, ozet, kart: [kart etiketi…], isler: [{id, tur, ad, ac, dk, not}]}]). Bölümler sırayla açılır; İlknur onaylı olarak erken açabilir, geri kilitleyebilir. Kilitli bölümün kart etiketleri yeni kart sırasına girmez. tur: ders | video | kelime | alistirma | kart | dinleme | konusma | odev | test. ac: ders:<dosya.md>#bN | calisma:<id>#a[,b] | kart:<etiket,…> | sinav:<id> | oku | sayi | telaffuz | serbest:<ünite> | kart | claude:<senaryo> = Claude konuşma projesini açar (aile, magaza, gecmis, yol, doktor, market, tcf1, tcf2 ya da boş = Başla); rapor eklenince biter.",
  "surum": 2,
  "unite": 9,
  "baslik": "Ünite 9 · İnsanları ve kıyafetleri anlatmak",
@@ -18,10 +18,10 @@
   {
    "id": "b-u8kon",
    "tur": "konusma",
-   "ad": "Konuşma: çocukluğunu 1 dakika anlat (yüksek sesle, kayıt al)",
-   "not": "Quand j'étais petite, j'habitais… Le week-end, nous allions…",
+   "ad": "Claude ile konuş: çocukluğunu ve geçen hafta sonunu anlat",
+   "not": "Quand j'étais petite, j'habitais… Le week-end dernier, je suis allée…",
    "dk": 10,
-   "ac": "ders:u08-gecmiste-tasvir.md#b3"
+   "ac": "claude:gecmis"
   },
   {
    "id": "b-u8yol",
@@ -257,6 +257,14 @@
      "ad": "Karşılaştırma kartları",
      "ac": "kart:karsilastirma",
      "dk": 5
+    },
+    {
+     "id": "u9-6d",
+     "tur": "konusma",
+     "ad": "Claude ile konuş: aileni anlat ve karşılaştır",
+     "ac": "claude:aile",
+     "dk": 15,
+     "not": "bitince \"rapor\" de, raporu Konuşma pratiği'ne ekle"
     }
    ]
   },
@@ -302,6 +310,14 @@
      "ad": "Mağaza kartları",
      "ac": "kart:magaza",
      "dk": 5
+    },
+    {
+     "id": "u9-7f",
+     "tur": "konusma",
+     "ad": "Claude ile konuş: mağazada kışlık mont",
+     "ac": "claude:magaza",
+     "dk": 15,
+     "not": "Claude satıcı, sen müşteri"
     }
    ]
   },
@@ -331,6 +347,14 @@
      "ad": "Serbest çalış: Ünite 9 kartları",
      "ac": "serbest:9",
      "dk": 15
+    },
+    {
+     "id": "u9-8d",
+     "tur": "konusma",
+     "ad": "Claude ile konuş: TCF görev 1 (kendini tanıt)",
+     "ac": "claude:tcf1",
+     "dk": 15,
+     "not": "sınav provası"
     }
    ]
   },
