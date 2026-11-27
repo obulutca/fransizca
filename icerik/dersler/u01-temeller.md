@@ -8,6 +8,8 @@ Bu ünite tam sıfırdan başlar. Sonunda kendini tanıtabileceksin:
 
 Bu ünitede altı konu var: Fransızca nasıl okunur, özne zamirleri, être (olmak), olumsuz cümle, soru cümlesi ve sıfat uyumu. Sonda selamlaşma ifadeleri, bir okuma metni ve bir diyalog var.
 
+**Bu ders nasıl okunur?** Her konu: **Video** → **Fikir** → **Çözümlü örnek** → **Kural** → **Dikkat** → **Kendini dene**. Fransızcaya dokununca sesli okunur. Okunuşlar Türk harfleriyle yazıldı ama yalnız destek; her kelimenin gerçek sesini dokunup dinle.
+
 ## Yeni kelimeler
 
 Okunuş Türk harfleriyle. ö = kısa, zayıf bir "ö" (*je*, *le*); ⁿ = sesliyi burundan ver, n'yi söyleme; w = kısa bir "u" (*moi* = mwa). Eril / dişil biçimler " / " ile ayrıldı. Her zaman çiftiyle öğren: "canadien / canadienne".
@@ -78,6 +80,10 @@ Okunuş Türk harfleriyle. ö = kısa, zayıf bir "ö" (*je*, *le*); ⁿ = sesli
 | moi / toi | mwa / twa | ben / sen (vurgulu) | me / you |
 
 ## Konu 1 · Fransızca nasıl okunur
+
+> **Video**
+>
+> [The French Alphabet (French Essentials Lesson 3)](https://www.youtube.com/watch?v=PaOVHdpRAK8) · 9 dk. Sonra: [Vowel Sounds in French](https://www.youtube.com/watch?v=0mC2zRtx8h8) · 4 dk.
 
 > **Fikir**
 >
@@ -180,6 +186,30 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 3. *dienne*: *ien* burun sesi olurdu, ama arkasında *nne* var (çift n + sesli) → burun sesi bozulur: "dyen".
 > 4. Sondaki *e* okunmaz.
 > 5. Sonuç: kanadyen. Eril *canadien* ise kanadyeⁿ.
+>
+> **2. *voiture* nasıl okunur?**
+>
+> 1. *v* + *oi* → "vwa".
+> 2. *t* + *u* → "tü" (u = ü).
+> 3. *r* + *e*: r okunur, son e okunmaz → "r".
+> 4. Sonuç: vwatür (araba).
+>
+> **3. *poulet* nasıl okunur?**
+>
+> 1. *p* + *ou* → "pu" (ou = u).
+> 2. *l* + *et* → "le"; sondaki t okunmaz (CaReFuL'da yok).
+> 3. Sonuç: pule (tavuk).
+>
+> **4. *vous êtes* nasıl okunur?**
+>
+> 1. *vous* tek başına "vu" (s okunmaz).
+> 2. Arkasından sesli (*êtes*) geliyor → bağlama: s, z olarak okunur ve sonraki kelimeye geçer.
+> 3. *êtes*: ê geniş e, *t* okunur, *es* okunmaz → "et".
+> 4. Sonuç: vu zet.
+
+> **Dikkat**
+>
+> Ünite 1 testindeki okuma hataların: *poulet* = pule (✗ pole), *voiture* = vwatür (✗ voture), *jaune* = jon (✗ joune). Üç harf grubunu ezberle: **ou = u**, **oi = wa**, **au = o**.
 
 > **Kendini dene 1**
 >
@@ -198,8 +228,19 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 8. *parler* → r {{hayır}}
 > 9. *petite* → t {{evet}}
 > 10. *Paris* → s {{hayır}}
+>
+> Okunuşunu yaz (Türk harfleriyle).
+>
+> 11. *maison* {{mezoⁿ|mezon}}
+> 12. *jaune* {{jon}}
+> 13. *poulet* {{pule}}
+> 14. *bonjour* {{boⁿjur|bonjur}}
 
 ## Konu 2 · Özne zamirleri
+
+> **Video**
+>
+> [French Subject Pronouns (French Essentials Lesson 9)](https://www.youtube.com/watch?v=8LBvMfR7fWc) · 18 dk.
 
 > **Fikir**
 >
@@ -227,6 +268,24 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 4. Grupta tek bir erkek bile varsa *ils*: 10 kadın + 1 erkek = *ils*.
 > 5. *il* ve *ils* aynı okunur ("il"); *elle* ve *elles* de ("el"). Hangisi olduğunu fiilden anlarsın: *il est* / *ils sont*.
 
+> **Çözümlü örnek**
+>
+> **1. "Makine hazır." → hangi zamirle anlatılır?**
+>
+> 1. *la machine* dişil (artikel *la*).
+> 2. Dişil tekil → *elle*.
+> 3. *La machine est prête.* = *Elle est prête.* (O hazır.)
+>
+> **2. "Biz yorgunuz." (günlük konuşma)**
+>
+> 1. Günlük dilde "biz" çoğunlukla *on*: *On est fatigués.*
+> 2. Yazıda ve resmî dilde *nous*: *Nous sommes fatigués.*
+>
+> **3. Müdürüne "Siz hazır mısınız?"**
+>
+> 1. Tek kişi ama resmî → *vous*.
+> 2. *Vous êtes prêt ?* (müdür erkekse) / *Vous êtes prête ?* (kadınsa).
+
 > **Kendini dene 2**
 >
 > Hangi zamir?
@@ -237,8 +296,16 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 4. siz (müdürünüze, kibar) {{vous}}
 > 5. sen (arkadaşına) {{tu}}
 > 6. biz (günlük konuşmada) {{on|nous}}
+> 7. la machine {{elle}}
+> 8. Kerem {{il}}
+> 9. 10 kadın + 1 erkek {{ils}}
+> 10. siz (iki arkadaşına) {{vous}}
 
 ## Konu 3 · être (olmak)
+
+> **Video**
+>
+> [Être (to be): Present Tense](https://www.youtube.com/watch?v=CbxrZMePugU) · 6 dk. Sonra: [Il est mi, C'est mi?](https://www.youtube.com/watch?v=5JIIIOzH12Y) · 5 dk.
 
 > **Fikir**
 >
@@ -271,6 +338,10 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > | Biz Toronto'dayız. | We are in Toronto. | *Nous sommes à Toronto.* |
 > | Siz Kanadalı mısınız? | Are you Canadian? | *Vous êtes canadien ?* |
 
+> **Dikkat**
+>
+> Ünite 1 testindeki hataların: ✗ *tu est* → *tu es*; ✗ *Kerem es* → *Kerem est*. Okunuş aynı ("e"), yazım farklı. Kural: **tu → -s, il / elle / isim → -t.** Bu kural ileride bütün fiillerde tekrar edecek (*tu as*, *tu parles*).
+
 > **Kendini dene 3**
 >
 > être'nin doğru biçimini yaz.
@@ -286,8 +357,16 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 >
 > 7. Türküm. (İlknur) {{Je suis turque.}}
 > 8. Bu Julie. {{C'est Julie.}}
+> 9. Toronto'dayız. {{Nous sommes à Toronto.|On est à Toronto.}}
+> 10. Kerem işte. {{Kerem est au travail.}}
+> 11. Sen yorgunsun. (erkeğe) {{Tu es fatigué.}}
+> 12. Doğru mu? {{C'est vrai ?}}
 
 ## Konu 4 · Olumsuz cümle
+
+> **Video**
+>
+> [Simple Negations - part 1 (French Essentials Lesson 13)](https://www.youtube.com/watch?v=Rymbg3PnyL0) · 8 dk.
 
 > **Fikir**
 >
@@ -318,6 +397,10 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 2. Sandviç: ne + est + pas. est sesliyle başlıyor → ne → n'.
 > 3. Sonuç: *Il n'est pas canadien.*
 
+> **Dikkat**
+>
+> Sandviçin iki ekmeği de lazım: ✗ *Je pas suis* · ✗ *Je ne suis fatiguée* → *Je ne suis pas fatiguée.* *pas* her zaman çekimli fiilin **hemen arkasında**.
+
 > **Kendini dene 4**
 >
 > Olumsuz yap.
@@ -327,8 +410,20 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 3. Nous sommes prêts. {{Nous ne sommes pas prêts.}}
 > 4. Vous êtes français. {{Vous n'êtes pas français.}}
 > 5. Elles sont au travail. {{Elles ne sont pas au travail.}}
+> 6. Tu es malade. {{Tu n'es pas malade.}}
+> 7. C'est vrai. {{Ce n'est pas vrai.}}
+> 8. On est en retard. {{On n'est pas en retard.}}
+>
+> Fransızca yaz:
+>
+> 9. Evde değilim. {{Je ne suis pas à la maison.}}
+> 10. Kerem Fransız değil, Türk. {{Kerem n'est pas français, il est turc.}}
 
 ## Konu 5 · Soru cümlesi
+
+> **Video**
+>
+> [Asking questions in French with EST-CE QUE (French Essentials Lesson 30)](https://www.youtube.com/watch?v=o0tgXagvolU) · 11 dk.
 
 > **Fikir**
 >
@@ -350,6 +445,20 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 >
 > Yazım: Fransa'da ? ! ; : işaretlerinden önce boşluk bırakılır (*Tu es turc ?*). Kanada'da çoğunlukla yalnız : işaretinden önce.
 
+> **Çözümlü örnek**
+>
+> **"Siz mühendis misiniz?" üç yolla**
+>
+> 1. Tonlama: *Vous êtes ingénieur ?*
+> 2. est-ce que: *Est-ce que vous êtes ingénieur ?*
+> 3. Devrik: *Êtes-vous ingénieur ?*
+>
+> **"Kerem nerede?"**
+>
+> 1. Soru kelimesi başa: *Où*.
+> 2. Fiil + özne: *est Kerem*.
+> 3. Sonuç: *Où est Kerem ?* (Konuşmada: *Kerem est où ?*)
+
 > **Kendini dene 5**
 >
 > Est-ce que ile soru yap.
@@ -362,8 +471,16 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 >
 > 4. *Tu n'es pas fatiguée ?* — (Hayır, aslında yorgunum.) {{Si, je suis fatiguée.}}
 > 5. "Julie nerede?" {{Où est Julie ?}}
+> 6. "Nasılsın?" {{Comment ça va ?|Ça va ?}}
+> 7. "Bu kim?" {{Qui est-ce ?}}
+> 8. Est-ce que ile: Elle est malade. {{Est-ce qu'elle est malade ?}}
+> 9. *Vous n'êtes pas canadienne ?* — (Hayır, Kanadalı değilim.) {{Non, je ne suis pas canadienne.}}
 
 ## Konu 6 · Cinsiyet ve sıfat uyumu (giriş)
+
+> **Video**
+>
+> [Feminine or Masculine words in French? Understanding French genders](https://www.youtube.com/watch?v=V7AjuIDn4oU) · 6 dk. Sonra: [Practise your French adjectives](https://www.youtube.com/watch?v=XZhFmmYUdbs) · 12 dk.
 
 > **Fikir**
 >
@@ -396,6 +513,27 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 2. Resmî tek kişiye vous: fiil çoğul (*êtes*), sıfat o kişiye uyar: bir kadına *Vous êtes fatiguée ?*
 > 3. Çoğul -s okunmaz: *Ils sont canadiens* → il soⁿ kanadyeⁿ.
 > 4. Kendin hakkında yazarken dişil biçim: *Je suis contente*, *je suis mariée*, *je suis turque*.
+> 5. Ünite 1 testindeki hataların: ✗ *Julie et Marc sont contentes* → *contents* (karışık grup = eril); ✗ *vous êtes français ?* (bir kadına) → *française*; ✗ *opératrics* → *opératrice* (-teur → -trice).
+
+> **Çözümlü örnek**
+>
+> **1. "Julie ve Nadia Kanadalı."**
+>
+> 1. Özne: iki kadın → *elles* → *sont*.
+> 2. *canadien* → dişil *canadienne* → çoğul *canadiennes*.
+> 3. Sonuç: *Julie et Nadia sont canadiennes.*
+>
+> **2. "Teknisyen misiniz?" (bir kadına, kibar)**
+>
+> 1. *vous* + *êtes*; tek kadın → dişil tekil.
+> 2. *technicien* → *technicienne*.
+> 3. Sonuç: *Vous êtes technicienne ?*
+>
+> **3. "O (kadın) küçük ama ben büyüğüm." (Osman)**
+>
+> 1. *petit* → *petite* (t okunur: pötit).
+> 2. *grand*, Osman erkek → değişmez.
+> 3. Sonuç: *Elle est petite, mais je suis grand.*
 
 > **Kendini dene 6**
 >
@@ -407,6 +545,12 @@ Aksanlar yazımın parçasıdır. (Uygulamada aksan eksikliği puan kaybettirmez
 > 4. Nous (Julie ve Nadia) sommes (prêt) ___. {{prêtes}}
 > 5. Je (İlknur) suis (turc) ___. {{turque}}
 > 6. Elle est (technicien) ___. {{technicienne}}
+> 7. Julie et Marc sont (content) ___. {{contents}}
+> 8. Vous (bir kadına) êtes (français) ___ ? {{française}}
+> 9. Elle est (opérateur) ___. {{opératrice}}
+> 10. Elles sont (soudeur) ___. {{soudeuses}}
+> 11. Je (İlknur) suis (marié) ___. {{mariée}}
+> 12. Ils sont (canadien) ___. {{canadiens}}
 
 ## Selamlaşma ifadeleri, parça parça
 
@@ -483,6 +627,30 @@ Sınavda dört becerinin her birinden ayrı ayrı NCLC 7 gerekiyor; en zayıf be
 - **Gölgeleme:** diyaloğu cümle cümle dinle, her cümleden sonra aynı hızla tekrar et.
 - **Konuşma:** kendini 6–8 cümleyle sesli tanıt: adın, milliyetin, mesleğin, nerede olduğun, nasıl olduğun, bir iş arkadaşın. Kâğıda bakmadan söylemeye çalış.
 - **Pasif dinleme:** Mauril (Radio-Canada) ya da TV5Monde A1. Anlamak değil, kulağın sese alışması hedef. Tanıdığın kelimeleri yakala: *je suis*, *c'est*, *bonjour*, *très*.
+
+### Kaynaklar
+
+| Kaynak | Ne için | Not |
+| --- | --- | --- |
+| Learn French With Alexa (YouTube) | Konu anlatımı | Her konunun başındaki videolar |
+| Mauril | CBC / Radio-Canada'nın ücretsiz uygulaması | Kanada Fransızcası; başlangıç seviyesi |
+| TV5Monde Apprendre | Seviyeli, sesli alıştırmalar | A1 seviyesini seç |
+| Coffee Break French (podcast) | İngilizce açıklamalı başlangıç dersleri | Yürürken, araba sürerken |
+| Forvo.com | Anadili Fransızca olanların kelime kayıtları | Bir kelimenin sesinden emin değilsen |
+
+> **Konuş**
+>
+> **Kendini tanıt (1 dakika).** Telefonuna kaydet, dinle, okuma metnindeki Kerem'le karşılaştır:
+>
+> - *Bonjour ! Je m'appelle …*
+> - *Je suis turque. Je suis à …*
+> - *Je suis …* (meslek ya da *étudiante*)
+> - *Je suis mariée. Mon mari s'appelle Osman.*
+> - *Aujourd'hui, je suis …* (fatiguée / contente / occupée)
+> - *Je ne suis pas …* (olumsuz bir cümle)
+> - *Et vous ?*
+>
+> Kontrol: her sıfatta dişil -e var mı? TCF konuşmanın ilk görevi tam olarak budur: kendini tanıtmak.
 
 ## Formül özeti
 
