@@ -538,6 +538,15 @@ button.panel.kh-giris:hover{border-color:var(--accent)}
 .kh-eylem .btn{text-align:left}
 @media (max-width:600px){.kh-ozet{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+/* Claude konuşma penceresi */
+.k-dlg{max-width:min(520px,92vw);width:100%;border:none;border-radius:16px;padding:20px 20px 16px;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.k-dlg::backdrop{background:rgba(10,15,40,.55)}
+.k-dlg h2{margin:0 0 4px;font-size:1.2em}
+.k-dlg .k-adim{padding-left:1.3em;margin:.4em 0 .8em}.k-dlg .k-adim li{margin:.35em 0}
+.k-dlg .k-dug{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.k-dlg .k-alt{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:12px}
+.k-dlg .k-ek{margin-top:10px}.k-dlg textarea{width:100%;box-sizing:border-box;margin:6px 0}
+
 </style>
 <div class="app">
   <div class="screen" id="screen"></div>
@@ -768,7 +777,7 @@ function makeQ(it){const c=byId[it.id];if(it.m==='mcfr'||it.m==='mcau')return {o
 /* ================= AKADEMİ: Dersler · Sınavlar · İlerleme =================
    İçerik: icerik/dersler (md), icerik/sinavlar (json, anahtarsız), icerik/ses (paketler).
    Teslimler ve değerlendirmeler gizli GitHub deposunda (Ayarlar: İlerleme sekmesi → Bağlantı). */
-const AKV='655988a8cb';
+const AKV='016038a2b6';
 let AD={view:'list'},AS={view:'list'},AI={view:'ana'},AKT=null;
 const AKLS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const jget=async u=>{const r=await fetch(u,{cache:'no-cache'});if(!r.ok)throw new Error(u+' · '+r.status);return r.json()};
@@ -987,7 +996,7 @@ let XDL=null,XOTO=null;
 async function xRun(){const EX=await exLoad(AS.id),st=xState(EX.id);if(!st){AS={view:'giris',id:EX.id};return render()}
   $('nav').hidden=true;const b=EX.bolumler[st.bi];XDL=xTimer(EX,st,b);
   if(XDL&&XDL<=Date.now())return xNextSection(EX,st,'Süre doldu: '+b.ad+' kapandı.');
-  const R={co:xCO,ce:xCE,kisa:xKisa,ee:xEE,eo:xEO}[b.tip]||xKisa;R(EX,st,b);
+  const R={co:xCO,ce:xCE,kisa:xKisa,ee:xEE,eo:xEO,kc:xKC}[b.tip]||xKisa;R(EX,st,b);
   if(XDL)AKT=setInterval(()=>{const r=(XDL-Date.now())/1000,c=$('akclk');if(c){c.querySelector('b').textContent=fmtT(r);c.classList.toggle('az',r<60)}if(r<=0){akStop();xNextSection(EX,st,'Süre doldu: '+b.ad+' kapandı.')}},500);
   $('akq').onclick=()=>{stopAudio();akRecStop();AS={view:'giris',id:EX.id};render()};
   document.querySelectorAll('[data-sec]').forEach(x=>x.onclick=()=>{stopAudio();akRecStop();st.bi=+x.dataset.sec;xSave(st);render()})}
@@ -1139,16 +1148,37 @@ function xEO(EX,st,b){const sinav=EX.tur==='sinav',ts=b.gorevler,ti=Math.min(st.
       $('akeob').innerHTML='<button class="big-btn" id="akready">Hazırım, kayda başla</button>';const iv=setInterval(()=>{left--;const e=$('akpt');if(e)e.textContent=fmtT(left);if(left<=0){clearInterval(iv);startRec()}},1000);
       $('akready').onclick=()=>{clearInterval(iv);startRec()}}else startRec()};
     if(g.ses){$('akrec').innerHTML='<div class="muted">Sınav görevlisi konuşuyor…</div>';playItem(EX,g,false,()=>afterPrompt())}else afterPrompt()}}
+/* --- Konuşma · Claude (KC): görev Claude projesinde sesli yapılır; rapor eklenmeden sonraki göreve/bölüme geçilmez.
+   Görev: {id, ad, konu (md), senaryo (Claude'a ilk mesaj), sure_dk, sinav (true: ipucu yok)}. Rapor st.ans[görev] olur, teslimle gider. --- */
+const kcVar=v=>typeof v==='string'&&v.trim().length>0;
+function xKC(EX,st,b){const ts=b.gorevler,ti=Math.min(st.qi[b.id]||0,ts.length-1),g=ts[ti],rap=st.ans[g.id],son=ti>=ts.length-1,alis=EX.tur==='alistirma';
+  const yapilamadi=kcVar(rap)&&/^YAPILAMADI:/.test(rap),A=kcVar(rap)&&!yapilamadi?konusAyristir(rap):null;
+  svCiz(EX,st,b,{no:`Tâche <b>${ti+1}</b> / ${ts.length}`,seg:svSeg(ts.length,ti,k=>kcVar(st.ans[ts[k].id])),
+    govde:`${b.talimat&&ti===0?`<div class="ak-note">${mdi(b.talimat)}</div>`:''}<div class="card ak-q">${g.ad?`<div class="kind">${esc(g.ad)}</div>`:''}<div class="ak-md">${mdr(frb(g.konu||''))}</div>
+     <div class="ak-note small">Claude ile sesli${g.sure_dk?` · yaklaşık <b>${g.sure_dk} dk</b>`:''}${g.sinav?' · <b>sınav</b>: ipucu ve Türkçe yardım yok':''}. Bitince "rapor" de, raporu kopyala, buraya dön.</div>
+     ${A?`<div class="fb ok"><b>Rapor eklendi ✓</b><div class="small">${esc(A.baslik)} · ${A.hatalar.length} düzeltme</div></div><details class="k-ek"><summary>Raporu gör</summary><div class="ak-md small">${mdr(A.govde)}</div></details>`
+       :yapilamadi?`<div class="fb no"><b>Yapılamadı</b><div class="small">${esc(rap.replace(/^YAPILAMADI:\s*/,''))}</div></div>`:''}</div>`,
+    bilgi:kcVar(rap)?'Rapor eklendi. Sonraki adıma geçebilirsin.':'Önce Claude ile konuş ve raporu ekle; rapor eklenmeden sonraki adıma geçilmez.',
+    dug:kcVar(rap)?`${!g.sinav||!A?'<button class="btn" id="kcGit">Yeniden konuş</button>':''}<button class="big-btn" id="kcNx">${son?svSon(EX,st):'Tâche suivante →'}</button>`
+      :`<button class="link small" id="kcYok">Yapamadım</button><button class="btn" id="kcEkle">📋 Raporu ekle</button><button class="big-btn" id="kcGit">🎙 Claude'da konuş</button>`});
+  const git=()=>konusGit({tur:'sinav',ex:EX.id,g:g.id,bolum:alis?b.id:null,sinavModu:!!g.sinav,baslik:EX.baslik+' · '+(g.ad||b.ad),mesaj:g.senaryo||g.konu});
+  if($('kcGit'))$('kcGit').onclick=()=>{if(kcVar(rap)&&!confirm('Eklenmiş rapor yeni konuşmanın raporuyla değişecek. Devam?'))return;git()};
+  if($('kcEkle'))$('kcEkle').onclick=()=>{AKLS.set('ak-konus-bekle',{tur:'sinav',ex:EX.id,g:g.id,bolum:alis?b.id:null,baslik:EX.baslik+' · '+(g.ad||b.ad),mesaj:g.senaryo||'',t:Date.now()});konusBekle(false)};
+  if($('kcYok'))$('kcYok').onclick=()=>{const n=prompt('Neden yapamadın? (ör. Claude açılmadı, ses çalışmadı) Bu not teslimle gider.');if(!n||!n.trim())return;st.ans[g.id]='YAPILAMADI: '+n.trim();if(alis){st.chkB=st.chkB||{};st.chkB[b.id]=Date.now()}xSave(st);render()};
+  if($('kcNx'))$('kcNx').onclick=()=>{if(!son){st.qi[b.id]=ti+1;xSave(st);return render()}if(EX.tur==='sinav'&&!confirm('Bu bölümü bitirirsen geri dönemezsin. Devam?'))return;akStop();xNextSection(EX,st)}}
+// Teslimden önce: rapor bekleyen Claude görevleri
+const kcEksik=(EX,st)=>EX.bolumler.filter(b=>b.tip==='kc').flatMap(b=>b.gorevler).filter(g=>!kcVar(st.ans[g.id]));
 /* --- Bitiş ve teslim --- */
 async function xEnd(){const EX=await exLoad(AS.id),st=xState(EX.id);if(!st){AS={view:'list'};return render()}
   const sum=EX.bolumler.map(b=>{if(b.tip==='ee')return `<tr><td>${esc(b.ad)}</td><td>${b.gorevler.map((g,i)=>`Görev ${i+1}: ${wc(st.ans[g.id])} kelime`).join('<br>')}</td></tr>`;
     if(b.tip==='eo')return `<tr><td>${esc(b.ad)}</td><td>${b.gorevler.map((g,i)=>`Görev ${i+1}: ${st.kayit[g.id]?fmtT(st.kayit[g.id].sure)+' kayıt':'kayıt yok'}`).join('<br>')}</td></tr>`;
+    if(b.tip==='kc')return `<tr><td>${esc(b.ad)}</td><td>${b.gorevler.map((g,i)=>`Görev ${i+1}: ${!kcVar(st.ans[g.id])?'<b style="color:var(--bad)">rapor yok</b>':/^YAPILAMADI:/.test(st.ans[g.id])?'yapılamadı (not var)':'Claude raporu eklendi ✓'}`).join('<br>')}</td></tr>`;
     const qs=b.sorular||[],n=qs.filter(q=>st.ans[q.id]!=null&&st.ans[q.id]!=='').length;return `<tr><td>${esc(b.ad)}</td><td>${n} / ${qs.length} cevaplandı</td></tr>`}).join('');
-  const sent=st.gonderildi,alis=EX.tur==='alistirma';
+  const sent=st.gonderildi,alis=EX.tur==='alistirma',kcE=kcEksik(EX,st);
   $('screen').innerHTML=akTop(EX.baslik,true)+`<div class="panel"><div class="kind">${sent?'Teslim edildi':'Bitti'}</div><table class="ak-tbl"><tbody>${sum}</tbody></table></div>
    ${alis?`<div class="ak-note ok"><b>Alıştırma bitti.</b> Puansız; teslim gerekmez. İstersen cevaplarına geri dönüp yanlışlarını yeniden deneyebilirsin.</div>`:sent?`<div class="ak-note ok"><b>Teslim edildi</b> (${new Date(sent).toLocaleString('tr-TR')}). Şimdi bilgisayarda Claude Code'u aç ve <b>“bitti, bak”</b> yaz. Değerlendirme hazır olunca <b>İlerleme</b> sekmesinde görünür.</div>`
      :GH.ok()?`<p class="muted">Teslim edince cevapların ve ses kayıtların gizli depona yüklenir.</p>`:`<div class="ak-note">Teslim için GitHub bağlantısı gerekli: <button class="link" id="akconn">İlerleme → Bağlantı</button>. Bağlantı yoksa dosyaları indirip bana elle de gönderebilirsin.</div>`}
-   <div id="aklog" class="diag" hidden></div><div class="spacer"></div><div class="bottom">${sent||alis?'':`<button class="big-btn" id="aksend" ${GH.ok()?'':'disabled'}>Teslim et</button>`}${alis?'':'<button class="btn" id="akdl">Dosyaları indir</button>'}${EX.tur!=='sinav'&&!sent?'<button class="btn" id="akbackx">Cevaplara geri dön</button>':''}</div>`;
+   <div id="aklog" class="diag" hidden></div><div class="spacer"></div>${!sent&&!alis&&kcE.length?`<div class="ak-note">Teslimden önce Claude konuşma raporu gerekli: <b>${kcE.map(g=>esc(g.ad||g.id)).join(', ')}</b>. <b>Cevaplara geri dön</b> ve o görevi yap.</div>`:''}<div class="bottom">${sent||alis?'':`<button class="big-btn" id="aksend" ${GH.ok()&&!kcE.length?'':'disabled'}>Teslim et</button>`}${alis?'':'<button class="btn" id="akdl">Dosyaları indir</button>'}${EX.tur!=='sinav'&&!sent?'<button class="btn" id="akbackx">Cevaplara geri dön</button>':''}</div>`;
   $('akbk').onclick=()=>{AS={view:'list'};render()};
   if($('akconn'))$('akconn').onclick=()=>{AI={view:'bag'};setTab('ilerleme')};
   if($('akbackx'))$('akbackx').onclick=()=>{st.bitti=false;st.bi=0;xSave(st);AS={view:'kos',id:EX.id};render()};
@@ -1182,7 +1212,7 @@ function yolBolumler(){if(!PLANJ)return [];if(Array.isArray(PLANJ.bolumler))retu
   return (PLANJ.gunler||[]).map((g,i)=>({id:'g'+(i+1),ad:'Bölüm '+(i+1),ozet:g.ozet||'',isler:[...(g.isler||[]),...(g.uzun||[])]}))}
 function bgKayit(){const k=AKLS.get('ak-bugun',null),pid=PLANJ?PLANJ.unite+'|'+PLANJ.durum:'',o=k&&k.plan===pid?k:{plan:pid,bitti:{},acik:null};
   o.bitti=o.bitti||{};o.ac=o.ac||{};o.kap=o.kap||{};return o}
-const bgOto=it=>/^(sinav|kart):/.test(it.ac||'');
+const bgOto=it=>/^(sinav|kart|claude):/.test(it.ac||'');
 // Alıştırma bölümü kontrol edildi mi (plan: "calisma:u08-calisma#a" ya da "#c,d")
 const calBitti=(s,b)=>!!((s.chkB&&s.chkB[b])||Object.keys(s.chk||{}).some(q=>q.startsWith(b)&&/^\d+$/.test(q.slice(b.length))));
 // "kart:imparfait,yol" → bu ünitenin o etiketli kartları
@@ -1274,7 +1304,7 @@ function bgAc(it){const a=it.ac||'';let m;const ts=kartEtiket(a);
   if((m=/^sinav:(.+)$/.exec(a))){AS={view:'giris',id:m[1]};return setTab('sinav')}
   if((m=/^calisma:([^#]+)(?:#(.+))?$/.exec(a))){if(m[2]){const s=xState(m[1]),bs=m[2].split(',').map(x=>x.trim());return calismaAc(m[1],bs.find(b=>!(s&&calBitti(s,b)))||bs[0])}
     AS={view:'giris',id:m[1]};return setTab('sinav')}   // alıştırma: bölüm (#a) verilmişse "Cevapları kontrol et" ile kendiliğinden biter
-  if((m=/^claude:(.*)$/.exec(a)))return claudeAc(m[1]);   // biter: rapor eklenince (konusKaydet) ya da elle
+  if((m=/^claude:(.*)$/.exec(a)))return konusGit({tur:'plan',id:it.id,baslik:String(it.ad).replace(/[*_`]/g,''),mesaj:m[1]});   // biter: yalnız rapor eklenince
   if(a==='oku'){const i=BOOK.findIndex(x=>yalin(it.ad).includes(yalin(x.title)));if(i<0){R={view:'lib'};return setTab('oku')}
     const pos=P.rpos[BOOK[i].title]||{};ctx();pack('s'+i+'.mp3');R={view:'story',i,step:pos.step||1,line:pos.line||0,playing:false,tr:false,slow:false,listens:0};return setTab('oku')}
   toast('Bu iş henüz bir ekrana bağlanmadı',true)}
@@ -1560,22 +1590,73 @@ const KSENARYO=[
  ['Ünite 8 · Yol sormak','Senaryo: Ünite 8. Montréal\'de bir yere (müze, eczane, metro) gitmek istiyorum. Sen yoldan geçen birisin; ben soracağım, sen tarif et. Sonra roller değişsin. Seviyem A1. Başlayalım.'],
  ['Ünite 6 · Doktorda','Senaryo: Ünite 6. Sen doktorsun, ben hastayım. Neyim olduğunu, ne zamandan beri ağrıdığını sor. Seviyem A1. Başlayalım.'],
  ['Ünite 5 · Fırında ve markette','Senaryo: Ünite 5. Sen bakkalsın; ben ekmek, peynir, meyve alacağım. Miktar ve fiyat sor. Seviyem A1. Başlayalım.']];
-const KDIR='konusmalar',KPROJE='https://claude.ai/project/01a21afa-6c21-7770-8130-2900e8ec2678';
-// Claude projesini aç: ilk mesajı panoya kopyala (window.open tıklamayla aynı anda olmalı; araya await girmez)
+const KDIR='konusmalar',KPID='01a21afa-6c21-7770-8130-2900e8ec2678',KWEB='https://claude.ai/project/'+KPID,KAPP='claude://claude.ai/project/'+KPID;
+/* Konuşma akışı (her konuşmada aynı): açıklama penceresi → "Anladım" → ilk mesaj panoya + Claude uygulaması açılır (claude:// ;
+   masaüstü ve telefon uygulaması) → İlknur konuşur, "rapor" der, raporu kopyalar → uygulamaya dönünce bekleyen konuşma penceresi
+   kendiliğinden açılır → "Raporu ekle" (pano). Bekleyen konuşma: ak-konus-bekle {tur: plan|ders|genel|sinav, id, ex, g, mesaj, baslik, t}.
+   Rapor nereye gider: sinav → o sınavın cevabı (teslimle gider); diğerleri → gizli depoda konusmalar/ ve Çalış'taki konuşma işi biter. */
 const KKISA={aile:'Ünite 9 · Ailemi anlatayım',magaza:'Ünite 9 · Mağazada kışlık mont',gecmis:'Ünite 8 · Geçmişi anlat',yol:'Ünite 8 · Yol sormak',doktor:'Ünite 6 · Doktorda',market:'Ünite 5 · Fırında ve markette',tcf1:'TCF görev 1 · Kendini tanıt',tcf2:'TCF görev 2 · Soru sor (ilan)'};
-function claudeAc(mesaj){mesaj=String(mesaj||'').trim()||'Başla';const k=KKISA[mesaj];if(k){const s=KSENARYO.find(x=>x[0]===k);if(s)mesaj=s[1]}
-  try{navigator.clipboard.writeText(mesaj).catch(()=>{})}catch(e){}
-  window.open(KPROJE,'_blank','noopener');
-  toast(mesaj==='Başla'?'Claude açılıyor: yeni sohbette "Başla" yaz, sonra ses düğmesine bas':'İlk mesaj kopyalandı: Claude\'da yeni sohbete yapıştır, gönder, ses düğmesine bas');aktifIsaretle()}
-// Rapor kaydı (yapıştırılan ya da panodan alınan); Çalış yolundaki ilk açık "claude:" konuşma işi biter
-async function konusKaydet(t){const A=konusAyristir(t),d=new Date(),p=n=>String(n).padStart(2,'0'),ad=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}.md`;
+const kMesaj=m=>{m=String(m||'').trim()||'Başla';const k=KKISA[m];if(k){const s=KSENARYO.find(x=>x[0]===k);if(s)return s[1]}return m};
+const kBekle=()=>{const b=AKLS.get('ak-konus-bekle',null);return b&&Date.now()-b.t<24*3600e3?b:null};
+const kKopya=t=>{try{navigator.clipboard.writeText(t).catch(()=>{})}catch(e){}};
+function kAcClaude(web){if(web||AKLS.get('ak-claude-yol','app')==='web')window.open(KWEB,'_blank','noopener');else location.href=KAPP}
+function kDialog(){let d=$('kdlg');if(!d){d=document.createElement('dialog');d.id='kdlg';d.className='k-dlg';document.body.appendChild(d);
+  d.addEventListener('cancel',e=>e.preventDefault())}return d}
+// 1) Ayrılmadan önce: ne yapacağını anlat; "Anladım" deyince Claude'a git
+// İlk mesajın altına anlık durum: hangi ünite ve bölümde, ünitenin hangi konularını henüz görmedi (ayrıntı projedeki "İlknur'un durumu" dosyasında)
+function kDurum(){try{if(!PLANJ){bgYukle();return ''}const tarih=new Date().toLocaleDateString('tr-TR');
+  if(PLANJ.durum!=='aktif')return `Durum (uygulamadan, ${tarih}): Ünite ${PLANJ.unite} bitti; yeni ünite henüz başlamadı. Ayrıntı: proje bilgisindeki "İlknur'un durumu".`;
+  const D=bgDurum(),i=D.sira<0?D.B.length-1:D.sira,b=D.B[i],sonra=D.B.slice(i+1).filter(x=>!/(odev|test)$/.test(x.id)).map(x=>String(x.ad).replace(/[*_`]/g,''));
+  return `Durum (uygulamadan, ${tarih}): Ünite ${PLANJ.unite}, bölüm ${i+1}/${D.B.length} ("${String(b.ad).replace(/[*_`]/g,'')}") üzerinde çalışıyor.`+(sonra.length?` Ünite ${PLANJ.unite}'un şu konularını henüz görmedi, kullanma: ${sonra.join(', ')}.`:'')+` Ayrıntı: proje bilgisindeki "İlknur'un durumu".`}catch(e){return ''}}
+function konusGit(o){o=Object.assign({tur:'genel'},o);o.mesaj=kMesaj(o.mesaj);{const du=kDurum();if(du)o.mesaj+='\n\n'+du}const d=kDialog(),sinav=o.sinavModu;
+  d.innerHTML=`<h2>🎙 Claude ile konuşma</h2>${o.baslik?`<p class="muted small">${esc(o.baslik)}</p>`:''}
+   <p>Şimdi Claude uygulamasına geçeceksin. Orada yapacakların:</p>
+   <ol class="k-adim">
+    <li><b>Fransızca Konuşma (İlknur)</b> projesi açılır. Açılmazsa: Claude'da <b>Projects → Fransızca Konuşma (İlknur)</b>.</li>
+    <li>Projede <b>yeni sohbet</b> başlat. Mesaj kutusuna <b>yapıştır</b> (ilk mesaj panoda hazır) ve gönder.</li>
+    <li><b>Ses düğmesine</b> bas ve konuş${sinav?'. Bu bir <b>sınav</b>: Claude ipucu vermez, Türkçe yardım etmez':''}. Kısa cevap verme; her cevapta 2–3 cümle söyle. 10–15 dakika.</li>
+    <li>Bitince <b>"rapor"</b> de. Claude Türkçe raporu yazar.</li>
+    <li>Raporun altındaki <b>Kopyala</b> düğmesine bas ve <b>bu uygulamaya geri dön</b>. Ekranda <b>Raporu ekle</b> çıkacak; ona bas.</li></ol>
+   <div class="ak-note small">${o.tur==='sinav'?'Rapor eklenmeden sınavın sonraki adımına geçilmez.':o.tur==='plan'?'Rapor eklenince Çalış\'taki bu iş kendiliğinden ✓ olur; rapor eklenmeden işaretlenmez.':'Rapor eklenince düzeltmeler kartlara çevrilebilir.'}</div>
+   <div class="k-dug"><button class="big-btn" id="kOk">Anladım, Claude'u aç</button><button class="btn" id="kNo">Vazgeç</button></div>`;
+  if(!d.open)d.showModal();
+  $('kNo').onclick=()=>d.close();
+  $('kOk').onclick=()=>{kKopya(o.mesaj);AKLS.set('ak-konus-bekle',Object.assign({},o,{t:Date.now()}));aktifIsaretle();kAcClaude();setTimeout(()=>konusBekle(true),300)}}
+// 2) Dönüşte (ya da Claude açıkken): raporu ekle
+function konusBekle(yeni){const b=kBekle();if(!b)return;const d=kDialog();
+  d.innerHTML=`<h2>Konuşma bitti mi?</h2><p class="muted small">${esc(b.baslik||'Claude ile konuşma')}</p>
+   <p>Claude'da <b>"rapor"</b> de, raporu <b>Kopyala</b>, sonra buraya bas:</p>
+   <button class="big-btn" id="kPanoE" style="width:100%">📋 Raporu ekle</button><div class="small" id="kDS"></div>
+   <details class="k-ek"><summary>Pano çalışmıyorsa: elle yapıştır</summary><textarea id="kDT" class="answer" rows="5" placeholder="Raporu buraya yapıştır"></textarea><button class="btn" id="kDK">Kaydet</button></details>
+   <div class="k-alt">${yeni?'':'<button class="link small" id="kYeni">Claude\'u yeniden aç</button>'}<button class="link small" id="kWeb">Claude uygulaması açılmadı: tarayıcıda aç</button><button class="link small" id="kKop">İlk mesajı yeniden kopyala</button><button class="link small" id="kSonra">Daha bitmedi (kapat)</button><button class="link small" id="kIptal">Konuşmaktan vazgeçtim</button></div>`;
+  if(!d.open)d.showModal();
+  const ekle=async t=>{const s=$('kDS');t=String(t||'').trim();
+    if(t.length<40||!/Konuşma raporu|Düzeltmeler/.test(t)){s.innerHTML='<span style="color:var(--warn)">Bu bir konuşma raporuna benzemiyor. Claude\'da raporun altındaki <b>Kopyala</b>\'ya bas (rapor "# Konuşma raporu" ile başlar), sonra yeniden dene.</span>';return}
+    s.textContent='Kaydediliyor…';try{await konusRaporEkle(b,t);d.close()}catch(e){s.innerHTML=`<span style="color:var(--bad)">Kaydedilemedi: ${esc(e.message)}</span>`}};
+  $('kPanoE').onclick=async()=>{let t='';try{t=await navigator.clipboard.readText()}catch(e){$('kDS').innerHTML='<span style="color:var(--warn)">Panoya erişilemedi; aşağıdan elle yapıştır.</span>';d.querySelector('.k-ek').open=true;return}ekle(t)};
+  $('kDK').onclick=()=>ekle($('kDT').value);
+  if($('kYeni'))$('kYeni').onclick=()=>{kKopya(b.mesaj);kAcClaude()};
+  $('kWeb').onclick=()=>{AKLS.set('ak-claude-yol','web');kKopya(b.mesaj);kAcClaude(true)};
+  $('kKop').onclick=()=>{kKopya(b.mesaj);toast('İlk mesaj kopyalandı')};
+  $('kSonra').onclick=()=>d.close();
+  $('kIptal').onclick=()=>{if(confirm('Bekleyen konuşma silinsin mi? (Rapor eklenmedi.)')){AKLS.del('ak-konus-bekle');d.close()}}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&kBekle())setTimeout(()=>konusBekle(false),400)});
+setTimeout(()=>{if(kBekle())konusBekle(false)},1500);
+// 3) Raporu yerine koy
+async function konusRaporEkle(b,t){
+  if(b.tur==='sinav'){const st=xState(b.ex);if(!st)throw new Error('sınav kaydı bu cihazda yok');st.ans[b.g]=t;if(b.bolum){st.chkB=st.chkB||{};st.chkB[b.bolum]=Date.now()}xSave(st);
+    AKLS.del('ak-konus-bekle');toast('Rapor sınava eklendi');if(tab==='sinav'&&AS.view==='kos'&&AS.id===b.ex)render();return}
+  if(!GH.ok())throw new Error('GitHub bağlantısı yok (İlerleme → Bağlantı)');
+  const r=await konusKaydet(t,b.tur==='plan'?b.id:null);AKLS.del('ak-konus-bekle');toast('Rapor kaydedildi');
+  if(tab==='ilerleme'){AI={view:'konusr',ad:r.ad};render()}else if(tab==='tekrar'&&S.view==='home')render()}
+async function konusKaydet(t,isId){const A=konusAyristir(t),d=new Date(),p=n=>String(n).padStart(2,'0'),ad=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}.md`;
   await GH.put(KDIR+'/'+ad,b64txt(t),'Konuşma raporu: '+A.baslik.slice(0,60));AKLS.set('ak-konus:'+ad,t);aktifIsaretle();
-  bgIsaretle((it,bi,si)=>/^claude:/.test(it.ac||'')&&bi<=si,true).catch(()=>{});return {A,ad}}
-// Ders kutusu "> **Konuş**": görev metni senaryo olur, düğme Claude'u açar
+  bgIsaretle(isId?(it=>it.id===isId):((it,bi,si)=>/^claude:/.test(it.ac||'')&&bi<=si),true).catch(()=>{});return {A,ad}}
+// Ders kutusu "> **Konuş**": görev metni senaryo olur
 function dersKonus(body){body.querySelectorAll('.ak-blok.konus').forEach(k=>{if(k.querySelector('.k-claude'))return;
-  const ders=(document.querySelector('#screen h1')||{}).textContent||'',gorev=[...k.children].filter(x=>!x.classList.contains('ak-etiket')).map(x=>x.innerText.trim()).join('\n').slice(0,900);
+  const ders=((document.querySelector('#screen h1')||{}).textContent||'').trim(),gorev=[...k.children].filter(x=>!x.classList.contains('ak-etiket')).map(x=>x.innerText.trim()).join('\n').slice(0,900);
   const b=document.createElement('button');b.className='btn sm k-claude';b.textContent='🎙 Claude ile konuş';
-  b.onclick=()=>claudeAc(`Senaryo: ${ders.trim()} dersinin konuşma görevi. Görev:\n${gorev}\nBana bu görevi yaptır: sorular sor, ben anlatayım. Seviyem A1. Başlayalım.`);k.appendChild(b)})}
+  b.onclick=()=>konusGit({tur:'ders',baslik:ders+' · Konuş',mesaj:`Senaryo: ${ders} dersinin konuşma görevi. Görev:\n${gorev}\nBana bu görevi yaptır: sorular sor, ben anlatayım. Seviyem A1. Başlayalım.`});k.appendChild(b)})}
 function konusAyristir(md){const m=/```json\s*([\s\S]*?)```/.exec(md);let j=null;try{if(m)j=JSON.parse(m[1])}catch(e){}
   const govde=md.replace(/```json[\s\S]*?```/,'').trim(),baslik=(/^#\s*(.+)$/m.exec(govde)||[])[1]||'Konuşma raporu';
   const hatalar=((j&&j.hatalar)||[]).map((h,i)=>Object.assign({id:'k'+(i+1)},h));return {j,govde,baslik,hatalar}}
@@ -1596,11 +1677,11 @@ async function iKonus(){const geri=()=>{AI={view:'ana'};render()};
   $('akbk').onclick=geri;
   const kopya=async t=>{try{await navigator.clipboard.writeText(t);toast('Kopyalandı')}catch(e){toast('Kopyalanamadı: '+e.message,true)}};
   $('kTal').onclick=async()=>{try{const t=await GH.raw('kaynak/konusma/proje-talimati.md');if(!t)throw new Error('talimat bulunamadı');kopya(t)}catch(e){toast(e.message,true)}};
-  $('kAc').onclick=()=>claudeAc('Başla');
-  $('screen').querySelectorAll('[data-ks]').forEach(b=>b.onclick=()=>claudeAc(KSENARYO[+b.dataset.ks][1]));
+  $('kAc').onclick=()=>konusGit({baslik:'Serbest konuşma (Claude senaryoyu seçer)',mesaj:'Başla'});
+  $('screen').querySelectorAll('[data-ks]').forEach(b=>b.onclick=()=>konusGit({baslik:KSENARYO[+b.dataset.ks][0],mesaj:KSENARYO[+b.dataset.ks][1]}));
   const kaydet=async(t,s,btn)=>{if(t.length<40||!/Konuşma raporu|Düzeltmeler/.test(t)){s.innerHTML='<span style="color:var(--warn)">Bu bir konuşma raporuna benzemiyor. Claude\'da raporun tamamını kopyala (rapor "# Konuşma raporu" ile başlar).</span>';return}
     if(!konusAyristir(t).j)s.innerHTML='<span style="color:var(--warn)">Rapordaki json bloğu okunamadı; yine de kaydediyorum (düzeltmeler karta çevrilemez).</span>';
-    btn.disabled=true;try{const r=await konusKaydet(t);toast('Rapor kaydedildi');AI={view:'konusr',ad:r.ad};render()}
+    btn.disabled=true;try{const r=await konusKaydet(t);{const kb=kBekle();if(kb&&kb.tur!=='sinav')AKLS.del('ak-konus-bekle')}toast('Rapor kaydedildi');AI={view:'konusr',ad:r.ad};render()}
     catch(e){s.innerHTML=`<span style="color:var(--bad)">Kaydedilemedi: ${esc(e.message)}</span>`;btn.disabled=false}};
   $('kKay').onclick=()=>kaydet($('kRap').value.trim(),$('kSon'),$('kKay'));
   $('kPano').onclick=async()=>{let t='';try{t=(await navigator.clipboard.readText()||'').trim()}catch(e){$('kPSon').innerHTML='<span style="color:var(--warn)">Panoya erişilemedi; aşağıdaki "Elle yapıştır"ı kullan.</span>';return}
@@ -1687,7 +1768,9 @@ function rHome(){
   const plan=bgPlanHtml();document.body.classList.add('genis');const dahaYeni=n?0:yeniHazir().length;
   $('screen').innerHTML=`<div class="top bg-top"><h1>Çalış</h1>${bgTarih()}<span class="grow"></span><button class="icon" id="gear" aria-label="Ayarlar">${I.gear}</button></div>
    <div class="bg-izgara"><div class="bg-sol">${ses?`<div class="resume"><div><b>Yarım kalan ${ses.kind==='test'?'test (Ünite '+ses.u+')':'oturum'}</b><div class="muted small">${ses.i} / ${ses.q.length} soru yapıldı</div></div><button class="big-btn" id="resume">Kaldığın yerden devam et</button></div>`:''}${plan}</div>
-   <div class="bg-sag"><div class="panel"><div><b>Kartlar</b><div class="count">${d+n}<span>kart · ~${mins} dk</span></div>
+   <div class="bg-sag"><div class="panel k-ana"><div><b>🎙 Konuşma pratiği</b><div class="muted small">${typeof kBekle==='function'&&kBekle()?'Bir konuşman rapor bekliyor: raporu Claude’da kopyala ve ekle.':'Claude ile sesli konuş (10–15 dk). Bitince raporu buraya eklersin.'}</div></div>
+     ${typeof kBekle==='function'&&kBekle()?'<button class="big-btn" id="konusrap">📋 Raporu ekle</button>':'<button class="big-btn" id="konusgo">Konuşma pratiği yap</button>'}<button class="link small" id="konussen">Senaryo seç · önceki konuşmalar ›</button></div>
+   <div class="panel"><div><b>Kartlar</b><div class="count">${d+n}<span>kart · ~${mins} dk</span></div>
      <div class="muted small" style="margin-top:6px">${d} tekrar · ${n} yeni · Ünite ${P.set.units.join(', ')}</div></div>
      <button class="${ses||plan?'btn':'big-btn'}" id="start" ${d+n?'':'disabled'}>${d+n?(ses?'Yeni oturum başlat':'Başla'):'Şu an tekrar edilecek kart yok'}</button>
      ${dahaYeni?`<button class="btn" id="dahayeni">${Math.min(15,dahaYeni)} yeni kart daha aç</button>`:''}</div>
@@ -1699,6 +1782,9 @@ function rHome(){
    <button class="link" id="stats">İlerleme ve kayıtlar ›</button></div></div>
    <div class="spacer"></div><div class="sync">${syncS==='on'?'Kayıtların cihazlar arası senkron':syncS==='error'?'Senkron hatası; bu cihazda kayıtlı':'Bu cihazda kayıtlı'}</div>`;
   $('gear').onclick=()=>{S={view:'settings'};render()};
+  if($('konusgo'))$('konusgo').onclick=()=>konusGit({baslik:'Serbest konuşma (Claude senaryoyu seçer)',mesaj:'Başla'});
+  if($('konusrap'))$('konusrap').onclick=()=>konusBekle(false);
+  $('konussen').onclick=()=>{AI={view:'konus'};setTab('ilerleme')};
   $('stats').onclick=()=>{S={view:'stats'};render()};
   $('test').onclick=()=>{S={view:'test'};render()};
   $('free').onclick=()=>{S={view:'free'};render()};
@@ -2004,5 +2090,5 @@ document.addEventListener('keydown',e=>{if(tab!=='tekrar'||S.view!=='session'||e
 window.addEventListener('hashchange',()=>{if(/^#(tekrar|oku|ders|sinav|ilerleme)$/.test(location.hash)&&location.hash.slice(1)!==tab)setTab(location.hash.slice(1))});
 render();
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=655988a8cb').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js?v=016038a2b6').then(r=>{r.update()});let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{if(typeof yenilemeUygun==='function'&&!yenilemeUygun())return}catch(e){}location.reload()})}</script>
 </body></html>
