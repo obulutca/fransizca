@@ -15,6 +15,8 @@ Bu tek paragrafta ünitenin dört konusu var:
 
 TCF'de "gününü anlat", "geçen hafta sonu ne yaptın", "randevu tarihi ne" gibi görevler en sık çıkan A1–A2 konularıdır. Bu ünite onların temeli.
 
+**Bu ders nasıl okunur?** Her konu: **Video** → **Fikir** → **Çözümlü örnek** → **Kural** → **Dikkat** → **Kendini dene**. Fransızcaya dokununca sesli okunur.
+
 ## Yeni kelimeler
 
 Okunuş Türk harfleriyle. ö = ağzı yuvarlak, hafif bir "ö" (*le*, *je*, *me*); ü = Türkçedeki ü; ⁿ = sesli harfi burundan söyle, n'yi tam okuma (*an*, *on*, *in*).
@@ -130,7 +132,28 @@ Okunuş Türk harfleriyle. ö = ağzı yuvarlak, hafif bir "ö" (*le*, *je*, *me
 | j'ai faim | je feⁿ | açım |
 | la nourriture | la nurütür | yiyecek |
 
+### Hatırlatma: önceki ünitelerden
+
+| Fransızca | Okunuş | Türkçe |
+| --- | --- | --- |
+| être: je suis, tu es, il est, nous sommes, vous êtes, ils sont | jö süi, tü e, il e, nu som, vu zet, il soⁿ | olmak (Ünite 1) |
+| avoir + ortaç: j'ai mangé, j'ai pris, j'ai fait | je moⁿje, je pri, je fe | yedim, aldım, yaptım (Ünite 6) |
+| hier, hier soir, la semaine dernière | yer, yer swar, la sömen dernyer | dün, dün akşam, geçen hafta (Ünite 6) |
+| il y a deux jours | il ya dö jur | iki gün önce (Ünite 6) |
+| à sept heures et demie | a set ör e dömi | yedi buçukta (Ünite 3) |
+| le lundi / lundi | lö leⁿdi / leⁿdi | pazartesileri / bu pazartesi (Ünite 3) |
+| aller au travail / au parc | ale o travay / o park | işe / parka gitmek (Ünite 4) |
+| je vais + mastar | jö ve | -eceğim (Ünite 4) |
+| prendre le bus / le métro | praⁿdr lö büs / lö metro | otobüse / metroya binmek (Ünite 4) |
+| fatigué(e), content(e) | fatige, koⁿtaⁿ(t) | yorgun, memnun (Ünite 1) |
+| vingt et un, trente et un | veⁿ te eⁿ, traⁿt e eⁿ | 21, 31 (Ünite 2) |
+| dix-huit, dix-neuf | diz üit, diz nöf | 18, 19 (Ünite 2) |
+
 ## Konu 1 · Geçmişin ikinci yardımcı fiili: être
+
+> **Video**
+>
+> [Learn French: know the passé composé with Être under 5 minutes](https://www.youtube.com/watch?v=p7iiqxYB2JI) · 5 dk. Sonra: [French Verbs of Movement](https://www.youtube.com/watch?v=I2tufUvfHCM) · 6 dk.
 
 > **Fikir**
 >
@@ -189,6 +212,27 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 >
 > - *ils sont* / *ils ont*: *ils sont* (s sesi: "il soⁿ") = être; *ils ont* (z sesi: "ilzoⁿ") = avoir. Dinlerken bu tek ses farklı bir yardımcı fiil demek.
 > - être ve avoir'ın kendi geçmişi her zaman avoir ile kurulur: *j'ai été* (oldum), *j'ai eu* (sahip oldum). Ünite 6 ödevindeki *ils sont eu* bu yüzden yanlış; doğrusu *ils ont eu*.
+> - Ü7 testindeki hatan: ✗ *j'ai resté deux heures* → *je suis restée deux heures* (İki saat kaldım). *rester* hareket bildirmiyor gibi görünür ama listede: "yerimde kalmak" da bir yer bilgisi.
+
+> **Çözümlü örnek**
+>
+> **2. "Kızım 2015'te doğdu."**
+>
+> 1. *naître* listede → être: *ma fille est*.
+> 2. Ortaç *né*; özne kadın → *née*.
+> 3. Yıl: *en 2015* (*deux mille quinze*).
+> 4. Sonuç: *Ma fille est née en 2015.*
+>
+> **3. "Metroya bindik ve Berri-UQAM'da indik."**
+>
+> 1. "metroya binmek" Fransızcada *prendre le métro* → avoir: *nous avons pris le métro*.
+> 2. "inmek" = *descendre* → listede → être: *nous sommes descendus* (karışık grup).
+> 3. Sonuç: *Nous avons pris le métro et nous sommes descendus à Berri-UQAM.*
+>
+> **4. "Seyahat ettin mi?"**
+>
+> 1. *voyager* hareket bildirir ama listede **yok** → avoir.
+> 2. Sonuç: *Tu as voyagé ?*
 
 > **Kendini dene 1**
 >
@@ -202,8 +246,18 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 > 6. Ils (prendre) le métro. {{Ils ont pris le métro.}}
 > 7. Je (naître) en Turquie. {{Je suis né(e) en Turquie.}}
 > 8. Elle (voyager) en Espagne. {{Elle a voyagé en Espagne.}}
+> 9. Elle (tomber) dans la rue. {{Elle est tombée dans la rue.}}
+> 10. Nous (visiter) Montréal. {{Nous avons visité Montréal.}}
+> 11. Il (sortir) avec ses amis. {{Il est sorti avec ses amis.}}
+> 12. Je (İlknur) (rester) deux heures. {{Je suis restée deux heures.}}
+> 13. Ils (descendre) du bus. {{Ils sont descendus du bus.}}
+> 14. Tu (avoir) un problème ? {{Tu as eu un problème ?}}
 
 ## Konu 2 · Ortaç uyumu: -e, -s, -es
+
+> **Video**
+>
+> [Être or Avoir in the Passé Composé in French](https://www.youtube.com/watch?v=R7CMGVsanu8) · 8 dk.
 
 > **Fikir**
 >
@@ -234,6 +288,15 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 >
 > **Sen ne yazacaksın?** Kendin hakkında yazarken her être cümlesinde -e ekle: *je suis allée*, *je suis née*, *je me suis levée*.
 
+> **Dikkat**
+>
+> Ü7 testindeki iki uyum hatası:
+>
+> - ✗ *Elles sont montés dans le train.* → *Elles sont montées dans le train.* Özne *elles* (kadınlar) → **-es**.
+> - ✗ *je ne me suis pas réveillé* (İlknur yazıyor) → *je ne me suis pas réveillée*. Dönüşlü fiil de être alır (Konu 4), uyum da gelir.
+>
+> Kontrol sorusu: "Cümlede *être* var mı? Varsa özne kim: kadın mı, çoğul mu?"
+
 > **Kendini dene 2**
 >
 > Ortaçın doğru biçimini yaz.
@@ -244,8 +307,18 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 > 4. Elle a (manger) ___ une salade. {{mangé}}
 > 5. Je (İlknur) suis (naître) ___ en 1990. {{née}}
 > 6. Les enfants sont (tomber) ___ dans la neige. {{tombés}}
+> 7. Ma mère est (mourir) ___ en 2010. {{morte}}
+> 8. Elles ont (regarder) ___ un film. {{regardé}}
+> 9. Vous (Madame Tremblay) êtes (venir) ___ hier ? {{venue}}
+> 10. Les filles sont (monter) ___ dans le train. {{montées}}
+> 11. Mon mari est (rentrer) ___ tard. {{rentré}}
+> 12. Je (Osman) suis (sortir) ___ à huit heures. {{sorti}}
 
 ## Konu 3 · Dönüşlü fiiller (şimdiki zaman)
+
+> **Video**
+>
+> [French Made Easy: Reflexive Verbs](https://www.youtube.com/watch?v=DybxlyAQrxo) · 6 dk. Sonra: [PYF Reflexive Verbs - Present Tense](https://www.youtube.com/watch?v=J51sAIvkhHA) · 16 dk.
 
 > **Fikir**
 >
@@ -286,6 +359,37 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 > 2. Özne: *les enfants* = ils → zamir se.
 > 3. Çekim: -er fiili, ils → -ent (okunmaz).
 > 4. Sonuç: *Les enfants se réveillent à sept heures.*
+>
+> **2. "Eğleniyor musun?"**
+>
+> 1. eğlenmek = *s'amuser*; özne *tu* → zamir *te*.
+> 2. *te* + sesli (*amuse*) → *t'*: *tu t'amuses*.
+> 3. Sonuç: *Tu t'amuses ?* (✗ *Tu te s'amuse*: Ü7 testindeki hatan; zamir iki kez yazılmış ve -s unutulmuş.)
+>
+> **3. "Saat yedide kalkarlar." mı, "yıkanırlar" mı?**
+>
+> 1. kalkmak = *se lever* → *ils se lèvent* (il sö lev).
+> 2. yıkanmak = *se laver* → *ils se lavent* (il sö lav).
+> 3. Ü7 testinde ikisini karıştırdın. Ezber yolu: *lever* "kaldırmak" (İngilizce *lever* = kaldıraç); *laver* "yıkamak" (*lavabo*, *lavanta*).
+>
+> **4. "Arabayı yıkarım, sonra yıkanırım."**
+>
+> 1. Arabayı yıkamak: nesne araba → dönüşlü değil: *je lave la voiture*.
+> 2. Kendimi yıkamak → dönüşlü: *je me lave*.
+> 3. Sonuç: *Je lave la voiture, puis je me lave.*
+
+> **Dikkat**
+>
+> Ü7'deki en büyük hata deseni: **gerekmeyen yere zamir, gereken yerde zamir yok.**
+>
+> | Yazdığın | Doğrusu | Neden |
+> | --- | --- | --- |
+> | ✗ *je me pris le petit-déjeuner* | *j'ai pris le petit-déjeuner* | kahvaltıyı "kendine" almıyorsun; *prendre* dönüşlü değil |
+> | ✗ *je me pars* | *je pars* | *partir* dönüşlü değil |
+> | ✗ *nous habillons* | *nous nous habillons* | giyinen kendimiziz → zamir gerekli |
+> | ✗ *Tu te s'amuse* | *Tu t'amuses* | tek zamir; tu → -s |
+>
+> **Kontrol sorusu:** Türkçede "kendini …" diyebiliyor muyum? "Kendimi kaldırıyorum" → evet → *je me lève*. "Kendimi kahvaltı alıyorum" → hayır → *je prends*.
 
 > **Kendini dene 3**
 >
@@ -297,8 +401,18 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 > 4. Elle (se doucher) le soir. {{Elle se douche}}
 > 5. Vous (se reposer) le dimanche ? {{Vous vous reposez}}
 > 6. Olumsuz yap: Je me lève tôt. {{Je ne me lève pas tôt.}}
+> 7. Ils (se laver) les mains. {{Ils se lavent}}
+> 8. Je (s'appeler) İlknur. {{Je m'appelle}}
+> 9. Tu (s'amuser) ? {{Tu t'amuses}}
+> 10. Ils (se lever) à sept heures. {{Ils se lèvent}}
+> 11. Kahvaltı yaparım. (dönüşlü mü?) {{Je prends le petit-déjeuner.}}
+> 12. Yürüyüşe çıkıyoruz. {{Nous nous promenons.}}
 
 ## Konu 4 · Dönüşlü fiiller geçmişte ve yakın gelecekte
+
+> **Video**
+>
+> [S'HABILLER (to get dressed): Past, Present & Future](https://www.youtube.com/watch?v=PojBdH5oGYM) · 12 dk.
 
 > **Fikir**
 >
@@ -326,6 +440,10 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 > `özne + aller + zamir + mastar`
 >
 > *Je vais me coucher.* (Yatacağım.) · *Tu vas te coucher ?* (Yatacak mısın?) · *Nous allons nous promener.* (Yürüyüşe çıkacağız.)
+
+> **Dikkat**
+>
+> Ü7 testindeki hatan: ✗ *À quelle heure tu as levée ?* → *Tu t'es levée à quelle heure ?* İki eksik: dönüşlü zamir (*t'*) ve yardımcı fiil (*es*, çünkü dönüşlü fiil hep être alır).
 
 > **Dikkat**
 >
@@ -361,8 +479,21 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 >
 > 5. Tu te couches. {{Tu vas te coucher.}}
 > 6. Nous nous promenons. {{Nous allons nous promener.}}
+>
+> Fransızca yaz:
+>
+> 7. Saat kaçta kalktın? (kadına) {{Tu t'es levée à quelle heure ?|À quelle heure est-ce que tu t'es levée ?}}
+> 8. Uyanmadım. (İlknur) {{Je ne me suis pas réveillée.}}
+> 9. Dün akşam geç yattık. (Osman ve İlknur) {{Hier soir, nous nous sommes couchés tard.}}
+> 10. Eğlendiniz mi? (çocuklara) {{Vous vous êtes amusés ?|Est-ce que vous vous êtes amusés ?}}
+> 11. Dinleneceğim. {{Je vais me reposer.}}
+> 12. Kızlar giyindi. {{Les filles se sont habillées.}}
 
 ## Konu 5 · Günlük rutin ve sıralama
+
+> **Video**
+>
+> [Daily French conversation practice](https://www.youtube.com/watch?v=b10XNMxrThQ) · 6 dk.
 
 > **Fikir**
 >
@@ -398,6 +529,11 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 >
 > *Hier, je me suis réveillée à six heures. D'abord, je me suis douchée et je me suis habillée. Ensuite, j'ai pris le petit-déjeuner avec Osman. Puis, je suis partie au travail. Après le travail, je me suis promenée au parc. Enfin, je me suis couchée à vingt-trois heures.*
 
+> **Dikkat**
+>
+> - "parti" Türkçede eğlence ama Fransızca *le parti* siyasi parti! Eğlence partisi **la fête**: *Samedi, nous sommes allés à une fête.* (Ü7 testi.)
+> - *puis* ve *ensuite* sonrasında da fiil geçmişte kalır: ✗ *Hier, je me suis levée. Ensuite, je prends le bus.* → *Ensuite, j'ai pris le bus.* (Konuşmada geçmişten şimdiki zamana kayıyorsun: *Hier, je mange*.)
+
 > **Kendini dene 5**
 >
 > Bu cümleleri sıralama kelimeleriyle tek paragraf yap: je prends le bus · je me lève · j'arrive au travail · je m'habille. Sonra aynı paragrafı Hier ile geçmişe çevir. Defterine yaz, sonra örnek cevapla karşılaştır.
@@ -410,7 +546,37 @@ Artan iki fiil: *rester* (kalmak; yer değiştirmemek de bir yer bilgisidir) ve 
 >
 > </details>
 
+> **Kendini dene 5b**
+>
+> Fransızca yaz.
+>
+> 1. Önce duş alırım. {{D'abord, je me douche.}}
+> 2. İşten sonra parkta yürüyüşe çıkarım. {{Après le travail, je me promène au parc.}}
+> 3. Akşam yemeğinden önce dinlenirim. {{Avant le dîner, je me repose.}}
+> 4. Genellikle erken yatarım. {{D'habitude, je me couche tôt.}}
+> 5. Geç kaldım! {{Je suis en retard !}}
+> 6. Son olarak dişlerimi fırçaladım. (İlknur) {{Enfin, je me suis brossé les dents.}}
+> 7. Cumartesi bir partiye gittik. {{Samedi, nous sommes allés à une fête.}}
+> 8. Sabahları kahve içerim. {{Le matin, je bois du café.}}
+
+> **Konuş**
+>
+> **Dünkü günün (2–3 dakika).** Telefonuna kaydet, dinle:
+>
+> - *Hier, je me suis réveillée à …*
+> - *D'abord, je me suis …* (iki dönüşlü fiil)
+> - *Ensuite, j'ai pris …* (avoir ile bir fiil)
+> - *Puis, je suis partie / allée …* (être ile bir fiil)
+> - *Après le travail, …*
+> - *Enfin, je me suis couchée à …*
+>
+> Kontrol: her cümlede **geçmiş** var mı (*suis / ai*)? *Hier* dedikten sonra şimdiki zamana kayma. İstersen İlerleme → Konuşma pratiği'nde "Geçen hafta sonu" senaryosunu Claude ile konuş.
+
 ## Konu 6 · Aylar ve tarihler
+
+> **Video**
+>
+> [The French Months of the Year (French Essentials Lesson 5)](https://www.youtube.com/watch?v=JyROOY4RPJg) · 9 dk.
 
 > **Fikir**
 >
@@ -452,7 +618,8 @@ Son satıra dikkat: doğum geçmişte olmuş bir olay ve naître Konu 1'deki lis
 >
 > - *août* sadece "ut" okunur.
 > - *le huit*, *le onze* kısalmaz: "lö üit", "lö oⁿz". Sayılarda le, l' olmaz; sayı yanlış anlaşılmasın diye.
-> - Dinlerken: ay adını duyunca sayı bitmiş olur. *Le vingt et un juin*'de "vingt"de durma: et un ile juin arasında sayı tamamlanır. Bugün → Sayı dinle → Tarihler tam bunun için.
+> - Dinlerken: ay adını duyunca sayı bitmiş olur. *Le vingt et un juin*'de "vingt"de durma: et un ile juin arasında sayı tamamlanır. Çalış → Sayı dinle → Tarihler tam bunun için.
+> - Ü7 testindeki tarih hataların: *le vingt-huit août* (28/8) → 20 yazdın; *le trente et un décembre* (31/12) → 30 yazdın. İkinci parçayı duymadan yazma: sayı ay adına kadar sürer.
 
 > **Kendini dene 6**
 >
@@ -464,6 +631,12 @@ Son satıra dikkat: doğum geçmişte olmuş bir olay ve naître Konu 1'deki lis
 > 4. Martta doğdum. (İlknur) {{Je suis née en mars.}}
 > 5. Kütüphane 24 Aralık'tan 2 Ocak'a kadar kapalı. {{La bibliothèque est fermée du vingt-quatre décembre au deux janvier.}}
 > 6. Bugün ayın kaçı? {{Quelle est la date aujourd'hui ?|On est le combien ?}}
+> 7. 28 Ağustos {{le vingt-huit août}}
+> 8. 31 Aralık {{le trente et un décembre}}
+> 9. Ekimde {{en octobre}}
+> 10. Doğum günüm 3 Mart'ta. {{Mon anniversaire, c'est le trois mars.|Mon anniversaire est le trois mars.}}
+> 11. 1 Ekim'den beri {{depuis le premier octobre}}
+> 12. 11 Kasım {{le onze novembre}}
 
 ## Telaffuz ve dinleme ipuçları
 
@@ -476,7 +649,7 @@ Son satıra dikkat: doğum geçmişte olmuş bir olay ve naître Konu 1'deki lis
 | "nu nu…" | *nous nous* + fiil | arka arkaya iki nous = dönüşlü fiil |
 | "jö mö lev" / "jö mö süi löve" | şimdi / geçmiş | suis duyuluyorsa geçmiş |
 
-Okurken: *lève* ("lev", açık e) ile *levé* ("löve", sonu "e") farklıdır. Sondaki é geçmiş zamanın işaretidir; söylerken mutlaka duyulmalı. Bugün → Telaffuz çalış ile bu çiftleri dene: *je me lève* / *je me suis levée*.
+Okurken: *lève* ("lev", açık e) ile *levé* ("löve", sonu "e") farklıdır. Sondaki é geçmiş zamanın işaretidir; söylerken mutlaka duyulmalı. Çalış → Telaffuz ile bu çiftleri dene: *je me lève* / *je me suis levée*.
 
 ## Formül özeti
 
