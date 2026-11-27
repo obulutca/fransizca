@@ -6,6 +6,10 @@ Bu ünitenin sonunda ailenden ve iş yerinden bahsedebilecek, yaşını söyleye
 >
 > 38 yaşındayım. Bir kocam ve bir kedim var. Fabrikada robotlar var.
 
+Bu ünitede sekiz konu var: Ünite 1 tekrarı, isimlerin cinsiyeti, artikeller, çoğul, *avoir*, olumsuzda *pas de*, 0–69 sayılar ve *il y a*. TCF'de karşılığı: kendini ve aileni tanıtmak (konuşma görev 1), dinlemede sayılar ve yaşlar, okumada "nerede ne var" soruları.
+
+**Bu ders nasıl okunur?** Her konu: **Video** → **Fikir** → **Çözümlü örnek** → **Kural** → **Dikkat** → **Kendini dene**. Fransızcaya dokununca sesli okunur.
+
 ## Yeni kelimeler
 
 İsimler artikelleriyle. l' ile başlayanların cinsiyeti parantezde: (m) eril, (f) dişil.
@@ -81,7 +85,26 @@ Bu ünitenin sonunda ailenden ve iş yerinden bahsedebilecek, yaşını söyleye
 
 Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur. *famille*, *fille*, *travail* kurala uyar (y).
 
+### Hatırlatma: Ünite 1'den
+
+| Fransızca | Okunuş | Türkçe |
+| --- | --- | --- |
+| être: je suis, tu es, il est, nous sommes, vous êtes, ils sont | jö süi, tü e, il e, nu som, vu zet, il soⁿ | olmak |
+| ne … pas | nö … pa | değil |
+| est-ce que | es kö | soru başı (mı / mi) |
+| c'est | se | bu …dır |
+| ingénieur / technicienne / soudeur | eⁿjenyör / teknisyen / sudör | mühendis / teknisyen / kaynakçı |
+| fatigué(e) / content(e) / prêt(e) | fatige / koⁿtaⁿ(t) / pre(t) | yorgun / memnun / hazır |
+| marié(e) / malade | marye / malad | evli / hasta |
+| grand(e) / petit(e) | graⁿ(d) / pöti(t) | büyük / küçük |
+| au travail / à la maison | o travay / a la mezoⁿ | işte / evde |
+| aussi / mais / et | osi / me / e | de, da / ama / ve |
+
 ## Konu 1 · Ünite 1 tekrarı
+
+> **Video**
+>
+> [Être (to be): Present Tense](https://www.youtube.com/watch?v=CbxrZMePugU) · 6 dk.
 
 > **Kural**
 >
@@ -116,8 +139,15 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 1. Tu ___ prête ? (être) {{es}}
 > 2. Kerem ___ soudeur. (être) {{est}}
 > 3. Tu ___ une voiture ? (avoir) {{as}}
+> 4. Julie et Nadia ___ fatiguées. (être) {{sont}}
+> 5. Vous (bir kadına) êtes ___ ? (français) {{française}}
+> 6. Olumsuz yap: Elles sont prêtes. {{Elles ne sont pas prêtes.}}
 
 ## Konu 2 · İsimlerin cinsiyeti
+
+> **Video**
+>
+> [Feminine or Masculine words in French? Understanding French genders](https://www.youtube.com/watch?v=V7AjuIDn4oU) · 6 dk.
 
 > **Fikir**
 >
@@ -149,6 +179,23 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > - *le moule* (kalıp) eril; *la moule* (midye) dişil. Cinsiyet anlamı değiştiriyor.
 > - İnsanlarda cinsiyet kişiyi izler: *le père* / *la mère*. Bazıları aynı yazılır, yalnız artikel değişir: *un enfant* / *une enfant*.
 
+> **Çözümlü örnek**
+>
+> **1. *la sécurité* mi, *le sécurité* mi?**
+>
+> 1. Son: -té → dişil (İngilizce *security*: -ty → -té).
+> 2. Sonuç: *la sécurité*.
+>
+> **2. *appartement***
+>
+> 1. Son: -ment → eril.
+> 2. Sesliyle başlıyor → *l'appartement*; cinsiyeti görmek için belirsiz artikel: *un appartement*.
+>
+> **3. "Makine hazır" (sıfat uyumu)**
+>
+> 1. *la machine* dişil → sıfat da dişil.
+> 2. Sonuç: *La machine est prête.* Ünite 1'deki uyum eşyalarda da işler.
+
 > **Kendini dene 2**
 >
 > le mi la mı?
@@ -159,8 +206,18 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 4. ___ moteur {{le}}
 > 5. ___ voiture {{la}}
 > 6. ___ problème {{le}}
+> 7. ___ soudure {{la}}
+> 8. ___ bureau {{le}}
+> 9. ___ sécurité {{la}}
+> 10. un mi une mi? ___ appartement {{un}}
+> 11. ___ maison {{la}}
+> 12. Le moteur est (petit) ___. {{petit}}
 
 ## Konu 3 · Artikeller
+
+> **Video**
+>
+> [French Definite Article: How to say THE](https://www.youtube.com/watch?v=054MD3i3RDE) · 12 dk. Sonra: [French Indefinite Article](https://www.youtube.com/watch?v=xw1sORGoEOY) · 14 dk.
 
 > **Fikir**
 >
@@ -184,6 +241,33 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 >
 > **à + le = au, à + les = aux** (la ve l' birleşmez): *Je suis au bureau.* · *Il est aux États-Unis.* · *Je suis à la maison.* · *Je suis à l'usine.*
 
+> **Çözümlü örnek**
+>
+> **1. "Arkadaşlarım var." (I have friends)**
+>
+> 1. İngilizce çoğulda artikel atar; Fransızca atmaz → *des*.
+> 2. *amis* sesliyle başlıyor → bağlama: de zami.
+> 3. Sonuç: *J'ai des amis.*
+>
+> **2. "Bir bilgisayar var. Bilgisayar küçük."**
+>
+> 1. İlk kez → *un ordinateur* (eⁿ nordinatör).
+> 2. Artık bildiğimiz → *l'ordinateur* (sesliden önce *le* → *l'*).
+> 3. Sonuç: *Il y a un ordinateur. L'ordinateur est petit.*
+>
+> **3. "Julie'nin arabası"**
+>
+> 1. Sıra: önce sahip olunan, sonra sahibi: *la voiture* + *de* + *Julie*.
+> 2. Sonuç: *la voiture de Julie*. Sahip sesliyle başlarsa *d'*: *la voiture d'Osman*.
+
+> **Dikkat**
+>
+> Ünite 2 testindeki hataların:
+>
+> - ✗ *Il y a le ordinateur* → *Il y a un ordinateur.* *il y a* yeni bir şey tanıtır (*un*); üstelik *le* sesliden önce zaten *l'* olurdu.
+> - ✗ *La machines* → *Les machines.* Çoğulda yalnız *les* / *des*.
+> - ✗ *au États-Unis* → *aux États-Unis* (çoğul). ✗ *Elle est la maison* → *Elle est à la maison* (-de = *à*, düşmez).
+
 > **Kendini dene 3**
 >
 > Boşluğu doldur.
@@ -194,8 +278,18 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 4. J'ai ___ amis. (bazı, çoğul) {{des}}
 > 5. ___ ordinateur est petit. (the) {{l'}}
 > 6. Julie'nin ofisi {{le bureau de Julie}}
+> 7. Il y a ___ robot dans l'atelier. (bir) {{un}}
+> 8. Ils sont ___ États-Unis. (à + les) {{aux}}
+> 9. Elle est ___ maison. (evde) {{à la}}
+> 10. Osman'ın arabası {{la voiture d'Osman}}
+> 11. ___ enfants sont petits. (the) {{les}}
+> 12. Je suis ___ usine. (à + l') {{à l'}}
 
 ## Konu 4 · Çoğul isimler
+
+> **Video**
+>
+> [FRENCH QUIZ: Do you know all of these plural nouns?](https://www.youtube.com/watch?v=6OlovgdvtMs) · 11 dk.
 
 > **Fikir**
 >
@@ -211,6 +305,20 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 >
 > Düzensizler: -eau → -eaux (*les bureaux*); -al → -aux (*le journal* → *les journaux*, okunuş da değişir: jurnal → jurno; *un hôpital* → *des hôpitaux*); -s, -x, -z ile bitiyorsa değişmez (*le pays* → *les pays*).
 
+> **Çözümlü örnek**
+>
+> **1. "Makineler büyük."**
+>
+> 1. *la machine* → çoğul *les machines* (s okunmaz: le maşin).
+> 2. Fiil çoğul: *sont*; sıfat dişil çoğul: *grandes*.
+> 3. Sonuç: *Les machines sont grandes.* Kulak çoğulu *les* ve *sont*'tan anlar.
+>
+> **2. *un hôpital* → çoğul?**
+>
+> 1. -al → -aux.
+> 2. *un* → *des*; h okunmaz → bağlama: de zopito.
+> 3. Sonuç: *des hôpitaux*.
+
 > **Kendini dene 4**
 >
 > Çoğul yap.
@@ -220,8 +328,17 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 3. le bureau {{les bureaux}}
 > 4. le journal {{les journaux}}
 > 5. le pays {{les pays}}
+> 6. un enfant {{des enfants}}
+> 7. l'ordinateur {{les ordinateurs}}
+> 8. le gâteau {{les gâteaux}}
+> 9. un hôpital {{des hôpitaux}}
+> 10. Tekil yap: les machines {{la machine}}
 
 ## Konu 5 · avoir (sahip olmak)
+
+> **Video**
+>
+> [Avoir (to have): Present Tense](https://www.youtube.com/watch?v=sA82J16mNfU) · 4 dk. Sonra: [Family Words in French Part 1](https://www.youtube.com/watch?v=L5-3kpXaEi4) · 7 dk.
 
 > **Fikir**
 >
@@ -256,6 +373,20 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 2. İlk kez bahsedilen bir toplantı → belirsiz artikel; *réunion* (-ion) dişil → *une*.
 > 3. Sonuç: *Nous avons une réunion.*
 
+> **Çözümlü örnek**
+>
+> **2. "Acıktılar ve yorgunlar." (erkekler)**
+>
+> 1. -lar → *ils*. "acıkmak" → *avoir faim*: *ils ont faim*.
+> 2. "yorgun" sıfat → être: *ils sont fatigués*.
+> 3. Sonuç: *Ils ont faim et ils sont fatigués.* (Ü2 testinde "Acıktılar" için *Nous avons faim* yazdın: -lar = onlar = *ils*.)
+>
+> **3. "Mühendisiz." mi, "Bir mühendisimiz var" mı?**
+>
+> 1. "Mühendisiz" = meslek → être, artikel yok: *Nous sommes ingénieurs.*
+> 2. "Bir mühendisimiz var" = sahiplik → avoir + artikel: *Nous avons un ingénieur.*
+> 3. Ü2 testinde ✗ *Nous avons ingénieurs* ve ✗ *Elles ont fatiguées* yazdın; ikisi de être olmalı.
+
 > **Kendini dene 5**
 >
 > avoir'ın doğru biçimi.
@@ -269,8 +400,18 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 >
 > 5. 38 yaşındayım. {{J'ai trente-huit ans.}}
 > 6. Acıktım. {{J'ai faim.}}
+> 7. Acıktılar. (erkekler) {{Ils ont faim.}}
+> 8. Mühendisiz. {{Nous sommes ingénieurs.}}
+> 9. Yorgunlar. (kadınlar) {{Elles sont fatiguées.}}
+> 10. Bir köpeğin var mı? {{Tu as un chien ?|Est-ce que tu as un chien ?}}
+> 11. Kaç yaşındasınız? {{Quel âge avez-vous ?|Vous avez quel âge ?}}
+> 12. Okunuşunu yaz: ils ont {{il zoⁿ|ilzoⁿ|il zon}}
 
 ## Konu 6 · Olumsuzda pas de
+
+> **Video**
+>
+> [Simple Negations - part 2 (French Essentials Lesson 14)](https://www.youtube.com/watch?v=KJBQ_xDAvq0) · 9 dk.
 
 > **Fikir**
 >
@@ -288,6 +429,24 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 >
 > Değişmeyen iki durum: (1) *le, la, les* değişmez: *Je n'ai pas la clé.* (2) être ile değişmez: *Ce n'est pas une machine.*
 
+> **Çözümlü örnek**
+>
+> **1. "Arabam yok."**
+>
+> 1. Olumlu: *J'ai une voiture.*
+> 2. Olumsuz sandviç: *je n'ai pas*; *une* → *de*.
+> 3. Sonuç: *Je n'ai pas de voiture.*
+>
+> **2. "Anahtar bende değil."**
+>
+> 1. Bildiğimiz anahtar → *la clé*.
+> 2. *la* değişmez: *Je n'ai pas la clé.*
+>
+> **3. "Bu bir sorun değil."**
+>
+> 1. *c'est* → être → artikel değişmez.
+> 2. Sonuç: *Ce n'est pas un problème.*
+
 > **Kendini dene 6**
 >
 > Olumsuz yap.
@@ -297,8 +456,17 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 3. Nous avons un problème. {{Nous n'avons pas de problème.}}
 > 4. J'ai la clé. {{Je n'ai pas la clé.}}
 > 5. C'est une machine. {{Ce n'est pas une machine.}}
+> 6. Elle a un chat. {{Elle n'a pas de chat.}}
+> 7. Nous avons des amis à Toronto. {{Nous n'avons pas d'amis à Toronto.}}
+> 8. Vous avez une réunion. {{Vous n'avez pas de réunion.}}
+> 9. C'est le bureau de Julie. {{Ce n'est pas le bureau de Julie.}}
+> 10. Çocuğum yok. {{Je n'ai pas d'enfants.|Je n'ai pas d'enfant.}}
 
 ## Konu 7 · Sayılar 0–69 ve yaş
+
+> **Video**
+>
+> [French Numbers 1 to 20 (French Essentials Lesson 2)](https://www.youtube.com/watch?v=H2-REbL2OU0) · 8 dk. Sonra: [French numbers 1-100](https://www.youtube.com/watch?v=CEx2fPn-_UE) · 4 dk.
 
 > **Fikir**
 >
@@ -326,6 +494,25 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 >
 > *six, huit, dix*: tek başına sis, üit, dis. Sessizle başlayan isimden önce son harf düşer: *six machines* (si maşin). Sesliyle başlayandan önce z / t: *six enfants* (si zaⁿfaⁿ). Dinlerken en çok karışanlar: 6 / 16 / 60, 4 / 14 / 40, 5 / 15 / 50.
 
+> **Çözümlü örnek**
+>
+> **1. 38**
+>
+> 1. 30 = *trente*, 8 = *huit*.
+> 2. 21–69 arası tireyle: *trente-huit*.
+> 3. Ü2 testinde *trente-huit*'i dinlerken 58 yazdın: *trente* (30) ile *cinquante* (50) baştan farklı: traⁿt / seⁿkaⁿt.
+>
+> **2. 41**
+>
+> 1. 1 ile biten onluklarda *et un*, tiresiz.
+> 2. Sonuç: *quarante et un*.
+>
+> **3. "Kızım 9 yaşında."**
+>
+> 1. Yaş → *avoir*: *ma fille a*.
+> 2. *neuf ans* → bağlama: nö vaⁿ.
+> 3. Sonuç: *Ma fille a neuf ans.*
+
 > **Kendini dene 7**
 >
 > Kelimeyle yaz.
@@ -336,8 +523,18 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 4. 45 {{quarante-cinq}}
 > 5. 69 {{soixante-neuf}}
 > 6. Oğlum 6 yaşında. {{Mon fils a six ans.}}
+> 7. 14 {{quatorze}}
+> 8. 41 {{quarante et un}}
+> 9. 57 {{cinquante-sept}}
+> 10. Rakamla yaz: trente-huit {{38}}
+> 11. Rakamla yaz: soixante-six {{66}}
+> 12. Kaç yaşındasın? {{Tu as quel âge ?|Quel âge as-tu ?}}
 
 ## Konu 8 · il y a = var
+
+> **Video**
+>
+> [IL Y A: How to say "there is" or "there are" in French](https://www.youtube.com/watch?v=oV9RNNq4Pg0) · 10 dk.
 
 > **Fikir**
 >
@@ -358,6 +555,25 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 >
 > *dans* (daⁿ) = içinde, -de: *dans l'usine*, *dans le bureau*.
 
+> **Çözümlü örnek**
+>
+> **1. "Atölyede iki robot ve bir makine var."**
+>
+> 1. Bir yerde bir şey var → *il y a*.
+> 2. *deux robots* (sayı artikelin yerini tutar) + *une machine*.
+> 3. "atölyede" → *dans l'atelier*.
+> 4. Sonuç: *Dans l'atelier, il y a deux robots et une machine.*
+>
+> **2. "Julie'nin iki çocuğu var." avoir mı il y a mı?**
+>
+> 1. Sahip bir kişi (Julie) → *avoir*.
+> 2. Sonuç: *Julie a deux enfants.*
+>
+> **3. "Bu bir robot" mu, "Bir robot var" mı?**
+>
+> 1. "Bu …" → *C'est un robot.*
+> 2. "… var" → *Il y a un robot.* (Tekrar testinde ikisi karıştı.)
+
 > **Kendini dene 8**
 >
 > avoir mı il y a mı? Fransızca yaz.
@@ -366,6 +582,12 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 > 2. Bir arabam var. {{J'ai une voiture.}}
 > 3. Fabrikada kahve yok. {{Il n'y a pas de café dans l'usine.}}
 > 4. Bir sorun var mı? {{Est-ce qu'il y a un problème ?|Il y a un problème ?}}
+> 5. Atölyede iki robot var. {{Il y a deux robots dans l'atelier.|Dans l'atelier, il y a deux robots.}}
+> 6. Julie'nin iki çocuğu var. {{Julie a deux enfants.}}
+> 7. Ofiste bilgisayar yok. {{Il n'y a pas d'ordinateur dans le bureau.}}
+> 8. Bu bir robot. {{C'est un robot.}}
+> 9. Bizim bir toplantımız var. {{Nous avons une réunion.|On a une réunion.}}
+> 10. Şehirde bir fabrika var. {{Il y a une usine dans la ville.}}
 
 ## Okuma metni ve diyalog
 
@@ -411,10 +633,22 @@ Okunuş istisnası: *ville* (vil), *mille* (mil): ill burada y değil, l okunur.
 
 ## Dinleme ve konuşma
 
-- **Sayılar:** Bugün → Sayı dinle ile her gün 5 dakika. En çok karışanlar: 6 / 16 / 60, 4 / 14 / 40, 5 / 15 / 50.
+- **Sayılar:** Çalış → Sayı dinle ile her gün 5 dakika. En çok karışanlar: 6 / 16 / 60, 4 / 14 / 40, 5 / 15 / 50.
 - **ils sont / ils ont:** bu dersteki *ils sont* ve *ils ont* örneklerine arka arkaya dokun, farkı duy.
 - **Gölgeleme:** diyaloğu cümle cümle dinle, aynı tonla tekrar et.
 - **Konuşma:** kendini, aileni ve iş yerini 8–10 cümleyle anlat: yaşın, çocukların / kardeşlerin var mı, iş yerinde neler var, neler yok.
+
+> **Konuş**
+>
+> **Kendini, aileni ve evini anlat (1–2 dakika).** Telefonuna kaydet, dinle:
+>
+> - *J'ai … ans.* (yaşın; sayıyı dikkatle söyle)
+> - *J'ai un mari. Il s'appelle …* / *J'ai … enfants* ya da *Je n'ai pas d'enfants.*
+> - *J'ai un frère et une sœur. Ils sont à …*
+> - *Dans ma maison, il y a … Il n'y a pas de …*
+> - *Aujourd'hui, j'ai faim / je suis fatiguée.* (avoir mı être mi?)
+>
+> TCF konuşma görev 1'in tam karşılığı. Kontrol: her isimde artikel var mı, her olumsuzda *de* doğru mu?
 
 ## Formül özeti
 
